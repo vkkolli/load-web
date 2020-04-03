@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'dat-poc'`, () => {
+  it(`should have as title 'loadboard-poc'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('dat-poc');
+    expect(app.title).toEqual('loadboard-poc');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('dat-poc app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('loadboard-poc app is running!');
   });
 });

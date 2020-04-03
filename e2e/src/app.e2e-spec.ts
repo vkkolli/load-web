@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('dat-poc app is running!');
+    expect(page.getTitleText()).toEqual('loadboard-poc app is running!');
   });
 
   afterEach(async () => {
