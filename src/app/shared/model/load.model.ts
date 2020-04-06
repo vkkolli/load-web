@@ -1,1 +1,21 @@
-export class LoadBoard {}
+export interface ILoad {
+    loadId: number,
+    age: string,
+    equipmentName: string,
+    loadType: string,
+    loadStatus: string,
+    companyName: string,
+    contactEmail: string,
+    mileage: string,
+    originCSZ:string,
+    pickupDate: string,
+    destinationCSZ: string,
+    deliveryDate: string,
+    commodityName: string,
+    weight: number,
+    length: number,
+    revenueRate: number,
+    carrier: string,
+    actualPickupDate: string,
+    actualDeliveryDate: string,
+}
