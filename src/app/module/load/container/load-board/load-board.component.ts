@@ -1,88 +1,41 @@
 import { Component, OnInit } from "@angular/core";
+import { LoadBoardService } from 'src/app/shared/service/load-board.service';
+import { LoadBoard } from 'src/app/shared/model/load.model';
+
 
 @Component({
   templateUrl: "./load-board.component.html",
   styleUrls: ["./load-board.component.scss"]
 })
 export class LoadBoardComponent implements OnInit {
-  rows = [
-    {
-      age: "01:41",
-      avail: "02/25",
-      truck: "R",
-      fp: "F",
-      dho: "70",
-      origin: "Athens, GA",
-      trip: "772",
-      destination: "Chicago, IL",
-      dhd: 0,
-      company: "Tir-Pl Trucking Inc",
-      contact: "(847)233-0552",
-      length: "53 ft",
-      weight: "40.000 lbs"
-    },
-    {
-      age: "01:41",
-      avail: "02/25",
-      truck: "R",
-      fp: "F",
-      dho: "70",
-      origin: "Athens, GA",
-      trip: "772",
-      destination: "Chicago, IL",
-      dhd: 0,
-      company: "Tir-Pl Trucking Inc",
-      contact: "(847)233-0552",
-      length: "53 ft",
-      weight: "40.000 lbs"
-    },
-    {
-      age: "01:41",
-      avail: "02/25",
-      truck: "R",
-      fp: "F",
-      dho: "70",
-      origin: "Athens, GA",
-      trip: "772",
-      destination: "Chicago, IL",
-      dhd: 0,
-      company: "Tir-Pl Trucking Inc",
-      contact: "(847)233-0552",
-      length: "53 ft",
-      weight: "40.000 lbs"
-    },
-    {
-      age: "01:41",
-      avail: "02/25",
-      truck: "R",
-      fp: "F",
-      dho: "70",
-      origin: "Athens, GA",
-      trip: "772",
-      destination: "Chicago, IL",
-      dhd: 0,
-      company: "Tir-Pl Trucking Inc",
-      contact: "(847)233-0552",
-      length: "53 ft",
-      weight: "40.000 lbs"
-    }
-  ];
+  loads: LoadBoard[];
   columns = [
+    { name: "LoadId", prop: "loadId" },
     { name: "Age", prop: "age" },
-    { name: "Avail", prop: "avail" },
-    { name: "Truck", prop: "truck" },
-    { name: "F/P", prop: "fp" },
-    { name: "DH-O", prop: "dho" },
-    { name: "Origin", prop: "origin" },
-    { name: "Trip", prop: "trip" },
-    { name: "Destination", prop: "destination" },
-    { name: "DH-D", prop: "dhd" },
-    { name: "Company", prop: "company" },
-    { name: "Contact", prop: "contact" },
+    { name: "Truck", prop: "equipmentName" },
+    { name: "F/P", prop: "loadType" },
+    { name: "Status", prop: "loadStatus" },
+    { name: "Origin", prop: "originCSZ" },
+    { name: "Trip", prop: "mileage" },
+    { name: "Destination", prop: "destinationCSZ" },
+    { name: "Pickup", prop: "pickupDate" },
+    { name: "Delivery", prop: "deliveryDate" },
+    { name: "Company", prop: "companyName" },
+    { name: "Contact", prop: "contactEmail" },
     { name: "Length", prop: "length" },
-    { name: "Weight", prop: "weight" }
+    { name: "Weight", prop: "weight" },
+    { name: "Rate", prop: "revenueRate" }
   ];
-  constructor() {}
+  errorMessage: string;
 
-  ngOnInit(): void {}
+  constructor(private loadBoardService: LoadBoardService) {}
+
+  ngOnInit(): void {
+    this.loadBoardService.getLoads().subscribe(
+      (loads: LoadBoard[]) => {
+          this.loads = loads;
+               },
+      (error: any) => this.errorMessage = <any>error
+  );
+  }
 }

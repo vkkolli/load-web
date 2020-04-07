@@ -1,17 +1,24 @@
-<section>
-  <div class="row mb-2">
-    <div class="col-10">
-    </div>
-    <div class="col-2">
-      <button class="btn btn-primary" routerLink="create">Create Load</button>
-    </div>
+<header class="header">
+  <app-header headerText="Load Board"></app-header>
+</header>
+<main class="main-body">
+  <div class="container bg-white my-2">
+    <section>
+      <div class="row mb-2">
+        <div class="col-10">
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" routerLink="create">Create Load</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10">
+      <app-load-table [rows]="loads" [columns]="columns"></app-load-table>
+        </div>
+        <div class="col-2">
+          <app-load-criteria></app-load-criteria>
+        </div>
+      </div>
+    </section>
   </div>
-  <div class="row">
-    <div class="col-10">
-      <app-load-table [rows]="rows" [columns]="columns"></app-load-table>
-    </div>
-    <div class="col-2">
-      <app-load-criteria></app-load-criteria>
-    </div>
-  </div>
-</section>
+</main>
