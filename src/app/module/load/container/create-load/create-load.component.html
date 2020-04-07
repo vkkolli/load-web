@@ -1,12 +1,35 @@
-<section>
-  <div class="row mb-2">
-    <div class="col-10">
-    </div>
-    <div class="col-2">
-      <button class="btn btn-primary" routerLink="../">Back</button>
-    </div>
+<header class="header">
+  <app-header headerText="Post Load"></app-header>
+</header>
+<main class="main-body">
+  <div class="container bg-white my-2">
+    <section>
+      <div class="row mb-2">
+          <div class="col-2">
+            <button class="btn btn-primary" routerLink="../">Back</button>
+          </div>
+      </div>
+      <div class="row">
+        <app-load-status></app-load-status>
+      </div>
+      <div class="row">
+        <app-customer></app-customer>
+      </div>
+      <div class="row">
+        <app-equipment></app-equipment>
+      </div>
+      <div class="row">
+        <app-commodity></app-commodity>
+      </div>
+      <div class="row">
+        <app-trip></app-trip>
+      </div>
+      <div class="row">
+        <app-pricing></app-pricing>
+      </div>
+      <div class="row">
+        <app-carrier></app-carrier>
+      </div>
+    </section>
   </div>
-  <div class="row">
-    <app-load-details class="col-12"></app-load-details>
-  </div>
-</section>
+</main>

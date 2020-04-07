@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild } from '@angular/core';
+import { SideMenuComponent } from '../side-menu/side-menu.component';
+import { SideNavService } from '../../side-nav.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +9,19 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
+  // @ViewChild(SideMenuComponent) sideMenu: SideMenuComponent;
 
-  constructor() { }
+  @Input() headerText: String;
+
+  constructor(){
+
+  }
 
   ngOnInit(): void {
+  }
+
+  sideMenuToggle() {
+    // this.sideNavService.toggle();
   }
 
 }

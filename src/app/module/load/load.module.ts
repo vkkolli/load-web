@@ -11,6 +11,13 @@ import { LoadDetailsComponent } from "./component/load-details/load-details.comp
 
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { LoadCriteriaComponent } from "./component/load-criteria/load-criteria.component";
+import { CustomerComponent } from './component/load-details/customer/customer.component';
+import { EquipmentComponent } from './component/load-details/equipment/equipment.component';
+import { LoadStatusComponent } from './component/load-details/load-status/load-status.component';
+import { CommodityComponent } from './component/load-details/commodity/commodity.component';
+import { TripComponent } from './component/load-details/trip/trip.component';
+import { PricingComponent } from './component/load-details/pricing/pricing.component';
+import { CarrierComponent } from './component/load-details/carrier/carrier.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +26,14 @@ import { LoadCriteriaComponent } from "./component/load-criteria/load-criteria.c
     CreateLoadComponent,
     LoadTableComponent,
     LoadDetailsComponent,
-    LoadCriteriaComponent
+    LoadCriteriaComponent,
+    CustomerComponent,
+    EquipmentComponent,
+    LoadStatusComponent,
+    CommodityComponent,
+    TripComponent,
+    PricingComponent,
+    CarrierComponent
   ],
   imports: [
     CommonModule,
