@@ -11,6 +11,8 @@ import { LoadDetailsComponent } from "./component/load-details/load-details.comp
 
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { LoadCriteriaComponent } from "./component/load-criteria/load-criteria.component";
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { LoadCriteriaComponent } from "./component/load-criteria/load-criteria.c
     CommonModule,
     LoadRoutingModule,
     AppCommonModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NgbAccordionModule,
+    ReactiveFormsModule
   ]
 })
 export class LoadModule {}
