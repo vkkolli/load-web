@@ -10,14 +10,14 @@
             <ng-template ngbPanelContent>
                 <div formGroupName="customer">
                     <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtName">Customer</label>
-                            <input type="text" id="txtName" class="form-control" formControlName="name" required>
+                            <input type="text" id="txtName" class="form-control" formControlName="name" [ngbTypeahead]="search" container="body" required>
                             <div class="invalid-feedback">
                                 Required
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="drpAddress">Address</label>
                             <select id="drpAddress" class="form-control" formControlName="address" required>
                                 <option value="">select</option>
@@ -26,7 +26,7 @@
                                 Required
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtConName">Contact Name</label>
                             <select id="txtConName" class="form-control" formControlName="contact_name" required>
                                 <option value="">select</option>
@@ -35,7 +35,7 @@
                                 Required
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtConEmail">Contact Email</label>
                             <select id="txtConEmail" class="form-control" formControlName="contact_email" required>
                                 <option value="">select</option>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtContPhone">Contact Phone</label>
                             <select id="txtContPhone" class="form-control" formControlName="phone">
                                 <option value="">select</option>
@@ -67,10 +67,9 @@
                 </div>
             </ng-template>
             <ng-template ngbPanelContent>
-                <fieldset class="border p-2" formGroupName="equipment">
-                    <legend  class="w-auto small font-weight-bold">Equipment</legend>
+                <div formGroupName="equipment">
                     <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="drpType">Type</label>
                             <select id="drpType" class="form-control" formControlName="type" required>
                                 <option value="">select</option>
@@ -82,14 +81,14 @@
                                 Required
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtConName">Load Size</label>
-                            <div class="col-12 p-0">
-                                <div class="custom-control custom-radio custom-control-inline">
+                            <div class="row px-3">
+                                <div class="col custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="rdoSizeFull" formControlName="load_size" class="custom-control-input" value="F">
                                     <label class="custom-control-label" for="rdoSizeFull">Full</label>
                                 </div>
-                                <div class="custom-control custom-radio custom-control-inline">
+                                <div class="col custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="rdoSizePart" formControlName="load_size" class="custom-control-input" value="P">
                                     <label class="custom-control-label" for="rdoSizePart">Partial</label>
                                 </div>
@@ -98,43 +97,235 @@
                                 Required
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtLen">Length (FT)</label>
                             <input type="text" id="txtLen" class="form-control" formControlName="length">
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtWidth">Width (FT)</label>
                             <input type="text" id="txtWidth" class="form-control" formControlName="width" >
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtWeight">Weight (LBS)</label>
                             <input type="text" id="txtWeight" class="form-control" formControlName="weight" >
                         </div>
                     </div>
-                </fieldset>
-                <fieldset class="border p-2" formGroupName="commodity">
-                    <legend  class="w-auto small font-weight-bold">Commodity</legend>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel id="commodity">
+            <ng-template ngbPanelTitle>
+                <div class="row justify-content-between text-dark">
+                    <div class="d-flex text-white text-uppercase">Commodity</div>
+                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div formGroupName="commodity">
                     <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtCommName">Name</label>
                             <input type="text" id="txtCommName" class="form-control" formControlName="name" required>
                             <div class="invalid-feedback">
                                 Required
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtCommWeight">Weight (LBS)</label>
                             <input type="text" id="txtCommWeight" class="form-control" formControlName="weight" >
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3 form-group">
                             <label for="txtCommVal">Value</label>
                             <input type="text" id="txtCommVal" class="form-control" formControlName="value" >
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel id="trip">
+            <ng-template ngbPanelTitle>
+                <div class="row justify-content-between text-dark">
+                    <div class="d-flex text-white text-uppercase">Trip</div>
+                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <fieldset class="border p-2 mb-2" formGroupName="origin">
+                    <legend  class="w-auto small font-weight-bold">Origin</legend>
+                    <div class="form-row pb-sm-3">
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtOrigName">Name</label>
+                            <input type="text" id="txtOrigName" class="form-control" formControlName="name" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtOrigCity">City / State / Zip</label>
+                            <input type="text" id="txtOrigCity" class="form-control" formControlName="cityStateZip" [ngbTypeahead]="search" container="body" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtPickDate">Pickup Date</label>
+                            <div class="input-group">
+                                <input type="text" id="txtPickDate" class="form-control" formControlName="pickup_date" container="body" ngbDatepicker  #p="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="p.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtOrigNotes">Notes</label>
+                            <textarea id="txtOrigNotes" class="form-control" formControlName="notes" ></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="border p-2" formGroupName="destination">
+                    <legend  class="w-auto small font-weight-bold">Destination</legend>
+                    <div class="form-row pb-sm-3">
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtDestName">Name</label>
+                            <input type="text" id="txtDestName" class="form-control" formControlName="name" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtDestCity">City / State / Zip</label>
+                            <input type="text" id="txtDestCity" class="form-control" formControlName="cityStateZip" [ngbTypeahead]="search" container="body" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtDeliDate">Pickup Date</label>
+                            <div class="input-group">
+                                <input type="text" id="txtDeliDate" class="form-control" formControlName="delivery_date" container="body" ngbDatepicker  #d="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtDestNotes">Notes</label>
+                            <textarea id="txtDestNotes" class="form-control" formControlName="notes" ></textarea>
                         </div>
                     </div>
                 </fieldset>
             </ng-template>
         </ngb-panel>
+        <ngb-panel id="pricing">
+            <ng-template ngbPanelTitle>
+                <div class="row justify-content-between text-dark">
+                    <div class="d-flex text-white text-uppercase">Pricing</div>
+                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div formGroupName="pricing">
+                    <div class="form-row pb-sm-3">
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtTarget">Target</label>
+                            <input type="text" id="txtTarget" class="form-control" formControlName="target" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtPriceMax">Max</label>
+                            <input type="text" id="txtPriceMax" class="form-control" formControlName="max" >
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="drpRev">Revenue</label>
+                            <select id="drpRev" class="form-control" formControlName="revenue" required>
+                                <option value="">select</option>
+                                <option value="FR">Flat Rate</option>
+                                <option value="PM">Per Mile</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtRevVal">Value</label>
+                            <input type="text" id="txtRevVal" class="form-control" formControlName="rev_value" >
+                        </div>
+                    </div>
+                    <div class="form-row pb-sm-3">
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="drpCost">Cost</label>
+                            <select id="drpCost" class="form-control" formControlName="cost" required>
+                                <option value="">select</option>
+                                <option value="FR">Flat Rate</option>
+                                <option value="PM">Per Mile</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <label for="txtCostVal">Value</label>
+                            <input type="text" id="txtCostVal" class="form-control" formControlName="cost_value" >
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel id="carrier">
+            <ng-template ngbPanelTitle>
+                <div class="row justify-content-between text-dark">
+                    <div class="d-flex text-white text-uppercase">Carrier Search</div>
+                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div formGroupName="carrier">
+                    <div class="form-row pb-sm-3">
+                        <div class="col-sm-6 col-md-3 form-group">
+                            <div class="input-group">
+                                <input type="text" id="txtSearchCarrier" class="form-control" formControlName="carrier_search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force" [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50" [limit]="10" [rowHeight]="50" [rows]="rows"></ngx-datatable>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel id="load_carrier">
+            <ng-template ngbPanelTitle>
+                <div class="row justify-content-between text-dark">
+                    <div class="d-flex text-white text-uppercase">Load Carrier Details</div>
+                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div formGroupName="carrier">
+                    <div class="row">
+                        <div class="col-12">
+                            <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force" [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50" [limit]="10" [rowHeight]="50" [rows]="rows"></ngx-datatable>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
     </ngb-accordion>
+    <div class="row mb-2 justify-content-end">
+        <div class="col-auto">
+          <button class="btn btn-danger px-5" routerLink="../">Cancel</button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-success px-5">Create</button>
+        </div>
+    </div>
 </form>

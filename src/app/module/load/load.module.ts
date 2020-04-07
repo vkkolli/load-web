@@ -12,6 +12,7 @@ import { LoadDetailsComponent } from "./component/load-details/load-details.comp
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { LoadCriteriaComponent } from "./component/load-criteria/load-criteria.component";
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomerComponent } from './component/load-details/customer/customer.component';
 import { EquipmentComponent } from './component/load-details/equipment/equipment.component';
@@ -43,7 +44,8 @@ import { CarrierComponent } from './component/load-details/carrier/carrier.compo
     AppCommonModule,
     NgxDatatableModule,
     NgbAccordionModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ]
 })
 export class LoadModule {}
