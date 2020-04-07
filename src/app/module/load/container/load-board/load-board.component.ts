@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { LoadBoardService } from 'src/app/shared/service/load-board.service';
-import { ILoad } from 'src/app/shared/model/load.model';
+import { LoadBoard } from 'src/app/shared/model/load.model';
 
 
 @Component({
@@ -8,7 +8,7 @@ import { ILoad } from 'src/app/shared/model/load.model';
   styleUrls: ["./load-board.component.scss"]
 })
 export class LoadBoardComponent implements OnInit {
-  loads: ILoad[];
+  loads: LoadBoard[];
   columns = [
     { name: "LoadId", prop: "loadId" },
     { name: "Age", prop: "age" },
@@ -32,7 +32,7 @@ export class LoadBoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBoardService.getLoads().subscribe(
-      (loads: ILoad[]) => {
+      (loads: LoadBoard[]) => {
           this.loads = loads;
                },
       (error: any) => this.errorMessage = <any>error
