@@ -1,4 +1,4 @@
-<form [formGroup]="loadForm">
+<form [formGroup]="loadForm" (ngSubmit)="onSubmit()" novalidate>
     <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
         <ngb-panel id="customer">
             <ng-template ngbPanelTitle>
