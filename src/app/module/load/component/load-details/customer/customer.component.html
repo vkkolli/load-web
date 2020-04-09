@@ -1,1 +1,58 @@
-<p>customer works!</p>
+<form [formGroup]="customerForm"  novalidate>
+    <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
+        <ngb-panel id="customer">
+            <ng-template ngbPanelTitle>
+                <div class="row justify-content-between text-dark">
+                    <div class="d-flex text-white text-uppercase">Customer</div>
+                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div formGroupName="customer">
+                    <div class="form-row pb-sm-3">
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtName">Customer</label>
+                            <input type="text" id="txtName" class="form-control" formControlName="name" [ngbTypeahead]="search" container="body" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="drpAddress">Address</label>
+                            <select id="drpAddress" class="form-control" formControlName="address" required>
+                                <option value="">select</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtConName">Contact Name</label>
+                            <input type="text" id="txtConName" class="form-control" formControlName="contact_name" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtConEmail">Contact Email</label>
+                            <input type="text" id="txtConEmail" class="form-control" formControlName="contact_email" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtContPhone">Contact Phone</label>
+                            <input type="text" id="txtContPhone" class="form-control" formControlName="phone" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        
+    </ngb-accordion>    
+</form>
