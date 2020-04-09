@@ -14,7 +14,7 @@ pipeline {
             environment {
                 DOCKER_PATH = tool name: 'Docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
                 DOCKER_HOME = "${DOCKER_PATH}/bin"
-                env.PATH = "${DOCKER_HOME}:${env.PATH}"
+                PATH = "${DOCKER_HOME}:${env.PATH}"
                 dockerImage = docker.build("192.100.0.24/loadboard-web:${env.BUILD_ID}")
             }
             steps {
