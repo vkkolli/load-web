@@ -14,7 +14,10 @@ pipeline {
                     echo DOCKER_HOME
                     env.PATH = "$DOCKER_HOME/bin:$env.PATH"
                     echo env.PATH
-                    dockerImage = docker.build("registry:$BUILD_ID")
+                    dockerImage = docker.build("$registry:$BUILD_ID")
+                    withDockerRegistry(toolName: 'Docker', url: '192.100.0.24:32000') {
+                        dockerImage.push()
+                    }
                 }
             }
         }
