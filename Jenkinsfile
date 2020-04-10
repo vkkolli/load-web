@@ -18,7 +18,8 @@ pipeline {
                 // dockerImage = docker.build("192.100.0.24/loadboard-web:$BUILD_ID")
             }
             steps {
-                sh "Docker Image: ${dockerImage}"
+                // sh "Docker Image: ${dockerImage}"
+                sh "echo $PATH"
             }
         }
     }
