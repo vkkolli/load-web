@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: loadboad-web
+  name: loadboard-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: loadboard-web
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: loadboard-web
+    spec:
+      containers:
+      - image: 192.100.0.24:32000/loadboard-web:$IMAGE_TAG
+        name: java-basics
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: loadboard-web
+  name: loadboard-web
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: loadboard-web
+  type: ClusterIP
