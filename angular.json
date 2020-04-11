@@ -42,13 +42,14 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "aot": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [
                 {
