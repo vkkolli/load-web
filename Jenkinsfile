@@ -5,6 +5,8 @@ pipeline {
     DOCKER_HOME = ''
     dockerTool = 'Docker'
     IMAGE = "$registry:$env.BUILD_ID"
+    kubeDeployTemplate = 'deployment.yaml'
+    kubeDeploy = 'deployment-k8.yaml'
   }
   agent {
     kubernetes {
@@ -55,13 +57,13 @@ pipeline {
     }
     stage('Prepare Kubernetes Deployment') {
       steps {
-        sh "sed 's/\$IMAGE/$IMAGE/' deployment.yaml > deployment-k8s.yaml"
+        sh "sed 's|\$IMAGE|$IMAGE|' $kubeDeployTemplate > $kubeDeploy"
       }
     }
     stage('Deploy to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy configs: 'deployment-k8s.yaml', kubeconfigId: 'Kube-Config'
+          kubernetesDeploy configs: kubeDeploy, kubeconfigId: 'Kube-Config'
         }
       }
     }
