@@ -31,11 +31,14 @@ metadata:
     app: loadboard-web
   name: loadboard-web
 spec:
+  selector:
+    app: loadboard-web
+  type: NodePort
   ports:
   - name: 8080-8080
     port: 8080
     protocol: TCP
     targetPort: 8080
-  selector:
-    app: loadboard-web
-  type: ClusterIP
+    nodePort: 30036
+
+
