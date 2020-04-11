@@ -1,1 +1,78 @@
-<p>equipment works!</p>
+<form [formGroup]="equipForm" novalidate>
+    <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
+        
+        <ngb-panel id="equip">
+            <ng-template ngbPanelTitle>
+                <div class="row justify-content-between text-dark">
+                    <div class="d-flex text-white text-uppercase">Equipment Info</div>
+                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+                </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <fieldset formGroupName="equipment" class="border p-2 mb-2">
+                    <legend  class="w-auto small font-weight-bold">Equipment</legend>
+                    <div class="form-row pb-sm-3">
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="drpType">Type</label>
+                            <select id="drpType" class="form-control" formControlName="type" required>
+                                <option value="">select</option>
+                                <option value="V">Van</option>
+                                <option value="R">Refer</option>
+                                <option value="FB">Flat Bed</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtConName">Load Size</label>
+                            <div class="row px-3">
+                                <div class="col custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="rdoSizeFull" formControlName="load_size" class="custom-control-input" value="F">
+                                    <label class="custom-control-label" for="rdoSizeFull">Full</label>
+                                </div>
+                                <div class="col custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="rdoSizePart" formControlName="load_size" class="custom-control-input" value="P">
+                                    <label class="custom-control-label" for="rdoSizePart">Partial</label>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtLen">Length (FT)</label>
+                            <input type="text" id="txtLen" class="form-control" formControlName="length">
+                        </div>
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtWeight">Weight (LBS)</label>
+                            <input type="text" id="txtWeight" class="form-control" formControlName="weight" >
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset formGroupName="commodity" class="border p-2 mb-2">
+                    <legend  class="w-auto small font-weight-bold">Commodity</legend>
+                    <div class="form-row pb-sm-3">
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtCommName">Name</label>
+                            <input type="text" id="txtCommName" class="form-control" formControlName="name" required>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtCommWeight">Weight (LBS)</label>
+                            <input type="text" id="txtCommWeight" class="form-control" formControlName="weight" >
+                        </div>
+                        <div class="col-sm-6 col-lg-3 form-group">
+                            <label for="txtCommVal">Value</label>
+                            <input type="text" id="txtCommVal" class="form-control" formControlName="value" >
+                        </div>
+                    </div>
+                </fieldset>
+            </ng-template>
+        </ngb-panel>
+        
+    </ngb-accordion>
+    
+</form>
