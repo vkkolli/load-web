@@ -42,6 +42,7 @@ pipeline {
         script {
           withDockerRegistry(toolName: dockerTool, url: '192.100.0.24:32000') {
             dockerImage.push()
+            dockerImage.push('latest')
           }
         }
       }

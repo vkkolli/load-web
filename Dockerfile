@@ -1,8 +1,7 @@
 FROM node:lts-alpine as build-stage
 ARG configuration=production
 
-WORKDIR /app
-COPY package*.json /app/
+COPY package.json package-lock.json ./
 # RUN npm install
 RUN npm ci && mkdir /ng-app && mv ./node_modules ./ng-app
 
