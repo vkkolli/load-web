@@ -48,17 +48,13 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps {
-        script {
-          docker rmi "$registry:$env.BUILD_ID"
-        }
+        sh "docker rmi $registry:$env.BUILD_ID"
       }
     }
 
     stage('Deploy to Kubernetes') {
       steps {
-        script {
-          echo "Here!!"
-        }
+        sh 'echo Here!!'
       }
     }
   }
