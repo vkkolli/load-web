@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = '192.100.0.24:32000/loadboard-poc'
+    registry = '192.100.0.24:32000/loadboard-web'
     dockerImage = ''
     DOCKER_HOME = ''
     dockerTool = 'Docker'

@@ -20,4 +20,4 @@ FROM nginx:alpine
 
 COPY --from=build-stage /ng-app/dist/out/ /usr/share/nginx/html
 # Copy the default nginx.conf
-COPY --from=build-stage /ng-app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build-stage /ng-app/nginx.conf /etc/nginx/nginx.conf
