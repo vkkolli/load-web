@@ -15,16 +15,20 @@ export class LoadBoardComponent implements OnInit {
     { name: "Truck", prop: "equipmentName" },
     { name: "F/P", prop: "loadType" },
     { name: "Status", prop: "loadStatus" },
-    { name: "Origin", prop: "originCSZ" },
+    { name: "Origin", prop: "originCsz" },
     { name: "Trip", prop: "mileage" },
-    { name: "Destination", prop: "destinationCSZ" },
+    { name: "Destination", prop: "destinationCsz" },
     { name: "Pickup", prop: "pickupDate" },
     { name: "Delivery", prop: "deliveryDate" },
-    { name: "Company", prop: "companyName" },
-    { name: "Contact", prop: "contactEmail" },
-    { name: "Length", prop: "length" },
-    { name: "Weight", prop: "weight" },
-    { name: "Rate", prop: "revenueRate" }
+    { name: "Company", prop: "customerName" },
+    { name: "Contact", prop: "customerEmail" },
+    { name: "Commodity", prop: "commodityName" },
+    { name: "Length", prop: "commodityLength" },
+    { name: "Weight", prop: "commodityWeight" },
+    { name: "Cost", prop: "revenueCost" },
+    { name: "Carrier", prop: "carrierName" },
+    { name: "Actual Pickup", prop: "actualPickupDate" },
+    { name: "Actual Delivery", prop: "actualDeliveryDate" }
   ];
   errorMessage: string;
 
@@ -34,7 +38,7 @@ export class LoadBoardComponent implements OnInit {
     this.loadBoardService.getLoads().subscribe(
       (loads: LoadBoard[]) => {
           this.loads = loads;
-               },
+      },
       (error: any) => this.errorMessage = <any>error
   );
   }
