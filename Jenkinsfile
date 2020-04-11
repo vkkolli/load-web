@@ -49,7 +49,7 @@ pipeline {
     stage('Remove Unused docker image') {
       steps {
         scripts {
-          docker rmi registry:BUILD_NUMBER
+          docker rmi "$registry:$BUILD_NUMBER"
         }
       }
     }
