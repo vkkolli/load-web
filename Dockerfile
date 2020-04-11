@@ -14,10 +14,10 @@ RUN ./node_modules/.bin/ngcc --properties es2015
 
 COPY . .
 # RUN npm run build --  --output-path=./dist/out --configuration $configuration
-RUN npm run nghm -- build --aot=true --vendor-chunk --output-path=./dist/out --configuration $configuration
+RUN npm run nghm -- build --aot=true --vendor-chunk --configuration $configuration
 
 FROM nginx:alpine
 
-COPY --from=build-stage /ng-app/dist/out/ /usr/share/nginx/html
+COPY --from=build-stage /ng-app/dist/ /usr/share/nginx/html
 # Copy the default nginx.conf
-COPY --from=build-stage /ng-app/nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
