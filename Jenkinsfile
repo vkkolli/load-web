@@ -52,11 +52,15 @@ pipeline {
         sh "docker rmi $registry:$env.BUILD_ID"
       }
     }
-
+    stage('Prepare Kubernetes Deployment') {
+      steps {
+        sh "sed 's/\$IMAGE_TAG/$test_var/' deployment.yaml > deployment-k8s.yaml"
+      }
+    }
     stage('Deploy to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy configs: 'deployment.yaml', kubeconfigId: 'Kube-Config'
+          kubernetesDeploy configs: 'deployment-k8s.yaml', kubeconfigId: 'Kube-Config'
         }
       }
     }
