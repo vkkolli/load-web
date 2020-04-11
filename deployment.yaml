@@ -16,8 +16,8 @@ spec:
         app: loadboard-web
     spec:
       containers:
-      - image: 192.100.0.24:32000/loadboard-web:$IMAGE_TAG
-        name: java-basics
+      - image: $IMAGE
+        name: loadboard-web
         resources: {}
 ---
 apiVersion: v1

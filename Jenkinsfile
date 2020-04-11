@@ -4,6 +4,7 @@ pipeline {
     dockerImage = ''
     DOCKER_HOME = ''
     dockerTool = 'Docker'
+    IMAGE = "$registry:$env.BUILD_ID"
   }
   agent {
     kubernetes {
@@ -33,7 +34,7 @@ pipeline {
     stage('Building image') {
       steps {
         script {
-          dockerImage = docker.build registry + ":$env.BUILD_ID"
+          dockerImage = docker.build IMAGE
         }
       }
     }
@@ -49,12 +50,12 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps {
-        sh "docker rmi $registry:$env.BUILD_ID"
+        sh "docker rmi $IMAGE"
       }
     }
     stage('Prepare Kubernetes Deployment') {
       steps {
-        sh "sed 's/\$IMAGE_TAG/$test_var/' deployment.yaml > deployment-k8s.yaml"
+        sh "sed 's/\$IMAGE/$IMAGE/' deployment.yaml > deployment-k8s.yaml"
       }
     }
     stage('Deploy to Kubernetes') {
