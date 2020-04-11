@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: loadboad-web
   name: loadboard-web
@@ -13,7 +12,6 @@ spec:
   strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: loadboard-web
     spec:
@@ -21,12 +19,10 @@ spec:
       - image: 192.100.0.24:32000/loadboard-web:$IMAGE_TAG
         name: java-basics
         resources: {}
-status: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   labels:
     app: loadboard-web
   name: loadboard-web
@@ -40,5 +36,3 @@ spec:
     protocol: TCP
     targetPort: 8080
     nodePort: 30036
-
-
