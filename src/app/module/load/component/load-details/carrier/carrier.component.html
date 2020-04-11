@@ -1,1 +1,24 @@
-<p>carrier works!</p>
+<div [formGroup]="loadForm">
+  <div formGroupName="carrier">
+  <div class="row pb-sm-3 justify-content-between mb-2">
+      <div class="col-sm-6 col-lg-3 form-group">
+          <div class="input-group">
+              <input type="text" id="txtSearchCarrier" class="form-control" formControlName="carrier_search">
+              <div class="input-group-append">
+                  <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+              </div>
+          </div>
+      </div>
+      <div class="col-auto">
+          <button class="btn btn-primary px-5" type="button">Assign</button>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12">
+          <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force" [selectionType]="SelectionType.single" [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50" [limit]="10" [rowHeight]="50" [rows]="rows">
+
+          </ngx-datatable>
+      </div>
+  </div>
+</div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import {ColumnMode, SelectionType} from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
@@ -16,31 +16,7 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
 })
 export class LoadDetailsComponent implements OnInit {
   activeIds = [];
-  ColumnMode = ColumnMode;
-  columns = [
-    { headerCheckboxable: false, checkboxable: true, width: "30" },
-    { name: "Name", prop: "name" },
-    { name: "City / State / Zip", prop: "cityStateZip" },
-    { name: "Contact Name", prop: "contact_name" },
-    { name: "Contact Email", prop: "contact_email" },
-    { name: "Contact Phone", prop: "phone" }
-  ];
-  columns1 = [
-    { name: "Name", prop: "name" },
-    { name: "City / State / Zip", prop: "cityStateZip" },
-    { name: "Contact Name", prop: "contact_name" },
-    { name: "Contact Email", prop: "contact_email" },
-    { name: "Contact Phone", prop: "phone" },
-    { name: "Actions", prop: "actions" }
-  ];
-  rows = [
-    { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" },
-    { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" },
-    { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" },
-    { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" }
-  ];
-  SelectionType = SelectionType;
-  
+
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
@@ -54,7 +30,11 @@ export class LoadDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activeIds = ['customer', 'equip', 'commodity', 'trip', 'pricing', 'carrier', 'load_carrier'];
+    this.activeIds = ['trip', 'pricing'];
+  }
+
+  tripFormChangeEvent (tripFormGroup: FormGroup) {
+    this.loadForm.addControl('origin',tripFormGroup);
   }
 
   get formControls() { return this.loadForm.controls; }
@@ -78,7 +58,7 @@ export class LoadDetailsComponent implements OnInit {
       weight: [''],
       value: ['']
     }),
-    origin: this.fb.group({
+     origin: this.fb.group({
       name: ['', Validators.required],
       cityStateZip: [''],
       pickup_date: [''],
@@ -107,14 +87,14 @@ export class LoadDetailsComponent implements OnInit {
     })
   });
 
-  onSubmit() {
+  saveOrUpdate() {
     // stop here if form is invalid
-    if (this.loadForm.invalid) {
-      alert("Form Invalid...!");
-      return;
-    }
+    // if (this.loadForm.invalid) {
+    //   alert("Form Invalid...!");
+    //   return;
+    // }
 
-    this.createLoadService.createLoad(this.loadForm)
+    this.createLoadService.createLoad(this.loadForm.value)
       .subscribe(data => {
         if (data["success"]) {
           alert("Load Created Successfuly..!")

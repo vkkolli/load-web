@@ -21,6 +21,7 @@ import { CommodityComponent } from './component/load-details/commodity/commodity
 import { TripComponent } from './component/load-details/trip/trip.component';
 import { PricingComponent } from './component/load-details/pricing/pricing.component';
 import { CarrierComponent } from './component/load-details/carrier/carrier.component';
+import { LoadCarrierComponent } from './component/load-details/load-carrier/load-carrier.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CarrierComponent } from './component/load-details/carrier/carrier.compo
     CommodityComponent,
     TripComponent,
     PricingComponent,
-    CarrierComponent
+    CarrierComponent,
+    LoadCarrierComponent
   ],
   imports: [
     CommonModule,

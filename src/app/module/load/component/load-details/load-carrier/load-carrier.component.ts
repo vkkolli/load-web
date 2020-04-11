@@ -1,17 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
-  selector: 'app-carrier',
-  templateUrl: './carrier.component.html',
-  styleUrls: ['./carrier.component.scss']
+  selector: 'app-load-carrier',
+  templateUrl: './load-carrier.component.html',
+  styleUrls: ['./load-carrier.component.scss']
 })
-export class CarrierComponent implements OnInit {
+export class LoadCarrierComponent implements OnInit {
 
-  @Input() loadForm : FormGroup;
+  @Input() loadForm: FormGroup;
   ColumnMode = ColumnMode;
-  SelectionType = SelectionType;
   columns = [
     { headerCheckboxable: false, checkboxable: true, width: "30" },
     { name: "Name", prop: "name" },
@@ -34,6 +33,7 @@ export class CarrierComponent implements OnInit {
     { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" },
     { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" }
   ];
+
 
   constructor() { }
 
