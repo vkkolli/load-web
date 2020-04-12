@@ -15,7 +15,7 @@ RUN ./node_modules/.bin/ngcc --properties es2015
 
 COPY . .
 # RUN npm run build --  --output-path=./dist/out --configuration $configuration
-RUN npm run nghm -- build --configuration $configuration --output-path=./dist/out
+RUN npm run build --configuration $configuration --output-path=./dist/out
 
 # Stage 1: Serve Angular app using nginx
 FROM nginx:alpine
