@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:  # list of containers that you want present for your build, you can define a default container in the Jenkinsfile
     - name: jnlp
-      image: jnlp
+      image: jenkinsci/jnlp-slave
       resources:
         limits:
           cpu: 1
