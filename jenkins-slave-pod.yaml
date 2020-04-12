@@ -7,23 +7,23 @@ kind: Pod
 #       component: agent
 spec:
   containers:  # list of containers that you want present for your build, you can define a default container in the Jenkinsfile
-    - name: jnlp
-      image: jenkinsci/jnlp-slave
-      resources:
-        limits:
-          cpu: 1
-          memory: 2Gi
-        request:
-          cpu: 1
-          memory: 2Gi
-      imagePullPolicy: Always
-      env:
-        - name: POP_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIP
-        - name: DOCKER_HOST
-          value: tcp://192.100.0.24:2375
+    # - name: jnlp
+    #   image: jenkinsci/jnlp-slave
+    #   resources:
+    #     limits:
+    #       cpu: 1
+    #       memory: 2Gi
+    #     request:
+    #       cpu: 1
+    #       memory: 2Gi
+    #   imagePullPolicy: Always
+    #   env:
+    #     - name: POP_IP
+    #       valueFrom:
+    #         fieldRef:
+    #           fieldPath: status.podIP
+    #     - name: DOCKER_HOST
+    #       value: tcp://192.100.0.24:2375
     - name: dind
       image: docker:19.03-dind
       imagePullPolicy: Always
