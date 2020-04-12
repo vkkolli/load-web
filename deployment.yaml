@@ -46,7 +46,7 @@ metadata:
 spec:
   rules:
     - http:
-      paths:
-        - backend:
-            serviceName: loadboard-web
-            servicePort: 8080
+        paths:
+          - backend:
+              serviceName: loadboard-web
+              servicePort: 8080
