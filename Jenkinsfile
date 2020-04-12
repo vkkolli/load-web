@@ -23,31 +23,36 @@ pipeline {
         git 'https://cjpeter@bitbucket.org/CEI_CJ/loadboard-web.git'
       }
     }
-    stage ('Setup Docker') {
-      steps {
-        script {
-          DOCKER_HOME = tool(name: dockerTool, type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool')
-          echo DOCKER_HOME
-          env.PATH = "$DOCKER_HOME/bin:$env.PATH"
-          echo env.PATH
-        }
-      }
-    }
+    // stage ('Setup Docker') {
+    //   steps {
+    //     script {
+    //       DOCKER_HOME = tool(name: dockerTool, type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool')
+    //       echo DOCKER_HOME
+    //       env.PATH = "$DOCKER_HOME/bin:$env.PATH"
+    //       echo env.PATH
+    //     }
+    //   }
+    // }
     stage('Building image') {
       steps {
-        script {
-          dockerImage = docker.build IMAGE
-        }
+        // script {
+        //   dockerImage = docker.build IMAGE
+        // }
+        sh "docker build -t $IMAGE ."
       }
     }
     stage('Deploy Image') {
       steps {
-        script {
-          withDockerRegistry(toolName: dockerTool, url: '192.100.0.24:32000') {
-            dockerImage.push()
-            dockerImage.push('latest')
-          }
-        }
+        // script {
+        //   withDockerRegistry(toolName: dockerTool, url: '192.100.0.24:32000') {
+        //     dockerImage.push()
+        //     dockerImage.push('latest')
+        //   }
+        // }
+        sh "docker tag $IMAGE $IMAGE"
+        sh "docker push $IMAGE"
+        sh "docker tag $IMAGE $registry:latest"
+        sh "docker push $registry:latest"
       }
     }
     stage('Remove Unused docker image') {
