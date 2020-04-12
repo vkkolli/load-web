@@ -1,37 +1,15 @@
 apiVersion: v1
 kind: Pod
-# metadata:
-#     labels:
-#       jenkins/kube-default: true
-#       app: jenkins
-#       component: agent
 spec:
   containers:  # list of containers that you want present for your build, you can define a default container in the Jenkinsfile
-    # - name: jnlp
-    #   image: jenkinsci/jnlp-slave
-    #   resources:
-    #     limits:
-    #       cpu: 1
-    #       memory: 2Gi
-    #     request:
-    #       cpu: 1
-    #       memory: 2Gi
-    #   imagePullPolicy: Always
-    #   env:
-    #     - name: POP_IP
-    #       valueFrom:
-    #         fieldRef:
-    #           fieldPath: status.podIP
-    #     - name: DOCKER_HOST
-    #       value: tcp://192.100.0.24:2375
-    - name: dind
-      image: docker:19.03-dind
+    - name: docker
+      image: docker:18.06.1
+      command: ["tail", "-f", "/dev/null"]
       imagePullPolicy: Always
-      securityContext:
-        privileged: true
       volumeMounts:
-        - name: dind-storage
-          mountPath: /var/run/docker
+        - name: docker
+          mountPath: /var/run/docker.sock # We use the k8s host docker engine
   volumes:
-    - name: dind-storage
-      emptyDir: {}
+    - name: docker
+      hostPath:
+        path: /var/run/docker.sock
