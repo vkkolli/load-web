@@ -18,8 +18,8 @@ spec:
       containers:
       - image: $IMAGE
         name: loadboard-web
-        port: 80
-        resources: {}
+        ports:
+          - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
