@@ -26,6 +26,7 @@ spec:
           value: tcp://192.100.0.24:2375
     - name: dind
       image: docker:19.03-dind
+      imagePullPolicy: Always
       securityContext:
         privileged: true
       volumeMounts:
