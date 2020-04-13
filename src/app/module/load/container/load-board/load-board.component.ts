@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { LoadBoardService } from 'src/app/shared/service/load-board.service';
-import { LoadBoard } from 'src/app/shared/model/load.model';
+import { LoadBoardService } from '@app/shared/service/load-board.service';
+import { LoadBoard } from '@app/shared/model/load.model';
 
 
 @Component({

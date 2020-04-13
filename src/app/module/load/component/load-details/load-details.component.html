@@ -1,351 +1,80 @@
-<form [formGroup]="loadForm" (ngSubmit)="onSubmit()" novalidate>
-    <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
-        <ngb-panel id="customer">
-            <ng-template ngbPanelTitle>
-                <div class="row justify-content-between text-dark">
-                    <div class="d-flex text-white text-uppercase">Customer</div>
-                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
-                </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
-                <div formGroupName="customer">
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtName">Customer</label>
-                            <input type="text" id="txtName" class="form-control" formControlName="name" [ngbTypeahead]="search" container="body" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="drpAddress">Address</label>
-                            <select id="drpAddress" class="form-control" formControlName="address" required>
-                                <option value="">select</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtConName">Contact Name</label>
-                            <input type="text" id="txtConName" class="form-control" formControlName="contact_name" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtConEmail">Contact Email</label>
-                            <input type="text" id="txtConEmail" class="form-control" formControlName="contact_email" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtContPhone">Contact Phone</label>
-                            <input type="text" id="txtContPhone" class="form-control" formControlName="phone" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </ngb-panel>
-        <ngb-panel id="equip">
-            <ng-template ngbPanelTitle>
-                <div class="row justify-content-between text-dark">
-                    <div class="d-flex text-white text-uppercase">Equipment Info</div>
-                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
-                </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
-                <fieldset formGroupName="equipment" class="border p-2 mb-2">
-                    <legend  class="w-auto small font-weight-bold">Equipment</legend>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="drpType">Type</label>
-                            <select id="drpType" class="form-control" formControlName="type" required>
-                                <option value="">select</option>
-                                <option value="V">Van</option>
-                                <option value="R">Refer</option>
-                                <option value="FB">Flat Bed</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtConName">Load Size</label>
-                            <div class="row px-3">
-                                <div class="col custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="rdoSizeFull" formControlName="load_size" class="custom-control-input" value="F">
-                                    <label class="custom-control-label" for="rdoSizeFull">Full</label>
-                                </div>
-                                <div class="col custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="rdoSizePart" formControlName="load_size" class="custom-control-input" value="P">
-                                    <label class="custom-control-label" for="rdoSizePart">Partial</label>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtLen">Length (FT)</label>
-                            <input type="text" id="txtLen" class="form-control" formControlName="length">
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtWeight">Weight (LBS)</label>
-                            <input type="text" id="txtWeight" class="form-control" formControlName="weight" >
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset formGroupName="commodity" class="border p-2 mb-2">
-                    <legend  class="w-auto small font-weight-bold">Commodity</legend>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtCommName">Name</label>
-                            <input type="text" id="txtCommName" class="form-control" formControlName="name" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtCommWeight">Weight (LBS)</label>
-                            <input type="text" id="txtCommWeight" class="form-control" formControlName="weight" >
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtCommVal">Value</label>
-                            <input type="text" id="txtCommVal" class="form-control" formControlName="value" >
-                        </div>
-                    </div>
-                </fieldset>
-            </ng-template>
-        </ngb-panel>
-        <ngb-panel id="trip">
-            <ng-template ngbPanelTitle>
-                <div class="row justify-content-between text-dark">
-                    <div class="d-flex text-white text-uppercase">Trip</div>
-                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
-                </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
-                <fieldset class="border p-2 mb-2" formGroupName="origin">
-                    <legend  class="w-auto small font-weight-bold">Origin</legend>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtOrigName">Name</label>
-                            <input type="text" id="txtOrigName" class="form-control" formControlName="name" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtOrigCity">City / State / Zip</label>
-                            <input type="text" id="txtOrigCity" class="form-control" formControlName="cityStateZip" [ngbTypeahead]="search" container="body" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-4 form-group">
-                            <label for="txtPickDate">Pickup Date</label>
-                            <div class="form-row">
-                                <div class="col-6">
-                                    <div class="input-group">
-                                        <input type="text" id="txtPickDate" class="form-control" formControlName="pickup_date" container="body" ngbDatepicker  #p="ngbDatepicker">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary calendar" (click)="p.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <ngb-timepicker formControlName="pickup_time" [spinners]=false></ngb-timepicker>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-md-6 form-group">
-                            <label for="txtOrigNotes">Notes</label>
-                            <textarea id="txtOrigNotes" class="form-control" formControlName="notes" ></textarea>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset class="border p-2" formGroupName="destination">
-                    <legend  class="w-auto small font-weight-bold">Destination</legend>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtDestName">Name</label>
-                            <input type="text" id="txtDestName" class="form-control" formControlName="name" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtDestCity">City / State / Zip</label>
-                            <input type="text" id="txtDestCity" class="form-control" formControlName="cityStateZip" [ngbTypeahead]="search" container="body" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-4 form-group">
-                            <label for="txtDeliDate">Delivery Date</label>
-                            <div class="form-row">
-                                <div class="col-6">
-                                    <div class="input-group">
-                                        <input type="text" id="txtDeliDate" class="form-control" formControlName="delivery_date" container="body" ngbDatepicker  #d="ngbDatepicker">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <ngb-timepicker formControlName="delivery_time" [spinners]=false></ngb-timepicker>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-md-6 form-group">
-                            <label for="txtDestNotes">Notes</label>
-                            <textarea id="txtDestNotes" class="form-control" formControlName="notes" ></textarea>
-                        </div>
-                    </div>
-                </fieldset>
-            </ng-template>
-        </ngb-panel>
-        <ngb-panel id="pricing">
-            <ng-template ngbPanelTitle>
-                <div class="row justify-content-between text-dark">
-                    <div class="d-flex text-white text-uppercase">Pricing</div>
-                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
-                </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
-                <div formGroupName="pricing">
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtTarget">Target</label>
-                            <input type="text" id="txtTarget" class="form-control" formControlName="target" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtPriceMax">Max</label>
-                            <input type="text" id="txtPriceMax" class="form-control" formControlName="max" >
-                        </div>
-                    </div>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-                            <label for="drpRev">Revenue</label>
-                            <select id="drpRev" class="form-control" formControlName="revenue" required>
-                                <option value="">select</option>
-                                <option value="FR">Flat Rate</option>
-                                <option value="PM">Per Mile</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-                            <label for="txtRevVal">Value</label>
-                            <input type="text" id="txtRevVal" class="form-control" formControlName="rev_value" >
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-                            <label for="txtRevTot">Total</label>
-                            <input type="text" id="txtRevTot" class="form-control" formControlName="rev_total" >
-                        </div>
-                    </div>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-                            <label for="drpCost">Cost</label>
-                            <select id="drpCost" class="form-control" formControlName="cost" required>
-                                <option value="">select</option>
-                                <option value="FR">Flat Rate</option>
-                                <option value="PM">Per Mile</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-                            <label for="txtCostVal">Value</label>
-                            <input type="text" id="txtCostVal" class="form-control" formControlName="cost_value" >
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-                            <label for="txtCostTot">Total</label>
-                            <input type="text" id="txtCostTot" class="form-control" formControlName="cost_total" >
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </ngb-panel>
-        <ngb-panel id="carrier">
-            <ng-template ngbPanelTitle>
-                <div class="row justify-content-between text-dark">
-                    <div class="d-flex text-white text-uppercase">Carrier Search</div>
-                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
-                </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
-                <div formGroupName="carrier">
-                    <div class="row pb-sm-3 justify-content-between mb-2">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <div class="input-group">
-                                <input type="text" id="txtSearchCarrier" class="form-control" formControlName="carrier_search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-primary px-5" type="button">Assign</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force" [selectionType]="SelectionType.single" [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50" [limit]="10" [rowHeight]="50" [rows]="rows">
-                                
-                            </ngx-datatable>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </ngb-panel>
-        <ngb-panel id="load_carrier">
-            <ng-template ngbPanelTitle>
-                <div class="row justify-content-between text-dark">
-                    <div class="d-flex text-white text-uppercase">Load Carrier Details</div>
-                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
-                </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
-                <div formGroupName="carrier">
-                    <div class="row">
-                        <div class="col-12">
-                            <ngx-datatable class="material" [columns]="columns1" [columnMode]="ColumnMode.force" [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50" [limit]="10" [rowHeight]="50" [rows]="rows">
-                                <ngx-datatable-column *ngFor="let column of columns1" name="{{column.name}}" prop="{{column.prop}}">
-                                    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                        <span *ngIf="value != 'remove'">{{value}}</span>
-                                        <span *ngIf="value == 'remove'" title="Remove"><button class="btn btn-sm btn-warning text-white" ><i class="fa fa-remove"></i> </button></span>
-                                    </ng-template>
-                                  </ngx-datatable-column>
-                            </ngx-datatable>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </ngb-panel>
-    </ngb-accordion>
-    <div class="row mb-2 justify-content-end">
-        <div class="col-auto">
-          <button class="btn btn-danger px-5" routerLink="../">Cancel</button>
-        </div>
-        <div class="col-auto">
-          <button class="btn btn-success px-5">Create</button>
-        </div>
-    </div>
+<form [formGroup]="loadForm" novalidate>
+  <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
+      <ngb-panel id="customer">
+          <ng-template ngbPanelTitle>
+              <div class="row justify-content-between text-dark">
+                  <div class="d-flex text-white text-uppercase">Customer</div>
+                  <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+              </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+              <app-customer></app-customer>
+          </ng-template>
+      </ngb-panel>
+      <ngb-panel id="equip">
+          <ng-template ngbPanelTitle>
+              <div class="row justify-content-between text-dark">
+                  <div class="d-flex text-white text-uppercase">Equipment Info</div>
+                  <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+              </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <app-equipment></app-equipment>
+            <app-commodity></app-commodity>
+          </ng-template>
+      </ngb-panel>
+      <ngb-panel id="trip">
+        <ng-template ngbPanelTitle>
+          <div class="row justify-content-between text-dark">
+              <div class="d-flex text-white text-uppercase">Trip</div>
+              <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <app-trip [loadForm]="loadForm"></app-trip>
+        </ng-template>
+
+      </ngb-panel>
+      <ngb-panel id="pricing">
+          <ng-template ngbPanelTitle>
+              <div class="row justify-content-between text-dark">
+                  <div class="d-flex text-white text-uppercase">Pricing</div>
+                  <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+              </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <app-pricing [loadForm]="loadForm"></app-pricing>
+          </ng-template>
+      </ngb-panel>
+      <!-- <ngb-panel id="carrier">
+          <ng-template ngbPanelTitle>
+              <div class="row justify-content-between text-dark">
+                  <div class="d-flex text-white text-uppercase">Carrier Search</div>
+                  <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+              </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <app-carrier [loadForm]="loadForm"></app-carrier>
+          </ng-template>
+      </ngb-panel>
+      <ngb-panel id="load_carrier">
+          <ng-template ngbPanelTitle>
+              <div class="row justify-content-between text-dark">
+                  <div class="d-flex text-white text-uppercase">Load Carrier Details</div>
+                  <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
+              </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <app-load-carrier [loadForm]="loadForm"></app-load-carrier>
+          </ng-template>
+      </ngb-panel> -->
+  </ngb-accordion>
+  <div class="row mb-2 justify-content-end">
+      <div class="col-auto">
+        <button class="btn btn-danger px-5" routerLink="../">Cancel</button>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-success px-5" (click)="saveOrUpdate()" [disabled]="!loadForm.valid">Create</button>
+      </div>
+  </div>
 </form>

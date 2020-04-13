@@ -1,1 +1,79 @@
-<p>trip works!</p>
+<div [formGroup]="loadForm">
+<fieldset class="border p-2 mb-2" formGroupName="origin">
+  <legend  class="w-auto small font-weight-bold">Origin</legend>
+  <div class="form-row pb-sm-3">
+      <div class="col-sm-6 col-lg-3 form-group">
+          <label for="txtOrigName">Name</label>
+          <input type="text" id="txtOrigName" class="form-control" formControlName="name">
+
+      </div>
+      <div class="col-sm-6 col-lg-3 form-group">
+          <label for="txtOrigCity">City / State / Zip</label>
+          <input type="text" id="txtOrigCity" class="form-control" formControlName="cityStateZip" [ngbTypeahead]="searchCityStateZip" container="body" required>
+          <div *ngIf="loadForm.get('origin.cityStateZip').touched && loadForm.get('origin.cityStateZip').invalid" class="alert alert-danger">
+            Origin City / State / Zip is required.
+           </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4 form-group">
+          <label for="txtPickDate">Pickup Date</label>
+          <div class="form-row">
+              <div class="col-6">
+                  <div class="input-group">
+                      <input type="text" id="txtPickDate" class="form-control" formControlName="pickup_date" container="body" ngbDatepicker  #p="ngbDatepicker">
+                      <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="p.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-6">
+                  <ngb-timepicker formControlName="pickup_time" [spinners]=false></ngb-timepicker>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="form-row pb-sm-3">
+      <div class="col-md-6 form-group">
+          <label for="txtOrigNotes">Notes</label>
+          <textarea id="txtOrigNotes" class="form-control" formControlName="notes" ></textarea>
+      </div>
+  </div>
+</fieldset>
+<fieldset class="border p-2" formGroupName="destination">
+  <legend  class="w-auto small font-weight-bold">Destination</legend>
+  <div class="form-row pb-sm-3">
+    <div class="col-sm-6 col-lg-3 form-group">
+          <label for="txtDestName">Name</label>
+          <input type="text" id="txtDestName" class="form-control" formControlName="name">
+        </div>
+        <div class="col-sm-6 col-lg-3 form-group">
+          <label for="txtDestCity">City / State / Zip</label>
+          <input type="text" id="txtDestCity" class="form-control" formControlName="cityStateZip" [ngbTypeahead]="searchCityStateZip" container="body" required>
+          <div *ngIf="loadForm.get('destination.cityStateZip').touched && loadForm.get('destination.cityStateZip').invalid" class="alert alert-danger">
+            Destination City / State / Zip is required.
+          </div>
+        </div>
+      <div class="col-sm-6 col-md-6 col-lg-4 form-group">
+        <label for="txtDeliDate">Delivery Date</label>
+        <div class="form-row">
+          <div class="col-6">
+            <div class="input-group">
+                      <input type="text" id="txtDeliDate" class="form-control" formControlName="delivery_date" container="body" ngbDatepicker  #d="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                      </div>
+                    </div>
+              </div>
+              <div class="col-6">
+                  <ngb-timepicker formControlName="delivery_time" [spinners]=false></ngb-timepicker>
+              </div>
+            </div>
+      </div>
+  </div>
+  <div class="form-row pb-sm-3">
+    <div class="col-md-6 form-group">
+      <label for="txtDestNotes">Notes</label>
+      <textarea id="txtDestNotes" class="form-control" formControlName="notes" ></textarea>
+    </div>
+  </div>
+</fieldset>
+</div>

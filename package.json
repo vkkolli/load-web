@@ -29,11 +29,15 @@
     "@swimlane/ngx-datatable": "^16.0.3",
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
+    "ngx-mask": "^9.0.0",
+    "ngx-spinner": "^9.0.2",
+    "ngx-toastr": "^12.0.1",
     "npm": "^6.14.4",
     "rxjs": "~6.5.4",
     "to": "^0.2.9",
     "tslib": "^1.10.0",
     "update": "^0.7.4",
+    "url-join": "^4.0.1",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
