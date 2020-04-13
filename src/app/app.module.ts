@@ -9,6 +9,7 @@ import { AppComponent } from './app-component/app.component';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NumericDirective } from './core/directives/numeric.directive';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NumericDirective } from './core/directives/numeric.directive';
     BrowserModule,
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
+    NgxSpinnerModule,
     AppRoutingModule,
     NgbModule,
     ToastrModule.forRoot(),

@@ -26,6 +26,8 @@ import { LoadService } from './component/load-details/shared/service/load.servic
 import { LoadBoardService } from '@app/shared/service/load-board.service';
 import { NumericDirective } from '@app/core/directives/numeric.directive';
 import { NgxMaskModule } from 'ngx-mask';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { NgxMaskModule } from 'ngx-mask';
     NgxDatatableModule,
     NgbAccordionModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     NgbModule
   ],
   providers: [

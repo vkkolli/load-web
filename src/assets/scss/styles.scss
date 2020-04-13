@@ -31,7 +31,6 @@ $loadboard-poc-theme: mat-light-theme($loadboard-poc-primary, $loadboard-poc-acc
 
 @import 'vendor/vendor';
 
-
 @import 'common';
 .header {
   position: fixed;
@@ -119,3 +118,11 @@ width: 5%;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~ngx-toastr/toastr-bs4-alert';
+
+.toast-container {
+  z-index: 100000000000;
+  margin-right: 40%;
+  text-align: center;
+}

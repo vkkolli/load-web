@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy, Injector } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoadService } from './shared/service/load.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg', 'poiuy', 'lkjhg', 'mnbv', 'jkl'];
 
@@ -18,6 +19,8 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
 export class LoadDetailsComponent implements OnInit {
   activeIds = [];
 
+  protected spinner: NgxSpinnerService;
+
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
@@ -26,8 +29,9 @@ export class LoadDetailsComponent implements OnInit {
         : searchList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
 
-  constructor(private fb: FormBuilder, config: NgbAccordionConfig, private loadService: LoadService, private router: Router) {
+  constructor(injector: Injector, private fb: FormBuilder, config: NgbAccordionConfig, private loadService: LoadService, private router: Router) {
     config.type = 'dark';
+    this.spinner = injector.get(NgxSpinnerService);
   }
 
   ngOnInit(): void {
@@ -78,13 +82,14 @@ export class LoadDetailsComponent implements OnInit {
       cost: [''],
       cost_value: [''],
       cost_total: ['']
-    }),
-    carrier: this.fb.group({
-      carrier_search: ['']
     })
+    // carrier: this.fb.group({
+    //   carrier_search: ['']
+    // })
   });
 
   saveOrUpdate() {
+    this.spinner.show();
     this.loadService.saveOrUpdate(this.loadForm.value);
   }
 }

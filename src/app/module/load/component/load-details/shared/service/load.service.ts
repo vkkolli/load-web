@@ -27,17 +27,16 @@ export class LoadService extends BaseService<Load>{
 
     onSaveComplete(response: Load) {
       this.spinner.hide();
-      this.toastr.success('Adjustment created successfully!');
-
+      this.toastr.success('Load created successfully!');
+      this.router.navigate(['/load', '/']);
     }
 
     onSaveFailed(error: HttpErrorResponse) {
       this.spinner.hide();
-      this.toastr.error('Adjustment failed!');
+      this.toastr.error('Load failed!');
     }
 
     onDestroy() {
-      console.log('Tenant Service Destroyed.');
     }
 
 
