@@ -1,0 +1,20 @@
+{
+    "extends": "recommended",
+    "rules": {
+        "CompileStatic": {
+            "enabled": false
+        },
+        "NestedBlockDepth": {
+            "enabled": false
+        },
+        "SpaceAroundMapEntryColon": {
+            "enabled": false
+        },
+        "UnnecessaryReturnKeyword": "error",
+        "comments.ClassJavadoc": "off",
+        "formatting.Indentation": {
+            "spacesPerIndentLevel": 2,
+            "severity": "info"
+        }
+    }
+}

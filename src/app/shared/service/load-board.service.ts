@@ -8,7 +8,7 @@ import { LoadBoard } from '../model/load.model';
 @Injectable()
 export class LoadBoardService {
 
-    private _loadBoardUrl: string = "/assets/data/load.json";
+    private _loadBoardUrl: string = "http://localhost:8080/load/";
     private loads: LoadBoard[];
 
     constructor(private http: HttpClient ) {
