@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import {ColumnMode, SelectionType} from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
 })
 export class CommodityComponent implements OnInit {
 
-
+  @Input() loadForm : FormGroup;
   activeIds = [];
   ColumnMode = ColumnMode;
   
@@ -34,18 +34,9 @@ export class CommodityComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activeIds = ['customer', 'equip', 'commodity', 'trip', 'pricing', 'carrier', 'load_carrier'];
   }
 
-  get formControls() { return this.commodityForm.controls; }
 
-  commodityForm = this.fb.group({
-    commodity: this.fb.group({
-      name: ['', Validators.required],
-      weight: [''],
-      value: ['']
-    })        
-  });
 
 
 }

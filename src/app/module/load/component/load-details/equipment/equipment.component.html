@@ -40,24 +40,5 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset formGroupName="commodity" class="border p-2 mb-2">
-                    <legend  class="w-auto small font-weight-bold">Commodity</legend>
-                    <div class="form-row pb-sm-3">
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtCommName">Name</label>
-                            <input type="text" id="txtCommName" class="form-control" formControlName="name" required>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtCommWeight">Weight (LBS)</label>
-                            <input type="text" id="txtCommWeight" class="form-control" formControlName="weight" >
-                        </div>
-                        <div class="col-sm-6 col-lg-3 form-group">
-                            <label for="txtCommVal">Value</label>
-                            <input type="text" id="txtCommVal" class="form-control" formControlName="value" >
-                        </div>
-                    </div>
-                </fieldset>    
+                <app-commodity [loadForm]="loadForm"></app-commodity>  
 </form>
