@@ -1,25 +1,50 @@
-<mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side">
-    <mat-nav-list>
-      <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-      <a href="#" mat-list-item>Menu Item 1</a>
-      <a href="#" mat-list-item>Menu Item 2</a>
-      <a href="#" mat-list-item>Menu Item 3</a>
-      <a href="#" mat-list-item>Menu Item 4</a>
-      <a href="#" mat-list-item>Menu Item 5</a>
-      <a href="#"mat-list-item>Menu Item 6</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <!-- <mat-sidenav-content>
-    <button mat-button (click)="sidenav.toggle()">Main content</button>
-  </mat-sidenav-content> -->
-</mat-sidenav-container>
-
-<!-- <mat-sidenav-container class='app-drawer-container' fullscreen>
-  <mat-sidenav #sidenav mode="side">
-    sidenav bar
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <button mat-button (click)="sidenav.toggle()">Main content</button>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
+<nav class="sideMenu px-2 py-3">
+  <ul class="list-unstyled components">
+      <p>Heading</p>
+      <li class="active" class="cur-pointer" (click)="isHomeCollapsed = !isHomeCollapsed" [attr.aria-expanded]="!isHomeCollapsed" aria-controls="homeSubmenu" aria-expanded="false" >
+          <a href="#homeSubmenu" class="text-white">Home</a>
+          <span class="pull-right">
+            <i class="fa fa-chevron-down" *ngIf="isHomeCollapsed"></i>
+            <i class="fa fa-chevron-up" *ngIf="!isHomeCollapsed"></i>
+          </span>
+          <ul class="collapse list-unstyled" [ngbCollapse]="isHomeCollapsed" id="homeSubmenu">
+              <li>
+                  <a href="#" class="text-white">Home 1</a>
+              </li>
+              <li>
+                  <a href="#" class="text-white">Home 2</a>
+              </li>
+              <li>
+                  <a href="#" class="text-white">Home 3</a>
+              </li>
+          </ul>
+      </li>
+      <li>
+          <a href="#" class="text-white">Menu 1</a>
+      </li>
+      <li class="active" class="cur-pointer" (click)="isPageCollapsed = !isPageCollapsed" [attr.aria-expanded]="!isPageCollapsed" aria-controls="pageSubmenu" aria-expanded="false" >
+          <a href="#pageSubmenu" class="text-white">Home</a>
+          <span class="pull-right">
+            <i class="fa fa-chevron-down" *ngIf="isPageCollapsed"></i>
+            <i class="fa fa-chevron-up" *ngIf="!isPageCollapsed"></i>
+          </span>
+          <ul class="list-unstyled" [ngbCollapse]="isPageCollapsed" id="pageSubmenu">
+              <li>
+                  <a href="#" class="text-white">Page 1</a>
+              </li>
+              <li>
+                  <a href="#" class="text-white">Page 2</a>
+              </li>
+              <li>
+                  <a href="#" class="text-white">Page 3</a>
+              </li>
+          </ul>
+      </li>
+      <li>
+          <a href="#" class="text-white">Menu 2</a>
+      </li>
+      <li>
+          <a href="#" class="text-white">Menu 3</a>
+      </li>
+  </ul>
+</nav>

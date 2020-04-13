@@ -44,6 +44,11 @@ export class EquipmentComponent implements OnInit {
       load_size: ['', Validators.required],
       length: [''],
       weight: ['']
+    }),
+    commodity: this.fb.group({
+      name: ['', Validators.required],
+      weight: [''],
+      value: ['']
     })
   });
 
