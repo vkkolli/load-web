@@ -1,3 +1,4 @@
+# Stage 0: Complie and Build Angular App
 FROM node:lts-alpine as build-stage
 ARG configuration=production
 
@@ -10,14 +11,15 @@ RUN npm set progress=false && npm set audit=false && npm set loglevel=error
 RUN npm ci && mkdir /ng-app && mv ./node_modules ./ng-app
 
 WORKDIR /ng-app
-COPY . .
-
 RUN ./node_modules/.bin/ngcc --properties es2015
-# RUN npm run build --  --output-path=./dist/out --configuration $configuration
-RUN npm run nghm -- build --aot=true --vendor-chunk --output-path=./dist/out --configuration $configuration
 
+COPY . .
+# RUN npm run build --  --output-path=./dist/out --configuration $configuration
+RUN npm run build -- --configuration $configuration --output-path=./dist/out
+
+# Stage 1: Serve Angular app using nginx
 FROM nginx:alpine
 
 COPY --from=build-stage /ng-app/dist/out/ /usr/share/nginx/html
 # Copy the default nginx.conf
-COPY --from=build-stage /ng-app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf

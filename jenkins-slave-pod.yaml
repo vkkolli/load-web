@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:  # list of containers that you want present for your build, you can define a default container in the Jenkinsfile
-    - name: docker
-      image: docker:18.06.1
+    - name: dind
+      image: docker:19.03-dind
       command: ["tail", "-f", "/dev/null"]
       imagePullPolicy: Always
       volumeMounts:
