@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ColumnMode, SelectionType} from '@swimlane/ngx-datatable';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -15,7 +15,7 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
 })
 export class CustomerComponent implements OnInit {
 
-
+  @Input() loadForm : FormGroup;
     activeIds = [];
   ColumnMode = ColumnMode;
   

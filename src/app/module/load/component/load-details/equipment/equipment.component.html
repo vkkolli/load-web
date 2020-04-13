@@ -1,14 +1,4 @@
-<form [formGroup]="equipForm" novalidate>
-    <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
-        
-        <ngb-panel id="equip">
-            <ng-template ngbPanelTitle>
-                <div class="row justify-content-between text-dark">
-                    <div class="d-flex text-white text-uppercase">Equipment Info</div>
-                    <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
-                </div>
-            </ng-template>
-            <ng-template ngbPanelContent>
+<form [formGroup]="loadForm" novalidate>                
                 <fieldset formGroupName="equipment" class="border p-2 mb-2">
                     <legend  class="w-auto small font-weight-bold">Equipment</legend>
                     <div class="form-row pb-sm-3">
@@ -69,10 +59,5 @@
                             <input type="text" id="txtCommVal" class="form-control" formControlName="value" >
                         </div>
                     </div>
-                </fieldset>
-            </ng-template>
-        </ngb-panel>
-        
-    </ngb-accordion>
-    
+                </fieldset>    
 </form>
