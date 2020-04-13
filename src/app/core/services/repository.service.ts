@@ -1,55 +1,72 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpParams, HttpHeaders, HttpEventType  } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RepositoryService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  public get(url: string, endpoint: string, params?: any): Observable<any> {
+  public get<T>(url: string, params?: any): Observable<T> {
     let reqParams: HttpParams = null;
-    if(params){
-      reqParams = new  HttpParams();
+    if (params) {
+      reqParams = new HttpParams();
       Object.keys(params).forEach(key => {
-        reqParams.append(key, params[key]);
-      })
+        reqParams = reqParams.append(key, params[key]);
+      });
     }
-    return this.handleRequest('Get', url + endpoint, null, reqParams);
+    return this.handleRequest<T>('Get', url, null, reqParams).pipe(
+      map((request: any) => ('body' in request ? request.body : request))
+    );
   }
 
-  public post(url: string, endpoint: string, body: any): Observable<any> {
-    return this.handleRequest('Post', url + endpoint, body);
+  public post<T>(url: string, body: any): Observable<T> {
+    return this.handleRequest<T>('Post', url, body).pipe(
+      map((request: any) => ('body' in request ? request.body : request))
+    );
   }
 
-  private handleRequest(method: string, url: string, reqBody?: any, reqParams?: HttpParams, reqHeaders?: HttpHeaders): Observable<any> {  
+  public postMultipart<T>(url: string, body: any): Observable<T> {
+    return this.handleRequest<T>('Post', url, body, null, new HttpHeaders());
+  }
 
-    let httpObserve : any = "response";
-    let httpResponseType : any = "json";
-    if(!reqHeaders){
-      reqHeaders =  new HttpHeaders();
+  public put<T>(url: string, body: any): Observable<T> {
+    return this.handleRequest<T>('Put', url, body);
+  }
+
+  public delete(url: string, params?: any): Observable<any> {
+    let reqParams: HttpParams = null;
+    if (params) {
+      reqParams = new HttpParams();
+      Object.keys(params).forEach(key => {
+        reqParams = reqParams.append(key, params[key]);
+      });
     }
-    reqHeaders = reqHeaders.set("Content-Type", "application/json");
+    return this.handleRequest('Delete', url, null, reqParams);
+  }
 
-    let httpOptions  = 
-    { 
-      body : reqBody,
+  private handleRequest<T>(
+    method: string,
+    url: string,
+    reqBody?: any,
+    reqParams?: HttpParams,
+    reqHeaders?: HttpHeaders
+  ): Observable<T> {
+    const httpResponseType = 'json';
+    if (!reqHeaders) {
+      reqHeaders = new HttpHeaders();
+      reqHeaders = reqHeaders.set('Content-Type', 'application/json');
+    }
+
+    const httpOptions = {
+      body: reqBody,
       headers: reqHeaders,
-      params: reqParams,     
-      responseType: httpResponseType,
-      observe : httpObserve
+      params: reqParams,
+      responseType: httpResponseType as 'json'
     };
 
-    return new Observable((observer) => {
-      this.http.request(method, url, httpOptions)      
-        .subscribe(
-        (response) => {
-          const resBody = response["body"] ? response["body"] : {};
-          observer.next(Object.assign(resBody, {"resStatus": response["ok"] }));
-          observer.complete();
-        });
-      });
+    return this.http.request<T>(method, url, httpOptions);
   }
 }

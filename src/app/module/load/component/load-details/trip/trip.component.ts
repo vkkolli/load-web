@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { LookupService } from '@app/module/load/service/lookup.service';
 
 const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg', 'poiuy', 'lkjhg', 'mnbv', 'jkl'];
 
@@ -13,29 +14,41 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
 export class TripComponent implements OnInit {
 
   @Input() loadForm : FormGroup;
-  // @Output() onFormGroupChange = new EventEmitter<FormGroup>();
 
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map(term => term.length < 2 ? []
-        : searchList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    );
+  // search = (text$: Observable<string>) =>
+  //   text$.pipe(
+  //     debounceTime(200),
+  //     distinctUntilChanged(),
+  //     map(searchText => searchText.length < 2 ? []
+  //       : this.zipSearchList = this.service.fetchAllCarrierDetails(searchText))
+  //   );
 
-  constructor(private fb: FormBuilder) { }
+
+  searchCityStateZip = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    switchMap(term => {
+      if (!term) {
+        return of([]);
+      }
+
+      return this.lookupService
+        .fetchCityStateZip(term)
+        .pipe(map(list => (list.length > 10 ? list.splice(0, 10) : list)));
+    })
+  );
+
+  zipSearchList: Observable<Array<String>>;
+  constructor(private fb: FormBuilder, private lookupService: LookupService) { }
 
   ngOnInit() {
-    //this.onValueChanges();
+    this.onValueChanges();
   }
 
   get formControls() { return this.loadForm.controls; }
 
   onValueChanges(): void {
-    this.loadForm.valueChanges.pipe( debounceTime(1000)).subscribe(val=>{
-      console.log(val);
-      //this.onFormGroupChange.emit(this.loadForm.value);
-    })
   }
 
   get name() { return this.loadForm.get('name'); }

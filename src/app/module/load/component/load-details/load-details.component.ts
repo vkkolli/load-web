@@ -1,18 +1,19 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
-import {ColumnMode, SelectionType} from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { CreateLoadService } from './shared/service/create-load.service';
 import { Router } from '@angular/router';
+import { LoadService } from './shared/service/load.service';
+
 const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg', 'poiuy', 'lkjhg', 'mnbv', 'jkl'];
+
 @Component({
   selector: "app-load-details",
   templateUrl: "./load-details.component.html",
   styleUrls: ["./load-details.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [NgbAccordionConfig, CreateLoadService]
+  providers: [NgbAccordionConfig]
 })
 export class LoadDetailsComponent implements OnInit {
   activeIds = [];
@@ -25,16 +26,12 @@ export class LoadDetailsComponent implements OnInit {
         : searchList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
 
-  constructor(private fb: FormBuilder, config: NgbAccordionConfig, private createLoadService: CreateLoadService, private router: Router) {
+  constructor(private fb: FormBuilder, config: NgbAccordionConfig, private loadService: LoadService, private router: Router) {
     config.type = 'dark';
   }
 
   ngOnInit(): void {
     this.activeIds = ['trip', 'pricing'];
-  }
-
-  tripFormChangeEvent (tripFormGroup: FormGroup) {
-    this.loadForm.addControl('origin',tripFormGroup);
   }
 
   get formControls() { return this.loadForm.controls; }
@@ -77,10 +74,10 @@ export class LoadDetailsComponent implements OnInit {
       max: [''],
       revenue: [''],
       rev_value: [''],
-      rev_total: [{value: '', disabled: true}],
+      rev_total: [''],
       cost: [''],
       cost_value: [''],
-      cost_total: [{value: '', disabled: true}]
+      cost_total: ['']
     }),
     carrier: this.fb.group({
       carrier_search: ['']
@@ -88,18 +85,6 @@ export class LoadDetailsComponent implements OnInit {
   });
 
   saveOrUpdate() {
-    // stop here if form is invalid
-    // if (this.loadForm.invalid) {
-    //   alert("Form Invalid...!");
-    //   return;
-    // }
-
-    this.createLoadService.createLoad(this.loadForm.value)
-      .subscribe(data => {
-        if (data["success"]) {
-          alert("Load Created Successfuly..!")
-          this.router.navigate(['../']);
-        }
-      });
+    this.loadService.saveOrUpdate(this.loadForm.value);
   }
 }

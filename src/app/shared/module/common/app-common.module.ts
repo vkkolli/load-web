@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,6 +19,7 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
   declarations: [HeaderComponent, FooterComponent, SideMenuComponent],
   imports: [
     CommonModule,
+    RouterModule,
     MatSliderModule,
     MatToolbarModule,
     MatSidenavModule,
