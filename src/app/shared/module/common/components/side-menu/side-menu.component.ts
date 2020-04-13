@@ -7,6 +7,8 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./side-menu.component.scss']
 })
 export class SideMenuComponent implements OnInit {
+  public isPageCollapsed = true;
+  public isHomeCollapsed = true;
 
   // @ViewChild('sidenav') public sidenav: MatSidenav;
 

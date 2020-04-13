@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   // @ViewChild(SideMenuComponent) sideMenu: SideMenuComponent;
 
   @Input() headerText: String;
+  public isCollapsed = true;
 
   constructor(){
 

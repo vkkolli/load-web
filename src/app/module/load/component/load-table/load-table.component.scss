@@ -1,0 +1,12 @@
+::ng-deep {
+    .ngx-datatable {
+        &.material {
+            .datatable-header {
+                .datatable-header-cell {
+                    background-color: #606060 !important;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+}
