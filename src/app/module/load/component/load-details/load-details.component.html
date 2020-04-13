@@ -8,7 +8,7 @@
               </div>
           </ng-template>
           <ng-template ngbPanelContent>
-              <app-customer></app-customer>
+              <app-customer [loadForm]="loadForm"></app-customer>
           </ng-template>
       </ngb-panel>
       <ngb-panel id="equip">
@@ -19,8 +19,7 @@
               </div>
           </ng-template>
           <ng-template ngbPanelContent>
-            <app-equipment></app-equipment>
-            <app-commodity></app-commodity>
+            <app-equipment [loadForm]="loadForm"></app-equipment>
           </ng-template>
       </ngb-panel>
       <ngb-panel id="trip">

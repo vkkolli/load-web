@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import {ColumnMode, SelectionType} from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
   styleUrls: ['./equipment.component.scss']
 })
 export class EquipmentComponent implements OnInit {
-
+  @Input() loadForm : FormGroup;
   activeIds = [];
   ColumnMode = ColumnMode;
   
@@ -32,7 +32,6 @@ export class EquipmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activeIds = ['customer', 'equip', 'commodity', 'trip', 'pricing', 'carrier', 'load_carrier'];
   }
 
   get formControls() { return this.equipForm.controls; }

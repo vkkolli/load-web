@@ -31,7 +31,7 @@ export class LoadDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activeIds = ['trip', 'pricing'];
+    this.activeIds = ['customer','equip','trip', 'pricing'];
   }
 
   get formControls() { return this.loadForm.controls; }
