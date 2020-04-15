@@ -5,7 +5,8 @@ metadata:
     app: loadboad-web
   name: loadboard-web
 spec:
-  replicas: 3
+  replicas: 2
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: loadboard-web
@@ -47,6 +48,7 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
+          - path: /
+            backend:
               serviceName: loadboard-web
               servicePort: 8080

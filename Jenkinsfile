@@ -7,7 +7,7 @@ pipeline {
   }
   agent {
     kubernetes {
-      label 'loadboard-builder'  // all your pods will be named with this prefix, followed by a unique id
+      label 'loadboard-angular-builder'  // all your pods will be named with this prefix, followed by a unique id
       idleMinutes 5  // how long the pod will live after no jobs have run on it
       yamlFile 'jenkins-slave-pod.yaml'  // path to the pod definition relative to the root of our project
       // define a default container if more than a few stages use it, will default to jnlp container
@@ -16,11 +16,6 @@ pipeline {
   }
 
   stages {
-    stage('Cloning Git') {
-      steps {
-        git 'https://cjpeter@bitbucket.org/CEI_CJ/loadboard-web.git'
-      }
-    }
     stage('Building image') {
       steps {
         sh "docker build -t $IMAGE ."
