@@ -11,14 +11,6 @@ export class LoadCarrierComponent implements OnInit {
 
   @Input() loadForm: FormGroup;
   ColumnMode = ColumnMode;
-  columns = [
-    { headerCheckboxable: false, checkboxable: true, width: "30" },
-    { name: "Name", prop: "name" },
-    { name: "City / State / Zip", prop: "cityStateZip" },
-    { name: "Contact Name", prop: "contact_name" },
-    { name: "Contact Email", prop: "contact_email" },
-    { name: "Contact Phone", prop: "phone" }
-  ];
   columns1 = [
     { name: "Name", prop: "name" },
     { name: "City / State / Zip", prop: "cityStateZip" },
@@ -29,9 +21,6 @@ export class LoadCarrierComponent implements OnInit {
   ];
   rows = [
     { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" },
-    { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" },
-    { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" },
-    { name: "ABC", cityStateZip: "New York, NY, 12345", contact_name: "XYZ", contact_email: "xyz@abc.com", phone: "(123) 456-7890", actions: "remove" }
   ];
 
 

@@ -3,7 +3,8 @@
       <div class="form-row pb-sm-3">
           <div class="col-sm-6 col-lg-3 form-group">
               <label for="txtName">Customer</label>
-              <input type="text" id="txtName" class="form-control" formControlName="name" [ngbTypeahead]="search" container="body" required>
+              <input type="text" id="txtName" class="form-control" formControlName="name"
+              [ngbTypeahead]="search" container="body" required placeholder="Enter Customer">
               <div class="invalid-feedback">
                   Required
               </div>
@@ -11,9 +12,10 @@
           <div class="col-sm-6 col-lg-3 form-group">
               <label for="drpAddress">Address</label>
               <select id="drpAddress" class="form-control" formControlName="address" required>
-                  <option value="">Select</option>
-                  <option value="V">Van</option>
-                  <option value="R">Refer</option>
+                  <option value="">Select Customer Address</option>
+                  <option value="1">California</option>
+                  <option value="2">Florida</option>
+                  <option value="3">Texas</option>
 
               </select>
               <div class="invalid-feedback">

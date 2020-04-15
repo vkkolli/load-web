@@ -126,3 +126,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-right: 40%;
   text-align: center;
 }
+
+// input[type="text"]::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+//   color: #adaeb0;
+//   opacity: 1; /* Firefox */
+// }
+
+// input[type="text"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+//   color: #adaeb0;
+// }
+
+// input[type="text"]::-ms-input-placeholder { /* Microsoft Edge */
+//   color: #adaeb0;
+// }
+
+// textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+//   color: #adaeb0;
+//   opacity: 1; /* Firefox */
+// }
+
+// textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+//   color: #adaeb0;
+// }
+
+// textarea::-ms-input-placeholder { /* Microsoft Edge */
+//   color: #adaeb0;
+// }
+
