@@ -14,12 +14,12 @@ export class PricingComponent implements OnInit {
 
   @Input() loadForm : FormGroup;
 
-  pricingLineItem$: Observable<Array<PricingLineItem>>;
+  // pricingLineItem$: Observable<Array<PricingLineItem>>;
 
   constructor(public lookupService: LookupService) { }
 
   ngOnInit() {
-    this.pricingLineItem$ = this.lookupService.pricingLineItem$;
+    // this.pricingLineItem$ = this.lookupService.pricingLineItem$;
 
     this.onValueChanges();
   }

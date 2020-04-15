@@ -15,7 +15,7 @@ export class LookupService {
   pricingLineItem$ = new BehaviorSubject<Array<Lookup>>([]);
 
   constructor(private repo: RepositoryService) {
-    this.fetchPricingLineItem();
+    // this.fetchPricingLineItem();
   }
 
   // Pricing Line item list

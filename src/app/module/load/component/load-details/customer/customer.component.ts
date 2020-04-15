@@ -18,7 +18,7 @@ export class CustomerComponent implements OnInit {
   @Input() loadForm : FormGroup;
     activeIds = [];
   ColumnMode = ColumnMode;
-  
+
   SelectionType = SelectionType;
 
   search = (text$: Observable<string>) =>
@@ -36,22 +36,5 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
     this.activeIds = ['customer'];
   }
-
-  get formControls() { return this.customerForm.controls; }
-
-  customerForm = this.fb.group({
-    customer: this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      contact_name: [{value: '', disabled: true}, Validators.required],
-      contact_email: [{value: '', disabled: true}, Validators.required],
-      phone: [{value: '', disabled: true}]
-    })
-    
-  });
-
-  
-
- 
 
 }
