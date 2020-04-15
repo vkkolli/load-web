@@ -3,10 +3,14 @@
       <div class="form-row pb-sm-3">
           <div class="col-sm-6 col-lg-3 form-group">
               <label for="txtName">Customer</label>
-              <input type="text" id="txtName" class="form-control" formControlName="name" [ngbTypeahead]="search" container="body" required>
+              <input type="text" id="txtName" class="form-control" formControlName="name" [ngbTypeahead]="searchCustomer" container="body" [inputFormatter]="formatter"
+              [resultFormatter]="formatter" required>
               <div class="invalid-feedback">
                   Required
               </div>
+              <div *ngIf="loadForm.get('customer.name').touched && loadForm.get('customer.name').invalid" class="invalid-element">
+                Customer Name is required.
+               </div>
           </div>
           <div class="col-sm-6 col-lg-3 form-group">
               <label for="drpAddress">Address</label>

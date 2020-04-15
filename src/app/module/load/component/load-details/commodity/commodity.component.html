@@ -4,6 +4,9 @@
       <div class="col-sm-6 col-lg-3 form-group">
           <label for="txtCommName">Name</label>
           <input type="text" id="txtCommName" class="form-control" formControlName="name" required>
+          <div *ngIf="loadForm.get('commodity.name').touched && loadForm.get('commodity.name').invalid" class="invalid-element">
+            Commodity Name is required.
+           </div>
           <div class="invalid-feedback">
               Required
           </div>
