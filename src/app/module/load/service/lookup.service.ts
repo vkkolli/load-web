@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import * as urljoin from 'url-join';
 const LOOKUP_PATH = urljoin(environment.loadApiPath, 'load/lookup');
 const ZIP_PATH = urljoin(environment.loadApiPath, 'zipcode');
+const CUST_PATH = environment.loadApiPath;
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,11 @@ export class LookupService {
 
   fetchCityStateZip(search: string) {
     const url = urljoin(ZIP_PATH, '/search/' + search);
+    return this.repo.get<Array<String>>(url);
+  }
+
+  fetchCustDetails(search: string) {
+    const url = urljoin(CUST_PATH, 'customer/search/' + search);
     return this.repo.get<Array<String>>(url);
   }
 

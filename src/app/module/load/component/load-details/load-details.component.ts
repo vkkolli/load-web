@@ -8,8 +8,6 @@ import { LoadService } from './shared/service/load.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 
-const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg', 'poiuy', 'lkjhg', 'mnbv', 'jkl'];
-
 @Component({
   selector: "app-load-details",
   templateUrl: "./load-details.component.html",
@@ -21,14 +19,6 @@ export class LoadDetailsComponent implements OnInit {
   activeIds = [];
 
   protected spinner: NgxSpinnerService;
-
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map(term => term.length < 2 ? []
-        : searchList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    );
 
   constructor(injector: Injector,private http: HttpClient, private fb: FormBuilder, config: NgbAccordionConfig, private loadService: LoadService, private router: Router) {
     config.type = 'dark';
@@ -59,7 +49,7 @@ export class LoadDetailsComponent implements OnInit {
         weight: [''],
         value: ['']
       }),
-        origin: this.fb.group({
+      origin: this.fb.group({
         name: ['', Validators.required],
         cityStateZip: [''],
         pickup_date: [''],
@@ -112,7 +102,7 @@ export class LoadDetailsComponent implements OnInit {
 
   private _jsonURL = 'assets/data/sample.json';
   public getJSON(): Observable<any> {
-    // this.loadService.fetchById(1233);
+    this.loadService.fetchById(1233);
     return this.http.get(this._jsonURL);
   }
 
