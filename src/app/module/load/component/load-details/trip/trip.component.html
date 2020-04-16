@@ -10,7 +10,7 @@
       <div class="col-sm-6 col-lg-3 form-group">
           <label for="txtOrigCity">City / State / Zip</label>
           <input type="text" id="txtOrigCity" class="form-control" formControlName="cityStateZip" placeholder="Type to Search"
-          [ngbTypeahead]="searchCityStateZip" container="body" required>
+          [ngbTypeahead]="searchCityStateZip" container="body" (selectItem)="selectedOriginItem($event)" required>
           <div *ngIf="loadForm.get('origin.cityStateZip').touched && loadForm.get('origin.cityStateZip').invalid" class="alert alert-danger">
             Origin City / State / Zip is required.
            </div>
@@ -50,7 +50,7 @@
         <div class="col-sm-6 col-lg-3 form-group">
           <label for="txtDestCity">City / State / Zip</label>
           <input type="text" id="txtDestCity" class="form-control" formControlName="cityStateZip" placeholder="Type to Search"
-          [ngbTypeahead]="searchCityStateZip" container="body" required>
+          [ngbTypeahead]="searchCityStateZip" container="body" (selectItem)="selectedDestinationItem($event)" required>
           <div *ngIf="loadForm.get('destination.cityStateZip').touched && loadForm.get('destination.cityStateZip').invalid" class="alert alert-danger">
             Destination City / State / Zip is required.
           </div>

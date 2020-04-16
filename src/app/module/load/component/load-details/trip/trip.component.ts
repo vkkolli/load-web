@@ -4,8 +4,6 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operato
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { LookupService } from '@app/module/load/service/lookup.service';
 
-const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg', 'poiuy', 'lkjhg', 'mnbv', 'jkl'];
-
 @Component({
   selector: 'app-trip',
   templateUrl: './trip.component.html',
@@ -14,32 +12,21 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
 export class TripComponent implements OnInit {
 
   @Input() loadForm : FormGroup;
-
-  // search = (text$: Observable<string>) =>
-  //   text$.pipe(
-  //     debounceTime(200),
-  //     distinctUntilChanged(),
-  //     map(searchText => searchText.length < 2 ? []
-  //       : this.zipSearchList = this.service.fetchAllCarrierDetails(searchText))
-  //   );
-
+  zipSearchList: Observable<Array<String>>;
 
   searchCityStateZip = (text$: Observable<string>) =>
   text$.pipe(
-    debounceTime(200),
+    debounceTime(500),
     distinctUntilChanged(),
-    switchMap(term => {
-      if (!term) {
+    switchMap(searchText => {
+      if (searchText.length < 3 ) {
         return of([]);
       }
-
-      return this.lookupService
-        .fetchCityStateZip(term)
-        .pipe(map(list => (list.length > 10 ? list.splice(0, 10) : list)));
+      return this.lookupService.fetchCityStateZip(searchText)
+      .pipe(map(list => list.length < 2 ? [] : (list.length > 10 ? list.splice(0, 10) : list)));
     })
   );
 
-  zipSearchList: Observable<Array<String>>;
   constructor(private fb: FormBuilder, private lookupService: LookupService) { }
 
   ngOnInit() {
@@ -49,6 +36,13 @@ export class TripComponent implements OnInit {
   get formControls() { return this.loadForm.controls; }
 
   onValueChanges(): void {
+  }
+
+
+  selectedOriginItem(item) {
+  }
+
+  selectedDestinationItem(item) {
   }
 
   get name() { return this.loadForm.get('name'); }

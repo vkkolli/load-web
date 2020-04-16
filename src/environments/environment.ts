@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   envName: 'local',
-  loadApiPath: 'http://localhost:8084/api',
+  loadApiPath: 'https://192.100.0.24/loadboard-rest',
 };
 
 
