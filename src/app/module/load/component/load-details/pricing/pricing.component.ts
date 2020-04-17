@@ -1,8 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { PricingLineItem } from '@app/shared/model/pricing_line_item';
 import { LookupService } from '@app/module/load/service/lookup.service';
 import { PricingConstants } from '@app/shared/types/constants';
 

@@ -1,14 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, Injector } from "@angular/core";
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoadService } from './shared/service/load.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
-import { constants } from 'buffer';
-import { ORIGIN, DESTINATION, PricingConstants } from '@app/shared/types/constants';
 
 @Component({
   selector: "app-load-details",

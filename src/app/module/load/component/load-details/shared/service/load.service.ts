@@ -10,8 +10,6 @@ import { Load } from '@app/shared/model/load';
 })
 export class LoadService extends BaseService<Load>{
 
-    private _baseUrl: string = "/";
-
     constructor(
       injector: Injector,
       router: Router,
@@ -38,6 +36,5 @@ export class LoadService extends BaseService<Load>{
 
     onDestroy() {
     }
-
 
 }
