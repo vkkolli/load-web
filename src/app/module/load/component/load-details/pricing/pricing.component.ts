@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { PricingLineItem } from '@app/shared/model/pricing_line_item';
 import { LookupService } from '@app/module/load/service/lookup.service';
+import { PricingConstants } from '@app/shared/types/constants';
 
 @Component({
   selector: 'app-pricing',
@@ -13,52 +14,51 @@ import { LookupService } from '@app/module/load/service/lookup.service';
 export class PricingComponent implements OnInit {
 
   @Input() loadForm : FormGroup;
+  mileage: number = 6;
 
   // pricingLineItem$: Observable<Array<PricingLineItem>>;
 
-  constructor(public lookupService: LookupService) { }
+  constructor(public lookupService: LookupService, private fb: FormBuilder) { }
 
   ngOnInit() {
     // this.pricingLineItem$ = this.lookupService.pricingLineItem$;
+    this.addPricing(PricingConstants.PRICING_TYPE_REVENUE);
+    this.addPricing(PricingConstants.PRICING_TYPE_COST);
 
-    this.onValueChanges();
+    // this.onValueChanges();
   }
 
   get formControls() { return this.loadForm.controls; }
 
+  get loadPricings() { return this.formControls.loadPricings as FormArray; }
+
+  addPricing(priceType: number) {
+    this.loadPricings.push(this.fb.group({
+      id: [''],
+      pricingTypeId: [priceType],
+      pricingLineItem: [''],
+      pricingLineItemValue: ['', Validators.required],
+      pricingLineItemSubtotal: ['']
+    }));
+  }
+
+  calculateTotal(pricingTypeId, index) {
+    if (this.getControl(index, 'pricingLineItemValue') !== '' && this.getControl(index, 'pricingLineItem') !== '') {
+      if (this.getControl(index, 'pricingLineItem') == PricingConstants.PRICING_CALC_TYPE_FLAT_RATE) {
+        this.loadPricings.controls[index].get('pricingLineItemSubtotal')
+        .setValue(this.getControl(index, 'pricingLineItemValue'));
+      } else {
+        this.loadPricings.controls[index].get('pricingLineItemSubtotal')
+        .setValue(this.getControl(index, 'pricingLineItemValue') * this.mileage);
+      }
+    }
+  }
+
+  getControl(index, key) {
+    return this.loadPricings.controls[index].get(key).value
+  }
+
   onValueChanges(): void {
-    this.loadForm.get('pricing.revenue').valueChanges.pipe( debounceTime(100)).subscribe(val=>{
-      if (val === 'FR' && val !== '') {
-        this.loadForm.get('pricing.rev_total').setValue(this.loadForm.get('pricing.rev_value').value);
-      }
-      if (val === 'PM' && val !== '') {
-        this.loadForm.get('pricing.rev_total').setValue(5 * this.loadForm.get('pricing.rev_value').value);
-      }
-    });
-    this.loadForm.get('pricing.rev_value').valueChanges.pipe( debounceTime(100)).subscribe(val=>{
-      if (this.loadForm.get('pricing.revenue').value === 'FR' && val !== '') {
-        this.loadForm.get('pricing.rev_total').setValue(this.loadForm.get('pricing.rev_value').value);
-      }
-      if (this.loadForm.get('pricing.revenue').value === 'PM' && val !== '') {
-        this.loadForm.get('pricing.rev_total').setValue(5 * this.loadForm.get('pricing.rev_value').value);
-      }
-    });
-    this.loadForm.get('pricing.cost').valueChanges.pipe( debounceTime(100)).subscribe(val=>{
-      if (val === 'FR' && val !== '') {
-        this.loadForm.get('pricing.cost_total').setValue(this.loadForm.get('pricing.cost_value').value);
-      }
-      if (val === 'PM' && val !== '') {
-        this.loadForm.get('pricing.cost_total').setValue(5 * this.loadForm.get('pricing.cost_value').value);
-      }
-    });
-    this.loadForm.get('pricing.cost_value').valueChanges.pipe( debounceTime(100)).subscribe(val=>{
-      if (this.loadForm.get('pricing.cost').value === 'FR' && val !== '') {
-        this.loadForm.get('pricing.cost_total').setValue(this.loadForm.get('pricing.cost_value').value);
-      }
-      if (this.loadForm.get('pricing.cost').value === 'PM' && val !== '') {
-        this.loadForm.get('pricing.cost_total').setValue(5 * this.loadForm.get('pricing.cost_value').value);
-      }
-    });
 
   }
 

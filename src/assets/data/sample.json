@@ -1,0 +1,49 @@
+{
+    "customer": {
+      "name": "sdfvdc",
+      "address": "R"
+    },
+    "equipment": {
+      "type": "V",
+      "load_size": "P",
+      "length": "23",
+      "weight": "23sdf"
+    },
+    "commodity": {
+      "name": "sdf",
+      "weight": "23",
+      "value": "23"
+    },
+    "origin": {
+      "name": "Rajaram",
+      "cityStateZip": "Chennai ",
+      "pickup_date": {
+        "year": 2020,
+        "month": 4,
+        "day": 3
+      },
+      "pickup_time": "",
+      "notes": "sdf"
+    },
+    "destination": {
+      "name": "Rajaram",
+      "cityStateZip": "Chennai ",
+      "delivery_date": {
+        "year": 2020,
+        "month": 4,
+        "day": 10
+      },
+      "delivery_time": "",
+      "notes": "sd"
+    },
+    "pricing": {
+      "target": "34",
+      "max": "43",
+      "revenue": "PM",
+      "rev_value": "34",
+      "rev_total": "170.00",
+      "cost": "PM",
+      "cost_value": "34",
+      "cost_total": "170.00"
+    }
+  }

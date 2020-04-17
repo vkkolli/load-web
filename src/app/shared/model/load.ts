@@ -1,19 +1,27 @@
 import { Base } from './base';
+import { Customer } from './customer';
+import { LoadStatus } from './load-status';
+import { Carrier } from './carrier';
+import { Equipment } from './equipment';
+import { Commodity } from './commodity';
+import { Trip } from './trip';
+import { Pricing } from './pricing';
+import { Address } from './address';
 
 export class Load extends Base{
-  loadId: number;
   loadDescription: string;
-  customer_id: number;
-  customer_address_id: number;
-
-  loadStatus_id: number;
-  sales_rep_id: number;
-  carrier_id: number;
-  equipment_id: number;
-  total_revenue: number;
-  total_cost: number;
-  max_rate: number;
-  target_rate: number;
-  load_size: string;
-  trip_mileage: number;
+  customer: Customer;
+  customerAddress: Address;
+  loadStatus: LoadStatus;
+  carrier: Carrier;
+  equipment: Equipment;
+  totalRevenue: number;
+  totalCost: number;
+  maxRate: number;
+  targetRate: number;
+  loadSize: string;
+  tripMileage: number;
+  loadPricings: Pricing[];
+  commodity: Commodity;
+  loadTrips: Trip[];
 }

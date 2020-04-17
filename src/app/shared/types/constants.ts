@@ -16,6 +16,9 @@ export const ADJ_PRICING_REV = `revenue_true`;
 export const LOAD_PRICING_COST = `cost_false`;
 export const ADJ_PRICING_COST = `cost_true`;
 
+// Trip Constants
+export const ORIGIN = 1;
+export const DESTINATION = 2;
 
 // pricing constants
 

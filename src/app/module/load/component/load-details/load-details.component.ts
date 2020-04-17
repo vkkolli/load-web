@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Injector } from "@angular/core";
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { LoadService } from './shared/service/load.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
+import { constants } from 'buffer';
+import { ORIGIN, DESTINATION, PricingConstants } from '@app/shared/types/constants';
 
 @Component({
   selector: "app-load-details",
@@ -31,7 +33,13 @@ export class LoadDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.loadForm = this.fb.group({
+      loadStatus: this.fb.group({
+        id: [''],
+        loadStatusName: [''],
+        description: ['']
+      }),
       customer: this.fb.group({
+        id: [''],
         name: ['', Validators.required],
         address: ['', Validators.required],
         contact_name: ['', Validators.required],
@@ -39,44 +47,30 @@ export class LoadDetailsComponent implements OnInit {
         phone: ['']
       }),
       equipment: this.fb.group({
+        id: [''],
         type: ['', Validators.required],
         load_size: ['', Validators.required],
         length: [''],
         weight: ['']
       }),
       commodity: this.fb.group({
+        id: [''],
         name: ['', Validators.required],
         weight: [''],
         value: ['']
       }),
-      origin: this.fb.group({
-        name: ['', Validators.required],
-        cityStateZip: [''],
-        pickup_date: [''],
-        pickup_time: [''],
-        notes: ['']
-      }),
-      destination: this.fb.group({
-        name: ['', Validators.required],
-        cityStateZip: [''],
-        delivery_date: [''],
-        delivery_time: [''],
-        notes: ['']
-      }),
-      pricing: this.fb.group({
-        target: ['', Validators.required],
-        max: [''],
-        revenue: [''],
-        rev_value: [''],
-        rev_total: [''],
-        cost: [''],
-        cost_value: [''],
-        cost_total: ['']
-      }),
+      loadTrips: new FormArray([]),
+      loadPricings: new FormArray([]),
       carrier: this.fb.group({
+        id: [''],
         carrier_search: ['']
-      })
+      }),
+      totalRevenue: [''],
+      totalCost: [''],
+      maxRate: [''],
+      targetRate: ['']
     });
+
 
     if (this.router.url.includes('/load/edit/')) {
       this.getJSON().subscribe(
@@ -95,10 +89,11 @@ export class LoadDetailsComponent implements OnInit {
           console.log(error);
         })
     }
+
     this.activeIds = ['customer','equip','trip', 'pricing'];
   }
-
   get formControls() { return this.loadForm.controls; }
+
 
   private _jsonURL = 'assets/data/sample.json';
   public getJSON(): Observable<any> {
