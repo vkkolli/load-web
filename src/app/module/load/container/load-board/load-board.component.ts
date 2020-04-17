@@ -10,36 +10,37 @@ import { LoadBoard } from '@app/shared/model/load.model';
 export class LoadBoardComponent implements OnInit {
   loads: LoadBoard[];
   columns = [
-    { name: "LoadId", prop: "loadId" },
-    { name: "Age", prop: "age" },
-    { name: "Truck", prop: "equipmentName" },
-    { name: "F/P", prop: "loadType" },
-    { name: "Status", prop: "loadStatus" },
-    { name: "Origin", prop: "originCsz" },
-    { name: "Trip", prop: "mileage" },
-    { name: "Destination", prop: "destinationCsz" },
-    { name: "Pickup", prop: "pickupDate" },
-    { name: "Delivery", prop: "deliveryDate" },
-    { name: "Company", prop: "customerName" },
-    { name: "Contact", prop: "customerEmail" },
-    { name: "Commodity", prop: "commodityName" },
-    { name: "Length", prop: "commodityLength" },
-    { name: "Weight", prop: "commodityWeight" },
-    { name: "Cost", prop: "revenueCost" },
-    { name: "Carrier", prop: "carrierName" },
-    { name: "Actual Pickup", prop: "actualPickupDate" },
-    { name: "Actual Delivery", prop: "actualDeliveryDate" }
+    { name: "LoadId", prop: "loadId", width:'60'},
+    { name: "Age", prop: "age", width:'60'},
+    { name: "Truck", prop: "equipmentName", width:'100'},
+    { name: "F/P", prop: "loadType",width:'30' },
+    { name: "Status", prop: "loadStatus",width:'100' },
+    { name: "Origin", prop: "originCsz",width:'100' },
+    { name: "Trip", prop: "mileage",width:'50' },
+    { name: "Destination", prop: "destinationCsz",width:'100' },
+    { name: "Company", prop: "customerName" ,width:'100'},
+    { name: "Contact", prop: "customerEmail",width:'130' },
+    { name: "Commodity", prop: "commodityName",width:'100' },
+    { name: "Cost", prop: "revenueCost" ,width:'60'},
+    { name: "Carrier", prop: "carrierName" ,width:'100'},
+    { name: "Actual Pickup", prop: "actualPickupDate" ,width:'70'},
+    { name: "Actual Delivery", prop: "actualDeliveryDate",width:'70' }
   ];
+
+
   errorMessage: string;
 
   constructor(private loadBoardService: LoadBoardService) {}
 
   ngOnInit(): void {
+
     this.loadBoardService.getLoads().subscribe(
       (loads: LoadBoard[]) => {
           this.loads = loads;
       },
       (error: any) => this.errorMessage = <any>error
-  );
+    );
+
+   
   }
 }
