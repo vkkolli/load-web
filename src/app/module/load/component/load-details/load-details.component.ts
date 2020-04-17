@@ -64,6 +64,7 @@ export class LoadDetailsComponent implements OnInit {
       totalRevenue: [''],
       totalCost: [''],
       maxRate: [''],
+      tripMileage:[''],
       targetRate: ['']
     });
 

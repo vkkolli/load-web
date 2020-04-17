@@ -4,6 +4,9 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operato
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { LookupService } from '@app/module/load/service/lookup.service';
 import { ORIGIN, DESTINATION } from '@app/shared/types/constants';
+import { Distance } from '@app/shared/model/distance';
+import { RepositoryService } from '@app/core/services/repository.service';
+import { LoadService } from '../shared/service/load.service';
 
 @Component({
   selector: 'app-trip',
@@ -29,8 +32,9 @@ export class TripComponent implements OnInit {
       .pipe(map(list => list.length < 2 ? [] : (list.length > 10 ? list.splice(0, 10) : list)));
     })
   );
+  API_KEY: string = 'js-QrAd6KG8tmif88Uza5DzCGhWkWte1HvuKKmVyyXaQmtORuheLWXiV2k3ODxaa501';
 
-  constructor(private fb: FormBuilder, private lookupService: LookupService) { }
+  constructor(private fb: FormBuilder, private lookupService: LookupService, private loadService: LoadService, private repo: RepositoryService) { }
 
   ngOnInit() {
 
@@ -78,6 +82,9 @@ export class TripComponent implements OnInit {
     }));
   }
 
+  calculateMileage(origin: number, dest: number): Observable<Distance> {
+    return this.repo.get<Distance>('https://www.zipcodeapi.com/rest/' + this.API_KEY + '/distance.json/' + origin + '/' + dest + '/mile');
+  }
 
   onValueChanges(): void {
   }
@@ -86,6 +93,12 @@ export class TripComponent implements OnInit {
     this.loadTrips.controls[index].get('city').setValue(item.item.split(',')[0]);
     this.loadTrips.controls[index].get('stateAbbr').setValue(item.item.split(',')[1]);
     this.loadTrips.controls[index].get('zipCode').setValue(item.item.split(',')[2]);
+    if (this.loadTrips.controls[0].get('zipCode').value != '' && this.loadTrips.controls[1].get('zipCode').value != '') {
+      this.calculateMileage((this.loadTrips.controls[0].get('zipCode').value).trim(),
+      (this.loadTrips.controls[1].get('zipCode').value).trim()).subscribe(response => {
+        this.loadForm.get('tripMileage').setValue(response.distance);
+      })
+    }
   }
 
 }
