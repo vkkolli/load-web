@@ -71,35 +71,9 @@ export class LoadDetailsComponent implements OnInit {
       targetRate: ['']
     });
 
-
-    if (this.router.url.includes('/load/edit/')) {
-      this.getJSON().subscribe(
-        data => {
-          this.loadForm.patchValue({
-            customer: data.customer,
-            equipment: data.equipment,
-            commodity: data.commodity,
-            origin: data.origin,
-            destination: data.destination,
-            pricing: data.pricing,
-            carrier: data.carrier
-          });
-        },
-        error => {
-          console.log(error);
-        })
-    }
-
     this.activeIds = ['customer','equip','trip', 'pricing'];
   }
   get formControls() { return this.loadForm.controls; }
-
-
-  private _jsonURL = 'assets/data/sample.json';
-  public getJSON(): Observable<any> {
-    this.loadService.fetchById(1233);
-    return this.http.get(this._jsonURL);
-  }
 
   saveOrUpdate() {
     this.spinner.show();
