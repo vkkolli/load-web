@@ -1,10 +1,18 @@
 ::ng-deep {
+    // Swatches
+    $white: #fff;
+    $tm-bk: #343a40;
+    $tm-vt: #1e1e3f;
+    $tm-or: #ff9701;
+    $tm-gy: #d2d2d2;
+
     .accordion {
         .card {
             margin-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;            
             .card-header {
                 padding: 0.20rem 1.25rem;
+                background-color: darken($tm-vt, 1%);
                 .btn {
                     &.btn-link {
                         width: 100%;

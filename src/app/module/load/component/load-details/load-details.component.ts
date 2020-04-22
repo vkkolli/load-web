@@ -19,7 +19,7 @@ export class LoadDetailsComponent implements OnInit {
   protected spinner: NgxSpinnerService;
 
   constructor(injector: Injector,private http: HttpClient, private fb: FormBuilder, config: NgbAccordionConfig, private loadService: LoadService, private router: Router) {
-    config.type = 'dark';
+    // config.type = 'dark';
     this.spinner = injector.get(NgxSpinnerService);
     console.log(this.router.url);
   }
