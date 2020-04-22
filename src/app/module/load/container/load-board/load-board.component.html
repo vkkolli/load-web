@@ -4,20 +4,34 @@
 <main class="main-body">
   <div class="container-fluid bg-white my-2">
     <section>
-      <!-- <div class="row mb-2">
-        <div class="col-10">
-        </div>
-        <div class="col-2">
-          <button class="btn btn-primary" routerLink="create">Create Load</button>
-        </div>
-      </div> -->
       <div class="row">
-        <div class="col-12">
-          <app-load-table [rows]="loads" [columns]="columns"></app-load-table>
+        <div class="mt-5" [ngClass]="quickSearchState ?'col-10':'col-12'">
+          <app-load-table [rows]="loads" [columns]="columns"></app-load-table>                 
+          <button type="button" class="btn-quicksearch" (click)="quickSearch()">
+            <i class="fa" [ngClass]="quickSearchState ?'fa-chevron-right':'fa-chevron-left'"></i>
+          </button>
         </div>
-        <!-- <div class="col-2">
-          <app-load-criteria></app-load-criteria>
-        </div> -->
+        <div class="mt-1 bg-darkxxx quick-search" [ngClass]="quickSearchState ?'col-2':'d-none'">
+          <h3>Refine your Search</h3>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Age</h5>
+              <label for="age">Age</label>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Age</h5>
+              <label for="age">Age</label>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Age</h5>
+              <label for="age">Age</label>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>

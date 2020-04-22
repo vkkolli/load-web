@@ -1,5 +1,57 @@
-<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'"
-  headerHeight="50" footerHeight="50" [limit]="10" [rowHeight]="'auto'" [scrollbarV]="false" [scrollbarH]="true" [rows]="rows">
-  <ngx-datatable-column *ngFor="let column of columns" name="{{column.name}}" prop="{{column.prop}}" width="{{column.width}}">
+<ngx-datatable #myTable class="material expandable" [columns]="columns" [columnMode]="'force'" headerHeight="50"
+  footerHeight="50" [limit]="10" [rowHeight]="'auto'" [scrollbarV]="false" [scrollbarH]="true" [rows]="rows">
+
+  <!-- Row Detail Template -->
+  <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">    
+    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+      <div class="lbd-dtl-container">
+        <div class="lbd-dtl-row">
+
+          <div class="lbd-dtl-column">
+            <div class="lbd-dtl-item">
+              <div class="lbd-dtl-head">Company Name</div>
+              <div class="lbd-dtl-data">{{row.commodityName}}</div>
+            </div>
+
+            <div class="lbd-dtl-item">
+              <div class="lbd-dtl-head">Source</div>
+              <div class="lbd-dtl-data">{{row.originCSZ}}</div>
+            </div>
+
+            <div class="lbd-dtl-item">
+              <div class="lbd-dtl-head">Destination</div>
+              <div class="lbd-dtl-data">{{row.destinationCSZ}}</div>
+            </div>
+          </div>
+
+          <div class="lbd-dtl-column">
+            <div class="lbd-dtl-item">
+              <div class="lbd-dtl-head">Equipment Name</div>
+              <div class="lbd-dtl-data">{{row.equipmentName}}</div>
+            </div>
+
+            <div class="lbd-dtl-item">
+              <div class="lbd-dtl-head">Date of Delivery</div>
+              <div class="lbd-dtl-data">{{row.deliveryDate}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </ng-template>
+  </ngx-datatable-row-detail>
+
+  <!-- Column Templates -->
+  <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+    [canAutoResize]="false">
+    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+      <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+        title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+      </a>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column *ngFor="let column of columns" name="{{column.name}}" prop="{{column.prop}}"
+    width="{{column.width}}">
   </ngx-datatable-column>
 </ngx-datatable>

@@ -29,7 +29,8 @@ export class LoadBoardComponent implements OnInit {
 
 
   errorMessage: string;
-
+  public quickSearchState: boolean = false;
+  
   constructor(private loadBoardService: LoadBoardService) {}
 
   ngOnInit(): void {
@@ -40,7 +41,10 @@ export class LoadBoardComponent implements OnInit {
       },
       (error: any) => this.errorMessage = <any>error
     );
-
    
+  }
+
+  quickSearch() {
+    this.quickSearchState =  !this.quickSearchState;
   }
 }

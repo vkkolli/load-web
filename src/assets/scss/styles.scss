@@ -32,16 +32,25 @@ $loadboard-poc-theme: mat-light-theme($loadboard-poc-primary, $loadboard-poc-acc
 @import 'vendor/vendor';
 
 @import 'common';
+
+// Swatches
+$white: #fff;
+$tm-bk: #343a40;
+$tm-vt: #1e1e3f;
+$tm-or: #ff9701;
+
 .header {
   position: fixed;
   z-index: 10300000000;
   left: 0;
   right: 0;
   top: 0;
-  background-color: dimgrey;
+  // background-color: dimgrey;
+  background-color: darken($tm-vt, 3%);
   color: aliceblue;
   // padding: 18px;
-  border-bottom: 3px solid darkgray;
+  // border-bottom: 3px solid darkgray;
+  border-bottom: 3px solid $tm-or;
 }
 
 .footer {
