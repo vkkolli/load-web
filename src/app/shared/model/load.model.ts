@@ -1,11 +1,16 @@
-export class LoadBoard {
+import { Base } from './base';
+
+export class LoadBoard extends Base {
     loadId: number;
     age: string;
     equipmentName: string;
+    equipmentDesc: string;
     loadType: string;
     loadStatus: string;
     customerName: string;
     customerEmail: string;
+    customerPhone: string;
+    customerAddress: string;
     mileage: number;
     originCsz: string;
     pickupDate: string;
@@ -14,8 +19,13 @@ export class LoadBoard {
     commodityName: string;
     commodityWeight: number;
     commodityLength: number;
+    commodityValue: number;
     revenueCost: number;
     carrier: string;
+    carrierContact: string;
+    carrierPhone: string;
+    carrierEmail: string;
+    carrierAddress: string;
     actualPickupDate: string;
     actualDeliveryDate: string;
 

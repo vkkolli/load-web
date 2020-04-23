@@ -10,19 +10,18 @@ import { LoadBoard } from '@app/shared/model/load.model';
 export class LoadBoardComponent implements OnInit {
   loads: LoadBoard[];
   columns = [
-    { name: "LoadId", prop: "loadId", width:'60'},
+    { name: "LoadId", prop: "loadId", width:'40'},
     { name: "Age", prop: "age", width:'60'},
     { name: "Truck", prop: "equipmentName", width:'100'},
     { name: "F/P", prop: "loadType",width:'30' },
     { name: "Status", prop: "loadStatus",width:'100' },
     { name: "Origin", prop: "originCsz",width:'100' },
-    { name: "Trip", prop: "mileage",width:'50' },
+    { name: "Trip", prop: "mileage",width:'30' },
     { name: "Destination", prop: "destinationCsz",width:'100' },
     { name: "Company", prop: "customerName" ,width:'100'},
-    { name: "Contact", prop: "customerEmail",width:'130' },
     { name: "Commodity", prop: "commodityName",width:'100' },
     { name: "Cost", prop: "revenueCost" ,width:'60'},
-    { name: "Carrier", prop: "carrierName" ,width:'100'},
+    { name: "Carrier", prop: "carrierName" ,width:'60'},
     { name: "Actual Pickup", prop: "actualPickupDate" ,width:'70'},
     { name: "Actual Delivery", prop: "actualDeliveryDate",width:'70' }
   ];
