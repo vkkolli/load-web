@@ -33,12 +33,7 @@ $loadboard-poc-theme: mat-light-theme($loadboard-poc-primary, $loadboard-poc-acc
 
 @import 'common';
 
-// Swatches
-$white: #fff;
-$tm-bk: #343a40;
-$tm-vt: #1e1e3f;
-$tm-or: #ff9701;
-$tm-gy: #d2d2d2;
+
 
 body {
   background-color: $tm-gy;

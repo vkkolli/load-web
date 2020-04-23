@@ -2,7 +2,7 @@
   <app-header headerText="Load Board"></app-header>
 </header>
 <main class="main-body">
-  <div class="container-fluid bg-whitexxx my-2">
+  <div class="container-fluid my-2">
     <section>
       <div class="row">
         <div class="mt-5" [ngClass]="quickSearchState ?'col-10':'col-12'">
@@ -11,7 +11,7 @@
             <i class="fa" [ngClass]="quickSearchState ?'fa-chevron-right':'fa-chevron-left'"></i>
           </button>
         </div>
-        <div class="mt-1 bg-darkxxx quick-search" [ngClass]="quickSearchState ?'col-2':'d-none'">
+        <div class="mt-1 quick-search" [ngClass]="quickSearchState ?'col-2':'d-none'">
           <h3>Refine your Search</h3>
           <div class="card">
             <div class="card-body">
