@@ -23,7 +23,9 @@ $tm-vt: #1e1e3f;
 
 .datatable-body-row {
     .datatable-body-cell {
+        padding: 0.3rem 1.2rem !important;
         .datatable-body-cell-label {
+            font-size: 0.67rem;
             a {
                 color: $tm-vt !important;
                 text-decoration: none;
@@ -38,7 +40,7 @@ $tm-vt: #1e1e3f;
 .ngx-datatable.material {
     .datatable-body {
         .datatable-row-detail{
-            background-color: lighten($tm-vt, 3%);
+            background-color: lighten($tm-vt, 10%);
             color: $white;
         }
     }
@@ -47,11 +49,12 @@ $tm-vt: #1e1e3f;
 // Custom Expand Column
 .lbd-dtl-row {
     display: flex;
-    padding: 5px 30px;
+    padding: 5px 60px;
     .lbd-dtl-column {
         .lbd-dtl-item {
             margin-right: 1rem;
             margin-bottom: 0.5rem;
+            font-size: 0.67rem;
             .lbd-dtl-head {
                 font-weight: bold;
                 letter-spacing: 1px;
