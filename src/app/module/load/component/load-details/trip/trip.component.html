@@ -1,37 +1,43 @@
 <div [formGroup]="loadForm">
 <div formArrayName="loadTrips">
 <fieldset class="border p-2 mb-2" *ngFor="let tripObj of loadTrips.controls; let i = index"  [formGroupName]="i">
-  <legend  class="w-auto small font-weight-bold">{{ tripObj.get('tripType').value == 1 ? 'Origin' : 'Destination' }}</legend>
+  <legend  class="w-auto small font-weight-bold">{{ tripObj.get('tripType').value === 0 ? 'Origin' : 'Destination' }}</legend>
   <div class="form-row pb-sm-3">
       <div class="col-sm-6 col-lg-3 form-group">
           <label for="txtOrigName">Name</label>
           <input type="text" id="txtOrigName" class="form-control" formControlName="companyName"
-          placeholder="{{ tripObj.get('tripType').value == 1 ? 'Origin' : 'Destination' }} Company Name">
+          placeholder="{{ tripObj.get('tripType').value === 0 ? 'Origin' : 'Destination' }} Company Name">
 
       </div>
       <div class="col-sm-6 col-lg-3 form-group">
           <label for="txtOrigCity">City / State / Zip</label>
           <input type="text" id="txtOrigCity" class="form-control" formControlName="cityStateZip" placeholder="Type to Search"
-          [ngbTypeahead]="searchCityStateZip" container="body" (selectItem)="selectedTripItem($event, i)" required>
-          <div *ngIf="tripObj.get('cityStateZip').touched && tripObj.get('cityStateZip').invalid" class="alert alert-danger">
+          [ngbTypeahead]="searchCityStateZip" container="body" (selectItem)="selectedTripItem($event, i)">
+          <div *ngIf="tripObj.get('cityStateZip').touched && tripObj.get('cityStateZip').invalid" class="invalid-element">
             City / State / Zip is required.
-           </div>
+          </div>
       </div>
       <div class="col-sm-12 col-md-6 col-lg-4 form-group">
-          <label for="txtPickDate">{{ tripObj.get('tripType').value == 1 ? 'Pickup' : 'Delivery' }} Date</label>
+          <label for="txtPickDate">{{ tripObj.get('tripType').value === 0 ? 'Pickup' : 'Delivery' }} Date</label>
           <div class="form-row">
               <div class="col-6">
+                    <!-- <mat-form-field>
+                      <mat-label>Choose a date</mat-label>
+                      <input matInput [matDatepicker]="picker" formControlName="expectedTripDateObj">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field> -->
                   <div class="input-group">
                       <input type="text" id="txtPickDate" class="form-control" formControlName="expectedTripDateObj"
-                      [ngModel]="date" name="dates" (ngModelChange)="formatDate($event, i)"
-                      container="body" ngbDatepicker  #p="ngbDatepicker" placeholder="Select {{ tripObj.get('tripType').value == 1 ? 'Pickup' : 'Delivery' }} Date">
+                      container="body" ngbDatepicker  #p="ngbDatepicker" required="false"
+                      placeholder="Select {{ tripObj.get('tripType').value === 0 ? 'Pickup' : 'Delivery' }} Date">
                       <div class="input-group-append">
                           <button class="btn btn-outline-secondary calendar" (click)="p.toggle()" type="button"><i class="fa fa-calendar"></i></button>
                       </div>
                   </div>
               </div>
               <div class="col-6">
-                  <ngb-timepicker formControlName="expectedTripTimeObj" [spinners]=false [(ngModel)]="time" name="i" (ngModelChange)="formatTime(i, $event)" ></ngb-timepicker>
+                  <ngb-timepicker formControlName="expectedTripTimeObj" [spinners]=false></ngb-timepicker>
               </div>
           </div>
       </div>
@@ -39,9 +45,41 @@
   <div class="form-row pb-sm-3">
       <div class="col-md-6 form-group">
           <label for="txtOrigNotes">Notes</label>
-          <textarea id="txtOrigNotes" class="form-control" formControlName="tripNotes" placeholder="{{ tripObj.get('tripType').value == 1 ? 'Origin' : 'Destination' }} Notes"></textarea>
+          <textarea id="txtOrigNotes" class="form-control" formControlName="tripNotes" placeholder="{{ tripObj.get('tripType').value === 0 ? 'Origin' : 'Destination' }} Notes"></textarea>
       </div>
   </div>
 </fieldset>
 </div>
+
+<!-- <agm-map
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClicked($event)">
+
+  <agm-marker
+      *ngFor="let m of markers; let i = index"
+      (markerClick)="clickedMarker(m.label, i)"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]="m.label"
+      [markerDraggable]="m.draggable"
+      (dragEnd)="markerDragEnd(m, $event)">
+
+    <agm-info-window>
+      <strong>InfoWindow content</strong>
+    </agm-info-window>
+
+  </agm-marker>
+
+  <agm-circle [latitude]="lat + 0.3" [longitude]="lng"
+      [radius]="5000"
+      [fillColor]="'red'"
+      [circleDraggable]="true"
+      [editable]="true">
+  </agm-circle>
+
+</agm-map> -->
 </div>

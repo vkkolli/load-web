@@ -1,4 +1,5 @@
 <form [formGroup]="loadForm" novalidate>
+
   <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
       <ngb-panel id="customer">
           <ng-template ngbPanelTitle>
@@ -7,7 +8,7 @@
                   <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
               </div>
           </ng-template>
-          <ng-template ngbPanelContent>
+          <ng-template ngbPanelContent ngbCollapse="disable">
               <app-customer [loadForm]="loadForm"></app-customer>
           </ng-template>
       </ngb-panel>
@@ -46,7 +47,8 @@
             <app-pricing [loadForm]="loadForm"></app-pricing>
           </ng-template>
       </ngb-panel>
-      <ngb-panel id="carrier">
+
+      <ngb-panel id="carrier" *ngIf="loadForm.get('loadStatus.id').value == 10">
           <ng-template ngbPanelTitle>
               <div class="row justify-content-between text-dark">
                   <div class="d-flex text-white text-uppercase">Carrier Search</div>
@@ -57,7 +59,7 @@
             <app-carrier [loadForm]="loadForm"></app-carrier>
           </ng-template>
       </ngb-panel>
-      <ngb-panel id="load_carrier">
+      <ngb-panel id="load_carrier"  *ngIf="loadForm.get('loadStatus.id').value > 20">
           <ng-template ngbPanelTitle>
               <div class="row justify-content-between text-dark">
                   <div class="d-flex text-white text-uppercase">Load Carrier Details</div>
@@ -74,7 +76,7 @@
         <button class="btn btn-danger px-5" routerLink="../">Cancel</button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-success px-5" (click)="saveOrUpdate()" >Create</button>
+        <button class="btn btn-success px-5" (click)="saveOrUpdate()" [disabled]=!loadForm.valid>Create</button>
       </div>
   </div>
 </form>

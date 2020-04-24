@@ -1,49 +1,131 @@
 {
-    "customer": {
-      "name": "sdfvdc",
-      "address": "R"
+  "loadStatus": {
+    "id": 10,
+    "loadStatusName": "",
+    "description": ""
+  },
+  "customer": {
+    "id": 1,
+    "company": "ABC Company",
+    "customerObj": {
+      "id": 1,
+      "company": "ABC Company",
+      "customerEmail": "abccompany@abc.com",
+      "active": true
     },
-    "equipment": {
-      "type": "V",
-      "load_size": "P",
-      "length": "23",
-      "weight": "23sdf"
+    "customerEmail": "abccompany@abc.com",
+    "active": true
+  },
+  "customerAddress": {
+    "id": "2",
+    "addressLine1": "",
+    "addressLine2": "",
+    "city": "",
+    "stateAbbr": "",
+    "countryAbbr": "USA",
+    "zipCode": "",
+    "contactPerson": "Contact A 2",
+    "emailId": "contacta2@gmail.com",
+    "phoneNo": "123-456-789"
+  },
+  "equipment": {
+    "id": "2",
+    "equipmentName": "",
+    "equipmentDescription": "",
+    "length": "55",
+    "weight": "556",
+    "active": ""
+  },
+  "commodity": [
+    {
+      "id": "",
+      "commodityName": "Desingraj",
+      "commodityWeight": "554",
+      "commodityLength": "",
+      "commodityValue": "24"
     },
-    "commodity": {
-      "name": "sdf",
-      "weight": "23",
-      "value": "23"
-    },
-    "origin": {
-      "name": "Rajaram",
-      "cityStateZip": "Chennai ",
-      "pickup_date": {
-        "year": 2020,
-        "month": 4,
-        "day": 3
-      },
-      "pickup_time": "",
-      "notes": "sdf"
-    },
-    "destination": {
-      "name": "Rajaram",
-      "cityStateZip": "Chennai ",
-      "delivery_date": {
-        "year": 2020,
-        "month": 4,
-        "day": 10
-      },
-      "delivery_time": "",
-      "notes": "sd"
-    },
-    "pricing": {
-      "target": "34",
-      "max": "43",
-      "revenue": "PM",
-      "rev_value": "34",
-      "rev_total": "170.00",
-      "cost": "PM",
-      "cost_value": "34",
-      "cost_total": "170.00"
+    {
+      "id": "",
+      "commodityName": "Desingraj",
+      "commodityWeight": "554",
+      "commodityLength": "",
+      "commodityValue": "24"
     }
-  }
+  ],
+  "loadTrips": [
+    {
+      "id": "",
+      "tripType": "ORIGIN",
+      "expectedTripDate": "04/01/2020",
+      "expectedTripTime": "11:11:0",
+      "expectedTripDateObj": "2020-03-31T18:30:00.000Z",
+      "expectedTripTimeObj": {
+        "hour": 11,
+        "minute": 11,
+        "second": 0
+      },
+      "actualTripDateObj": "",
+      "actualTripDate": "",
+      "actualTripTimeObj": "",
+      "actualTripTime": "",
+      "companyName": "sdfdsfgdfs",
+      "city": "Cold Bay",
+      "cityStateZip": "Cold Bay, AK, 99571",
+      "stateAbbr": "AK",
+      "countryAbbr": "USA",
+      "zipCode": "99571",
+      "tripNotes": "sdfdf",
+      "active": ""
+    },
+    {
+      "id": "",
+      "tripType": "DESTINATION",
+      "expectedTripDate": "04/03/2020",
+      "expectedTripTime": "4:4:0",
+      "expectedTripDateObj": "2020-04-02T18:30:00.000Z",
+      "expectedTripTimeObj": {
+        "hour": 4,
+        "minute": 4,
+        "second": 0
+      },
+      "actualTripDateObj": "",
+      "actualTripDate": "",
+      "actualTripTimeObj": "",
+      "actualTripTime": "",
+      "companyName": "dest",
+      "city": "Cold Brook",
+      "cityStateZip": "Cold Brook, NY, 13324",
+      "stateAbbr": "NY",
+      "countryAbbr": "USA",
+      "zipCode": "13324",
+      "tripNotes": "sdfsd",
+      "active": ""
+    }
+  ],
+  "loadPricings": [
+    {
+      "id": "",
+      "pricingTypeId": 1,
+      "pricingLineItem": "1",
+      "pricingLineItemValue": "125",
+      "pricingLineItemSubtotal": "125"
+    },
+    {
+      "id": "",
+      "pricingTypeId": 2,
+      "pricingLineItem": "1",
+      "pricingLineItemValue": "100",
+      "pricingLineItemSubtotal": "100"
+    }
+  ],
+  "carrier": {
+    "id": "",
+    "carrier_search": ""
+  },
+  "totalRevenue": "",
+  "totalCost": "",
+  "maxRate": "34534",
+  "loadSize": "P",
+  "tripMileage": 330.5,
+  "targetRate": "34"
+}

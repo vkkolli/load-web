@@ -1,48 +1,44 @@
 <form [formGroup]="loadForm" novalidate>
-    <fieldset formGroupName="equipment" class="border p-2 mb-2">
+    <fieldset class="border p-2 mb-2">
         <legend  class="w-auto small font-weight-bold">Equipment</legend>
         <div class="form-row pb-sm-3">
-            <div class="col-sm-6 col-lg-3 form-group">
+            <div class="col-sm-6 col-lg-3 form-group" formGroupName="equipment">
                 <label for="drpType">Type</label>
-                <select id="drpType" class="form-control" formControlName="type" required>
+                <select id="drpType" class="form-control" formControlName="id">
                     <option value="">Select Equipment Type</option>
-                    <option value="V">Van</option>
-                    <option value="R">Refer</option>
-                    <option value="FB">Flat Bed</option>
+                    <option value="1">Van</option>
+                    <option value="2">Refer</option>
+                    <option value="3">Flat Bed</option>
                 </select>
-                <div *ngIf="loadForm.get('equipment.type').touched && loadForm.get('equipment.type').invalid" class="invalid-element">
+                <div *ngIf="loadForm.get('equipment.id').touched && loadForm.get('equipment.id').invalid" class="invalid-element">
                     Equipment Type is required.
-                   </div>
-                <div class="invalid-feedback">
-                    Required
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3 form-group">
                 <label for="txtConName">Load Size</label>
                 <div class="row px-3">
                     <div class="col custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="rdoSizeFull" formControlName="load_size" class="custom-control-input" value="F">
+                        <input type="radio" id="rdoSizeFull" formControlName="loadSize" class="custom-control-input" value="F">
                         <label class="custom-control-label" for="rdoSizeFull">Full</label>
                     </div>
                     <div class="col custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="rdoSizePart" formControlName="load_size" class="custom-control-input" value="P">
+                        <input type="radio" id="rdoSizePart" formControlName="loadSize" class="custom-control-input" value="P">
                         <label class="custom-control-label" for="rdoSizePart">Partial</label>
                     </div>
                 </div>
-                <div *ngIf="loadForm.get('equipment.load_size').touched && loadForm.get('equipment.load_size').invalid" class="invalid-element">
+                <div *ngIf="loadForm.get('loadSize').touched && loadForm.get('loadSize').invalid" class="invalid-element">
                     Load Size is required.
-                   </div>
-                <div class="invalid-feedback">
-                    Required
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3 form-group">
+            <div class="col-sm-6 col-lg-3 form-group" formGroupName="equipment">
                 <label for="txtLen">Length (FT)</label>
-                <input type="text" id="txtLen" class="form-control" formControlName="length" placeholder="Trailer Length">
+                <input type="text" id="txtLen" class="form-control" formControlName="length" placeholder="Trailer Length"
+                mask="separator.2" separatorLimit="1000">
             </div>
-            <div class="col-sm-6 col-lg-3 form-group">
+            <div class="col-sm-6 col-lg-3 form-group" formGroupName="equipment">
                 <label for="txtWeight">Weight (LBS)</label>
-                <input type="text" id="txtWeight" class="form-control" formControlName="weight" placeholder="Trailer Capacity">
+                <input type="text" id="txtWeight" class="form-control" formControlName="weight" placeholder="Trailer Capacity"
+                mask="separator.2" separatorLimit="10000000">
             </div>
         </div>
     </fieldset>

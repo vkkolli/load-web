@@ -17,7 +17,7 @@
       <div class="col-sm-6 col-md-4 col-lg-3 form-group">
           <label for="drpRev">Revenue</label>
           <select id="drpRev" class="form-control" formControlName="pricingLineItem"
-          (change)="calculateTotal(pricingObj.get('pricingTypeId'), i)" required>
+          (change)="calculateTotal(pricingObj.get('pricingTypeId'), i)">
               <option value="">Select Revenue Item</option>
               <option value="1">Flat Rate</option>
               <option value="2">Per Mile</option>
@@ -28,39 +28,16 @@
       </div>
       <div class="col-sm-6 col-md-4 col-lg-3 form-group">
           <label for="txtRevVal">Value</label>
-          <input type="text" appNumeric id="txtRevVal" class="form-control" formControlName="pricingLineItemValue"
+          <input type="text" id="txtRevVal" class="form-control" formControlName="pricingLineItemValue"
           mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000"
           (keyup)="calculateTotal(pricingObj.get('pricingTypeId'), i)">
       </div>
       <div class="col-sm-6 col-md-4 col-lg-3 form-group">
           <label for="txtRevTot">Total</label>
-          <input type="text" appNumeric id="txtRevTot" class="form-control" formControlName="pricingLineItemSubtotal"
+          <input type="text" id="txtRevTot" class="form-control" formControlName="pricingLineItemSubtotal"
           mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000" disabled>
       </div>
   </div>
 </div>
-  <!-- <div class="form-row pb-sm-3">
-      <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-          <label for="drpCost">Cost</label>
-          <select id="drpCost" class="form-control" formControlName="cost" required>
-              <option value="">Select Cost Item</option>
-              <option value="FR">Flat Rate</option>
-              <option value="PM">Per Mile</option>
-          </select>
-          <div class="invalid-feedback">
-              Required
-          </div>
-      </div>
-      <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-          <label for="txtCostVal">Value</label>
-          <input type="text" appNumeric id="txtCostVal" class="form-control" formControlName="cost_value"
-          mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000">
-      </div>
-      <div class="col-sm-6 col-md-4 col-lg-3 form-group">
-          <label for="txtCostTot">Total</label>
-          <input type="text" appNumeric id="txtCostTot" class="form-control" formControlName="cost_total"
-          mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000" disabled>
-      </div>
-  </div> -->
-</div>
+  </div>
 </div>

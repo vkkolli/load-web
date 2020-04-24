@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import {ColumnMode, SelectionType} from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
@@ -16,18 +16,6 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
 export class CommodityComponent implements OnInit {
 
   @Input() loadForm : FormGroup;
-  activeIds = [];
-  ColumnMode = ColumnMode;
-  
-  SelectionType = SelectionType;
-  
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map(term => term.length < 2 ? []
-        : searchList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    );
 
   constructor(private fb: FormBuilder, config: NgbAccordionConfig, private router: Router) {
     config.type = 'dark';
@@ -36,7 +24,18 @@ export class CommodityComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addCommodity() {
+    this.loadCommodity.push(this.fb.group({
+      id: [''],
+      commodityName: ['', Validators.required],
+      commodityWeight: [''],
+      commodityLength: [''],
+      commodityValue: ['']
+    }));
+  }
 
+  get formControls() { return this.loadForm.controls; }
 
+  get loadCommodity() { return this.formControls.commodity as FormArray; }
 
 }

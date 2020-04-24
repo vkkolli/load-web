@@ -1,52 +1,37 @@
-<form [formGroup]="loadForm"  novalidate>
-  <div formGroupName="customer">
-      <div class="form-row pb-sm-3">
-          <div class="col-sm-6 col-lg-3 form-group">
-              <label for="txtName">Customer</label>
-              <input type="text" id="txtName" class="form-control" formControlName="name" [ngbTypeahead]="searchCustomer" container="body" [inputFormatter]="formatter"
-              [resultFormatter]="formatter" required>
-              <div class="invalid-feedback">
-                  Required
-              </div>
-              <div *ngIf="loadForm.get('customer.name').touched && loadForm.get('customer.name').invalid" class="invalid-element">
-                Customer Name is required.
-               </div>
-          </div>
-          <div class="col-sm-6 col-lg-3 form-group">
-              <label for="drpAddress">Address</label>
-              <select id="drpAddress" class="form-control" formControlName="address" required>
-                  <option value="">Select</option>
-                  <option value="V">Van</option>
-                  <option value="R">Refer</option>
-
-              </select>
-              <div class="invalid-feedback">
-                  Required
-              </div>
-          </div>
-          <div class="col-sm-6 col-lg-3 form-group">
-              <label for="txtConName">Contact Name</label>
-              <input type="text" id="txtConName" class="form-control" formControlName="contact_name" required>
-              <div class="invalid-feedback">
-                  Required
-              </div>
-          </div>
-          <div class="col-sm-6 col-lg-3 form-group">
-              <label for="txtConEmail">Contact Email</label>
-              <input type="text" id="txtConEmail" class="form-control" formControlName="contact_email" required>
-              <div class="invalid-feedback">
-                  Required
-              </div>
+<form [formGroup]="loadForm">
+  <div class="form-row pb-sm-3">
+      <div class="col-sm-6 col-lg-3 form-group" formGroupName="customer">
+          <label for="txtName">Customer</label>
+          <input type="text" id="txtName" class="form-control" formControlName="customerObj"
+          [ngbTypeahead]="searchCustomer" container="body" [inputFormatter]="formatter"
+          [resultFormatter]="formatter" (selectItem)="selectedCustomer($event)" placeholder="Customer Name">
+          <div *ngIf="loadForm.get('customer.customerObj').touched && loadForm.get('customer.company').invalid" class="invalid-element">
+            Customer Name is required.
           </div>
       </div>
-      <div class="form-row">
-          <div class="col-sm-6 col-lg-3 form-group">
-              <label for="txtContPhone">Contact Phone</label>
-              <input type="text" id="txtContPhone" class="form-control" formControlName="phone" required>
-              <div class="invalid-feedback">
-                  Required
-              </div>
-          </div>
+      <div class="col-sm-6 col-lg-3 form-group" formGroupName="customerAddress" >
+          <label for="drpAddress">Address</label>
+          <select id="drpAddress" class="form-control" formControlName="id" (change)="populateContact($event.target.selectedIndex)" >
+            <option value="">Select Customer Address</option>
+            <option *ngFor="let address of customerAddressList; let i = index" [value]="address.id">
+              {{address.addressLine1}}
+            </option>
+          </select>
+      </div>
+      <div class="col-sm-6 col-lg-3 form-group" formGroupName="customerAddress" >
+          <label for="txtConName">Contact Name</label>
+          <input type="text" id="txtConName" class="form-control" formControlName="contactPerson" placeholder="Contact Person">
+      </div>
+      <div class="col-sm-6 col-lg-3 form-group" formGroupName="customerAddress" >
+          <label for="txtConEmail">Contact Email</label>
+          <input type="text" id="txtConEmail" class="form-control" formControlName="emailId" placeholder="Contact Email">
+      </div>
+    </div>
+  <div class="form-row" formGroupName="customerAddress">
+      <div class="col-sm-6 col-lg-3 form-group">
+          <label for="txtContPhone">Contact Phone</label>
+          <input type="text" id="txtContPhone" class="form-control" formControlName="phoneNo"
+          mask="(000) 000-0000" placeholder="(000) 000-0000">
       </div>
   </div>
 </form>

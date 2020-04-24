@@ -6,6 +6,9 @@ import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LookupService } from '@app/module/load/service/lookup.service';
+import { LoadService } from '../shared/service/load.service';
+import { CustomerService } from '../shared/service/customer.service';
+import { Address } from '@app/shared/model/address';
 
 const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg', 'poiuy', 'lkjhg', 'mnbv', 'jkl'];
 
@@ -23,23 +26,15 @@ export class CustomerComponent implements OnInit {
 
   SelectionType = SelectionType;
 
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map(term => term.length < 2 ? []
-        : searchList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    );
-
     searchCustomer = (text$: Observable<string>) =>
     text$.pipe(
-      debounceTime(200),
+      debounceTime(500),
       distinctUntilChanged(),
       switchMap(term => {
         if (!term) {
           return of([]);
         }
-  
+
         return this.lookupService
           .fetchCustDetails(term)
           .pipe(map(list => (list.length > 10 ? list.splice(0, 10) : list)))
@@ -47,13 +42,47 @@ export class CustomerComponent implements OnInit {
     );
 
   formatter = (x: {company: string}) => x.company;
+  customerAddressList: Address[];
 
-  constructor(private fb: FormBuilder, config: NgbAccordionConfig, private router: Router,private lookupService: LookupService) {
-    config.type = 'dark';    
+  constructor(private fb: FormBuilder, config: NgbAccordionConfig, private router: Router,
+    private lookupService: LookupService, private customerService: CustomerService) {
+    config.type = 'dark';
   }
 
   ngOnInit(): void {
     this.activeIds = ['customer'];
+    this.onChanges();
+  }
+
+  onChanges(): void {
+    this.loadForm.get('customer.id').valueChanges.subscribe(customerId => {
+      this.customerService.getCustomerAddress(customerId).subscribe(response => {
+        this.customerAddressList = response;
+      })
+    });
+  }
+
+  selectedCustomer (customer) {
+    // this.loadForm.get('customer').setValue(customer.item);
+    this.loadForm.get('customer.id').setValue(customer.item.id);
+    this.loadForm.get('customer.company').setValue(customer.item.company);
+    this.loadForm.get('customer.customerEmail').setValue(customer.item.customerEmail);
+    this.loadForm.get('customer.active').setValue(customer.item.active);
+    if (customer) {
+      this.customerService.getCustomerAddress(customer.item.id).subscribe(response => {
+          this.customerAddressList = response;
+        })
+    }
+  }
+
+  get formControls() { return this.loadForm.controls; }
+
+  get customerAddress() { return this.formControls.customerAddress as FormGroup; }
+
+  populateContact (addressIndex) {
+    this.customerAddress.get('contactPerson').setValue(this.customerAddressList[addressIndex-1].contactPerson);
+    this.customerAddress.get('emailId').setValue(this.customerAddressList[addressIndex-1].emailId);
+    this.customerAddress.get('phoneNo').setValue(this.customerAddressList[addressIndex-1].phoneNo);
   }
 
 }

@@ -19,9 +19,6 @@ export class PricingComponent implements OnInit {
 
   ngOnInit() {
     // this.pricingLineItem$ = this.lookupService.pricingLineItem$;
-    this.addPricing(PricingConstants.PRICING_TYPE_REVENUE);
-    this.addPricing(PricingConstants.PRICING_TYPE_COST);
-
     // this.onValueChanges();
   }
 
@@ -46,7 +43,7 @@ export class PricingComponent implements OnInit {
         .setValue(this.getControl(index, 'pricingLineItemValue'));
       } else {
         this.loadPricings.controls[index].get('pricingLineItemSubtotal')
-        .setValue(this.getControl(index, 'pricingLineItemValue') * this.mileage);
+        .setValue(this.getControl(index, 'pricingLineItemValue') * this.loadForm.get('tripMileage').value);
       }
     }
   }

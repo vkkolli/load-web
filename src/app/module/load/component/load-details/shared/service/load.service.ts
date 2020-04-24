@@ -6,18 +6,24 @@ import { LoadApiService } from '@app/core/services/load.api.service';
 import { Load } from '@app/shared/model/load';
 import { RepositoryService } from '@app/core/services/repository.service';
 import { Observable } from 'rxjs';
-import { Distance } from '@app/shared/model/distance';
+import { MapResponse } from '@app/shared/model/map-response';
+import { environment } from 'environments/environment';
 
+import * as urljoin from "url-join";
+
+const BASE_PATH = urljoin(environment.loadApiPath, "/load/");
 @Injectable({
   providedIn: 'root'
 })
 export class LoadService extends BaseService<Load>{
-    repo: RepositoryService;
+
+    API_KEY: string = 'AIzaSyD-XqQu8wb1NSuDOkpOT-6n39IroPkHQ48';
 
     constructor(
       injector: Injector,
       router: Router,
       loadApiService: LoadApiService,
+      private repo: RepositoryService
     ) {
       super(injector, loadApiService);
     }
@@ -27,8 +33,13 @@ export class LoadService extends BaseService<Load>{
       return load;
     }
 
-    public calculateMileage(origin: number, dest: number): Observable<Distance> {
-      return this.repo.get<Distance>('https://www.zipcodeapi.com/rest/RswiQqwT4aAaxatZn1rmW3N07TvlstJsyOyMvazIHDoQXWa4LgqoFO5Kr45v3B0u/distance.json/' + origin + '/' + dest + '/mile');
+
+    public fetchByIsd(loadId: number) {
+      return  this.repo.get<Load>(BASE_PATH + loadId);
+    }
+
+    calculateMileage(origin: number, dest: number): Observable<MapResponse> {
+      return this.repo.get<MapResponse>('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + origin + '&destinations=' + dest + '&key=' + this.API_KEY + '&units=imperial');
     }
 
     onSaveComplete(response: Load) {
