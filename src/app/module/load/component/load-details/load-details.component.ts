@@ -115,7 +115,13 @@ export class LoadDetailsComponent implements OnInit {
           commodity: data.commodity,
           loadTrips: data.loadTrips,
           loadPricings: data.loadPricings,
-          carrier: data.carrier
+          // totalRevenue: data.totalRevenue,
+          // totalCost: data.totalCost,
+          maxRate: data.maxRate,
+          targetRate: data.targetRate,
+          loadSize: data.loadSize,
+          tripMileage: data.tripMileage,
+          // carrier: data.carrier
         });
         this.loadForm.get('customer.customerObj').setValue(this.loadForm.get('customer').value);
         this.loadTrips.controls.forEach(trip => {//expectedTripTime
@@ -213,7 +219,6 @@ export class LoadDetailsComponent implements OnInit {
 
     if (date) {
       trip.get('expectedTripDate').setValue(date.month + '/' + date.day + '/' + date.year);
-
       // const momentDate = new Date(date); // Replace event.value with your date value
       // const formattedDate = moment(momentDate).format("MM/DD/YYYY");
       // trip.get('expectedTripDate').setValue(formattedDate);

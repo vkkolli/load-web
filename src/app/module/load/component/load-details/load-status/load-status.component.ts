@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-load-status',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./load-status.component.scss']
 })
 export class LoadStatusComponent implements OnInit {
+
+  @Input() loadForm : FormGroup;
 
   constructor() { }
 

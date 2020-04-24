@@ -46,6 +46,11 @@ export class PricingComponent implements OnInit {
         .setValue(this.getControl(index, 'pricingLineItemValue') * this.loadForm.get('tripMileage').value);
       }
     }
+    if (pricingTypeId == PricingConstants.PRICING_TYPE_REVENUE) {
+      this.loadForm.get('totalRevenue').setValue(this.loadPricings.controls[index].get('pricingLineItemSubtotal').value);
+    } else {
+      this.loadForm.get('totalCost').setValue(this.loadPricings.controls[index].get('pricingLineItemSubtotal').value);
+    }
   }
 
   getControl(index, key) {

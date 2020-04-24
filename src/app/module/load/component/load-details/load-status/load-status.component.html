@@ -1,1 +1,66 @@
-<p>load-status works!</p>
+<div class="progress-status-container" [formGroup]="loadForm">
+  <div class="progress-list" formGroupName="loadStatus">
+    <div class="progress-item">
+      <div class="progress-title">
+        <span>shipment planning</span>
+      </div>
+      <div class="progress-index" [ngClass]="{'active': (loadForm.get('loadStatus.id').value == '10')}">
+        1
+      </div>
+    </div>
+
+    <div class="progress-item">
+      <div class="progress-title">
+        <span>pending pickup</span>
+      </div>
+      <div class="progress-index" [ngClass]="{'active': loadForm.get('loadStatus.id').value == '30'}">
+        2
+      </div>
+    </div>
+
+    <div class="progress-item">
+      <div class="progress-title">
+        <span>in-Transit</span>
+      </div>
+      <div class="progress-index" [ngClass]="{'active': loadForm.get('loadStatus.id').value == '40'}">
+        3
+      </div>
+    </div>
+
+    <div class="progress-item">
+      <div class="progress-title">
+        <span>delivered</span>
+      </div>
+      <div class="progress-index" [ngClass]="{'active': loadForm.get('loadStatus.id').value == '50'}">
+        4
+      </div>
+    </div>
+
+    <div class="progress-item">
+      <div class="progress-title">
+        <span>delivered/Audit</span>
+      </div>
+      <div class="progress-index" [ngClass]="{'active': loadForm.get('loadStatus.id').value == '60'}">
+        5
+      </div>
+    </div>
+
+    <div class="progress-item">
+      <div class="progress-title" [ngClass]="{'active': loadForm.get('loadStatus.id').value == '70'}">
+        <span>delivered/Processing</span>
+      </div>
+      <div class="progress-index">
+        6
+      </div>
+    </div>
+
+    <div class="progress-item">
+      <div class="progress-title">
+        <span>delivered/Billed</span>
+      </div>
+      <div class="progress-index" [ngClass]="{'active': loadForm.get('loadStatus.id').value == '80'}">
+        7
+      </div>
+    </div>
+  </div>
+</div>
