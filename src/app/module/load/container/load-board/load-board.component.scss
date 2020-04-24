@@ -1,0 +1,28 @@
+// Swatches
+$white: #fff;
+$tm-bk: #343a40;
+$tm-vt: #1e1e3f;
+
+
+.quick-search {
+    padding: 2rem 1rem;
+    background-color: darken($tm-vt, 12%);
+    h3 {
+        color: $white;
+    }
+    .card {
+        background-color: lighten($tm-vt, 60%);
+        margin-bottom: 1rem;
+    }
+}
+.btn-quicksearch {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    background-color: darken($tm-vt, 12%);
+    color: $white;
+    border: 1px solid darken($tm-vt, 12%);
+    padding: 0.5rem;
+    border-radius: 4px 0 0 4px;
+    outline: none;    
+}

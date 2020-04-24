@@ -32,16 +32,25 @@ $loadboard-poc-theme: mat-light-theme($loadboard-poc-primary, $loadboard-poc-acc
 @import 'vendor/vendor';
 
 @import 'common';
+
+
+
+body {
+  background-color: $tm-gy;
+}
+
 .header {
   position: fixed;
   z-index: 10300000000;
   left: 0;
   right: 0;
   top: 0;
-  background-color: dimgrey;
+  // background-color: dimgrey;
+  background-color: darken($tm-vt, 3%);
   color: aliceblue;
   // padding: 18px;
-  border-bottom: 3px solid darkgray;
+  // border-bottom: 3px solid darkgray;
+  border-bottom: 3px solid $tm-or;
 }
 
 .footer {
@@ -112,12 +121,6 @@ width: 5%;
   color: black;
   margin-right: 1%;
 }
-
-
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import '~ngx-toastr/toastr-bs4-alert';
 

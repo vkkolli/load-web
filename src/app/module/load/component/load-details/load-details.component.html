@@ -47,8 +47,7 @@
             <app-pricing [loadForm]="loadForm"></app-pricing>
           </ng-template>
       </ngb-panel>
-
-      <ngb-panel id="carrier" *ngIf="loadForm.get('loadStatus.id').value == 10">
+      <ngb-panel id="carrier" *ngIf="loadForm.get('loadStatus.id').value == (10 || 20 )">
           <ng-template ngbPanelTitle>
               <div class="row justify-content-between text-dark">
                   <div class="d-flex text-white text-uppercase">Carrier Search</div>

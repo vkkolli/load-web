@@ -9,8 +9,62 @@
             }
         }
     }
+
     .ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
         text-overflow: ellipsis !important;
         vertical-align: middle !important;
-      }
+    }
 }
+
+// Swatches
+$white: #fff;
+$tm-bk: #343a40;
+$tm-vt: #1e1e3f;
+
+.datatable-body-row {
+    .datatable-body-cell {
+        padding: 0.3rem 1.2rem !important;
+        .datatable-body-cell-label {
+            font-size: 0.67rem;
+            a {
+                color: $tm-vt !important;
+                text-decoration: none;
+                &::before {
+                    font-size: 1.2rem !important;
+                }
+            }
+        }
+    }
+}
+
+.ngx-datatable.material {
+    .datatable-body {
+        .datatable-row-detail{
+            background-color: lighten($tm-vt, 10%);
+            color: $white;
+        }
+    }
+}
+
+// Custom Expand Column
+.lbd-dtl-row {
+    display: flex;
+    padding: 5px 60px;
+    .lbd-dtl-column {
+        .lbd-dtl-item {
+            margin-right: 2rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.67rem;
+            .lbd-dtl-head {
+                font-weight: bold;
+                letter-spacing: 1px;
+                color: darken($white, 50%);
+            }
+            .lbd-dtl-data {
+                letter-spacing: 1px;
+            }
+        }
+    }
+}
+
+
