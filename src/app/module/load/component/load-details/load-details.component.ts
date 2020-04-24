@@ -29,7 +29,7 @@ export class LoadDetailsComponent implements OnInit {
 
   constructor(injector: Injector,private http: HttpClient, private fb: FormBuilder,
     config: NgbAccordionConfig, private loadService: LoadService, private router: Router, private route: ActivatedRoute) {
-    config.type = 'dark';
+    // config.type = 'dark';
     this.spinner = injector.get(NgxSpinnerService);
     this.toastr = injector.get(ToastrService);
   }
