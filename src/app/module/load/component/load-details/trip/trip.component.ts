@@ -75,7 +75,7 @@ export class TripComponent implements OnInit {
   onValueChanges(): void {
   }
 
-  selectedTripItem(tripObj, index, csz) {
+  selectedTripItem(tripObj, csz, index) {
     if (tripObj.get('tripType').value == 0) {
       this.originLocation = tripObj.value;
     } else {
