@@ -5,9 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoadService } from './shared/service/load.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
-import { ORIGIN, DESTINATION, PricingConstants } from '@app/shared/types/constants';
+import { PricingConstants } from '@app/shared/types/constants';
 
-import * as moment from 'moment';
 import { Trip } from '@app/shared/enum/trip.enum';
 import { Observable, Subscription } from 'rxjs';
 import { Load } from '@app/shared/model/load';
