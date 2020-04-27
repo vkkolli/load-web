@@ -7,8 +7,11 @@ RUN npm install --quiet node-gyp -g
 
 COPY package.json package-lock.json ./
 RUN npm set progress=false && npm set audit=false && npm set loglevel=error
+
+RUN set http_proxy= && set https_proxy= && npm config rm https-proxy && npm config rm proxy && npm config set registry "https://registry.npmjs.org"
+RUN npm cache clean --force
 # RUN npm install
-RUN npm ci && mkdir /ng-app && mv ./node_modules ./ng-app
+RUN npm ci --prefer-offline --no-audit && mkdir /ng-app && mv ./node_modules ./ng-app
 
 WORKDIR /ng-app
 RUN ./node_modules/.bin/ngcc --properties es2015
