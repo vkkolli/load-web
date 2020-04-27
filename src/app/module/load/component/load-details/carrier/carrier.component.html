@@ -6,7 +6,6 @@
               <!-- <input type="text" id="txtSearchCarrier" class="form-control" formControlName="carrier_search"> -->
               <input type="text" id="txtSearchCarrier" class="form-control" formControlName="carrier_search"
               placeholder="Carrier Name">
-
               <div class="input-group-append">
                   <button class="btn btn-primary" type="button" [disabled]="!carrierForm.valid"
                   (click)="searchCarriers()"><i class="fa fa-search"></i></button>
@@ -19,7 +18,10 @@
   </div>
   <div class="row">
       <div class="col-12">
-          <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force" [selectionType]="SelectionType.single" [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50" [limit]="10" [rowHeight]="50" [rows]="rows">
+          <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force"
+          [selectionType]="SelectionType.single"
+          [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50"
+          [limit]="10" [rowHeight]="50" [rows]="carriers$ | async">
 
           </ngx-datatable>
       </div>

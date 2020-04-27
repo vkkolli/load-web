@@ -92,7 +92,7 @@ export class TripComponent implements OnInit {
         this.loadForm.get('tripMileage').setValue(response.rows[0].elements[0].distance.text);
       },
       error => {
-        this.loadForm.get('tripMileage').setValue(330.50);
+        this.loadForm.get('tripMileage').setValue(1330.50);
       })
     }
   }

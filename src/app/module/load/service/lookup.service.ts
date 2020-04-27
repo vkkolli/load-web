@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Lookup } from '@app/shared/model/lookup';
 import { RepositoryService } from '@app/core/services/repository.service';
 import { environment } from 'environments/environment';
@@ -37,7 +37,7 @@ export class LookupService {
     return this.repo.get<Array<String>>(url);
   }
 
-  fetchCarrierDetails(search: string) {
+  fetchCarrierDetails(search: string): Observable<Array<Carrier>> {
     const url = urljoin(environment.loadApiPath, 'carrier/search/' + search);
     return this.repo.get<Array<Carrier>>(url);
   }

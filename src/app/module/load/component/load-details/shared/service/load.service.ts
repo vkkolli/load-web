@@ -55,7 +55,7 @@ export class LoadService extends BaseService<Load>{
 
     onSaveFailed(error: HttpErrorResponse) {
       this.spinner.hide();
-      this.toastr.error('Load failed!');
+      this.toastr.error('Load Creation Failed!');
     }
 
     onDestroy() {
