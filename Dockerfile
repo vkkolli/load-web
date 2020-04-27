@@ -11,7 +11,7 @@ RUN npm set progress=false && npm set audit=false && npm set loglevel=error
 #RUN set http_proxy= && set https_proxy= && npm config rm https-proxy && npm config rm proxy && npm config set registry "https://registry.npmjs.org"
 #RUN npm cache clean --force
 # Installing cert package will allow resolving the error to https://registry.npmjs.org/
-RUN apk add --no-cache ca-certificates
+#RUN apk add --no-cache ca-certificates
 # RUN npm install
 RUN npm ci && mkdir /ng-app && mv ./node_modules ./ng-app
 
