@@ -200,6 +200,10 @@ export class LoadDetailsComponent implements OnInit {
   }
 
   saveOrUpdate() {
+
+    this.toastr.success('Load created successfully!');
+
+    this.toastr.error('Load created successfully!');
     this.spinner.show();
     if (this.loadForm.get('loadStatus.id').value == '' ) {
       this.loadForm.get('loadStatus.id').setValue(10);
