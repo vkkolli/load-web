@@ -19,9 +19,7 @@ export class LoadBoardComponent implements OnInit {
     { name: "Trip", prop: "mileage",width:'30' },
     { name: "Destination", prop: "destinationCsz",width:'100' },
     { name: "Company", prop: "customerName" ,width:'100'},
-    { name: "Commodity", prop: "commodityName",width:'100' },
     { name: "Cost", prop: "revenueCost" ,width:'60'},
-    { name: "Carrier", prop: "carrierName" ,width:'60'},
     { name: "Actual Pickup", prop: "actualPickupDate" ,width:'70'},
     { name: "Actual Delivery", prop: "actualDeliveryDate",width:'70' }
   ];
