@@ -1,10 +1,9 @@
-<ngx-datatable #myTable class="material expandable" [columns]="columns" [columnMode]="ColumnMode.force" headerHeight="50"
-  footerHeight="50" [limit]="10" [rowHeight]="'auto'" [scrollbarV]="false" [scrollbarH]="false" [rows]="rows">
-
+<ngx-datatable #myTable class="material striped" [columns]="columns" [columnMode]="ColumnMode.force" headerHeight="50"
+  footerHeight="50" [limit]="10" [rowHeight]="'auto'" [rowClass]="getRowClass" [scrollbarV]="false" [scrollbarH]="true" [rows]="rows">
 
   <!-- Row Detail Template -->
   <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
-    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+    <ng-template let-row="row" ngx-datatable-row-detail-template>
       <div class="lbd-dtl-container">
         <div class="lbd-dtl-row">
           <div class="lbd-dtl-column col-md-2">

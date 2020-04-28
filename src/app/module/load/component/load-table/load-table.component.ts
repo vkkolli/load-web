@@ -15,7 +15,7 @@ export class LoadTableComponent implements OnInit {
   @Input() rows;
   @Input() columns;
 
-  ColumnMode = ColumnMode;
+  ColumnMode = ColumnMode.standard;
   constructor() { }
 
   ngOnInit(): void {
@@ -28,5 +28,12 @@ export class LoadTableComponent implements OnInit {
 
   onDetailToggle(event) {
     console.log('Detail Toggled', event);
+  }
+
+  getRowClass(row) {
+    return {
+      // 'is-header-row': row.age % 10 === 0
+      // 'is-header-row': row.loadId === 30000003
+    };
   }
 }

@@ -1,16 +1,10 @@
 // ----------------------------------
 //       Progress Status Bar
 // ----------------------------------
-// Swatches
-$white: #fff;
-$black: #000;
-$tm-bk: #343a40;
-$tm-vt: #1e1e3f;
-$tm-or: #ff9701;
-$tm-gy: #d2d2d2;
 
 // Bootstrap
 @import '../../../../../../assets/scss/vendor/vendor';
+@import '../../../../../../assets/scss/skin';
 
 .progress-status-container {
     .progress-list {

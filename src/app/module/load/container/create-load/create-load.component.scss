@@ -1,10 +1,5 @@
 ::ng-deep {
-    // Swatches
-    $white: #fff;
-    $tm-bk: #343a40;
-    $tm-vt: #1e1e3f;
-    $tm-or: #ff9701;
-    $tm-gy: #d2d2d2;
+    @import '../../../../../assets/scss/skin';
 
     .accordion {
         .card {
