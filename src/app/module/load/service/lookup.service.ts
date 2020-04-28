@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Lookup } from '@app/shared/model/lookup';
 import { RepositoryService } from '@app/core/services/repository.service';
-import { environment } from 'environments/environment';
-
-import * as urljoin from 'url-join';
 import { Carrier } from '@app/shared/model/carrier';
+import { LoadStatus } from '@app/shared/model/load-status';
+import { Lookup } from '@app/shared/model/lookup';
+import { environment } from 'environments/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
+import * as urljoin from 'url-join';
+
 const LOOKUP_PATH = urljoin(environment.loadApiPath, 'load/lookup');
 const ZIP_PATH = urljoin(environment.loadApiPath, 'zipcode');
-const CUST_PATH = environment.loadApiPath;
+const CUSTOM_PATH = environment.loadApiPath;
 
 @Injectable({
   providedIn: 'root'
 })
 export class LookupService {
+
   pricingLineItem$ = new BehaviorSubject<Array<Lookup>>([]);
+  loadStatuses$ = new BehaviorSubject<Array<LoadStatus>>([]);
 
   constructor(private repo: RepositoryService) {
-    // this.fetchPricingLineItem();
+    this.fetchLoadStatuses();
   }
 
   // Pricing Line item list
@@ -25,6 +28,12 @@ export class LookupService {
     this.repo
       .get<Array<Lookup>>(urljoin(LOOKUP_PATH, '/pricinglineitems'))
       .subscribe(pricingLineItem => this.pricingLineItem$.next(pricingLineItem));
+  }
+
+  fetchLoadStatuses() {
+    this.repo
+    .get<Array<LoadStatus>>(urljoin(CUSTOM_PATH, 'load/status'))
+    .subscribe(loadStatus => this.loadStatuses$.next(loadStatus));
   }
 
   fetchCityStateZip(search: string) {

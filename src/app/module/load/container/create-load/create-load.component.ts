@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,7 +19,7 @@ export class CreateLoadComponent implements OnInit {
   protected toastr: ToastrService;
   private routeSub: Subscription;
 
-  constructor(injector: Injector,private http: HttpClient, private fb: FormBuilder,
+  constructor(injector: Injector, private fb: FormBuilder,
     config: NgbAccordionConfig, private loadService: LoadService, private router: Router, private route: ActivatedRoute) {
     // config.type = 'dark';
     this.spinner = injector.get(NgxSpinnerService);

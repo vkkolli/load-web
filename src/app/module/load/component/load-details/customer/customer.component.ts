@@ -44,15 +44,17 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeIds = ['customer'];
-    this.onChanges();
+    // this.onChanges();
   }
 
   onChanges(): void {
-    this.loadForm.get('customer.id').valueChanges.subscribe(customerId => {
-      this.customerService.getCustomerAddress(customerId).subscribe(response => {
-        this.customerAddressList = response;
-      })
-    });
+    if(this.loadForm.get('customerAddress.emailId').invalid) {
+      this.loadForm.get('customer.id').valueChanges.subscribe(customerId => {
+        this.customerService.getCustomerAddress(customerId).subscribe(response => {
+          this.customerAddressList = response;
+        })
+      });
+    }
   }
 
   selectedCustomer (customer) {
