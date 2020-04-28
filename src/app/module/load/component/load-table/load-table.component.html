@@ -1,65 +1,12 @@
+
 <ngx-datatable #myTable class="material expandable" [columns]="columns" [columnMode]="ColumnMode.force" headerHeight="50"
   footerHeight="50" [limit]="10" [rowHeight]="'auto'" [scrollbarV]="false" [scrollbarH]="false" [rows]="rows">
-
 
   <!-- Row Detail Template -->
   <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
       <div class="lbd-dtl-container">
         <div class="lbd-dtl-row">
-          <div class="lbd-dtl-column col-md-2">
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Carrier Name</div>
-              <div class="lbd-dtl-data">{{row.carrierName}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Carrier Contact</div>
-              <div class="lbd-dtl-data">{{row.carrierContact}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Email Id</div>
-              <div class="lbd-dtl-data">{{row.carrierEmail}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">City/State/Zip</div>
-              <div class="lbd-dtl-data">{{row.carrierAddress}}</div>
-            </div>
-          </div>
-
-          <div class="lbd-dtl-column col-md-2">
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Equipment Name</div>
-              <div class="lbd-dtl-data">{{row.equipmentName}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Description</div>
-              <div class="lbd-dtl-data">{{row.equipmentDesc}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Full/Partial</div>
-              <div class="lbd-dtl-data">{{row.loadType}}</div>
-            </div>
-          </div>
-
-          <div class="lbd-dtl-column col-md-2">
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Company Name</div>
-              <div class="lbd-dtl-data">{{row.customerName}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Email Id</div>
-              <div class="lbd-dtl-data">{{row.customerEmail}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Phone</div>
-              <div class="lbd-dtl-data">{{row.customerPhone}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">City/State/Zip</div>
-              <div class="lbd-dtl-data">{{row.customerAddress}}</div>
-            </div>
-          </div>
-
           <div class="lbd-dtl-column">
             <div class="lbd-dtl-item">
               <div class="lbd-dtl-head">Commodity Name</div>
@@ -79,6 +26,20 @@
             </div>
           </div>
 
+          <div class="lbd-dtl-column col-md-2">
+            <div class="lbd-dtl-item">
+              <div class="lbd-dtl-head">Carrier Name</div>
+              <div class="lbd-dtl-data">{{row.carrierName}}</div>
+            </div>
+            <div class="lbd-dtl-item">
+              <div class="lbd-dtl-head">Carrier Contact</div>
+              <div class="lbd-dtl-data">{{row.carrierContact}}</div>
+            </div>
+            <div class="lbd-dtl-item">
+              <div class="lbd-dtl-head">Email Id</div>
+              <div class="lbd-dtl-data">{{row.carrierEmail}}</div>
+            </div>
+          </div>
         </div>
       </div>
     </ng-template>
@@ -94,7 +55,67 @@
     </ng-template>
   </ngx-datatable-column>
 
-  <ngx-datatable-column *ngFor="let column of columns" name="{{column.name}}" prop="{{column.prop}}"
-    width="{{column.width}}">
+  <ngx-datatable-column name="LoadId" [width]="200">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+       <a [routerLink]="['/load/edit/', row.loadId]" > {{ row.loadId }} </a>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Age" [width]="200">
+    <ng-template let-row="row"  ngx-datatable-cell-template>
+      {{ row.age }}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Truck" [width]="150">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.equipmentName }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="F/P" [width]="150">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.loadType }}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Status" [width]="200">
+    <ng-template let-row="row"  ngx-datatable-cell-template>
+      {{ row.loadStatus }}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Origin" [width]="300">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.originCsz }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Trip" [width]="150">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.mileage }}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Destination" [width]="300">
+    <ng-template let-row="row"  ngx-datatable-cell-template>
+      {{ row.destinationCsz }}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Company" [width]="200">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.customerName }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Cost" [width]="200">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.revenueCost }}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Actual Pickup" [width]="300">
+    <ng-template let-row="row"  ngx-datatable-cell-template>
+        {{ row.actualPickupDate }}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Actual Delivery" [width]="300">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.actualDeliveryDate }}
+    </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>
