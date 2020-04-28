@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Lookup } from '@app/shared/model/lookup';
 import { RepositoryService } from '@app/core/services/repository.service';
 import { environment } from 'environments/environment';
 
 import * as urljoin from 'url-join';
+import { Carrier } from '@app/shared/model/carrier';
 const LOOKUP_PATH = urljoin(environment.loadApiPath, 'load/lookup');
 const ZIP_PATH = urljoin(environment.loadApiPath, 'zipcode');
 const CUST_PATH = environment.loadApiPath;
@@ -32,8 +33,13 @@ export class LookupService {
   }
 
   fetchCustDetails(search: string) {
-    const url = urljoin(CUST_PATH, 'customer/search/' + search);
+    const url = urljoin(environment.loadApiPath, 'customer/search/' + search);
     return this.repo.get<Array<String>>(url);
+  }
+
+  fetchCarrierDetails(search: string): Observable<Array<Carrier>> {
+    const url = urljoin(environment.loadApiPath, 'carrier/search/' + search);
+    return this.repo.get<Array<Carrier>>(url);
   }
 
 }

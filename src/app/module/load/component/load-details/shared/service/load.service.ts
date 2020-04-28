@@ -10,8 +10,10 @@ import { MapResponse } from '@app/shared/model/map-response';
 import { environment } from 'environments/environment';
 
 import * as urljoin from "url-join";
+import { Carrier } from '@app/shared/model/carrier';
 
 const BASE_PATH = urljoin(environment.loadApiPath, "/load/");
+const CARRIER_PATH = urljoin(environment.loadApiPath, "/carrier/search");
 @Injectable({
   providedIn: 'root'
 })
@@ -33,9 +35,12 @@ export class LoadService extends BaseService<Load>{
       return load;
     }
 
-
     public fetchByIsd(loadId: number) {
       return  this.repo.get<Load>(BASE_PATH + loadId);
+    }
+
+    public fetchCarriers(carrier: string) {
+      return this.repo.get<Array<Carrier>>(CARRIER_PATH + carrier);
     }
 
     calculateMileage(origin: number, dest: number): Observable<MapResponse> {
@@ -50,7 +55,7 @@ export class LoadService extends BaseService<Load>{
 
     onSaveFailed(error: HttpErrorResponse) {
       this.spinner.hide();
-      this.toastr.error('Load failed!');
+      this.toastr.error('Load Creation Failed!');
     }
 
     onDestroy() {
