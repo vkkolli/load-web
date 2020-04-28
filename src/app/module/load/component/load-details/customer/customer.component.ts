@@ -1,16 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {ColumnMode, SelectionType} from '@swimlane/ngx-datatable';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LookupService } from '@app/module/load/service/lookup.service';
+import { Address } from '@app/shared/model/address';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { LookupService } from '@app/module/load/service/lookup.service';
-import { LoadService } from '../shared/service/load.service';
 import { CustomerService } from '../shared/service/customer.service';
-import { Address } from '@app/shared/model/address';
-
-const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg', 'poiuy', 'lkjhg', 'mnbv', 'jkl'];
 
 
 @Component({
@@ -21,25 +17,22 @@ const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg
 export class CustomerComponent implements OnInit {
 
   @Input() loadForm : FormGroup;
-    activeIds = [];
-  ColumnMode = ColumnMode;
+  activeIds = [];
 
-  SelectionType = SelectionType;
+  searchCustomer = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(500),
+    distinctUntilChanged(),
+    switchMap(term => {
+      if (!term) {
+        return of([]);
+      }
 
-    searchCustomer = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(500),
-      distinctUntilChanged(),
-      switchMap(term => {
-        if (!term) {
-          return of([]);
-        }
-
-        return this.lookupService
-          .fetchCustDetails(term)
-          .pipe(map(list => (list.length > 10 ? list.splice(0, 10) : list)))
-      })
-    );
+      return this.lookupService
+        .fetchCustDetails(term)
+        .pipe(map(list => (list.length > 10 ? list.splice(0, 10) : list)))
+    })
+  );
 
   formatter = (x: {company: string}) => x.company;
   customerAddressList: Address[];
@@ -63,7 +56,6 @@ export class CustomerComponent implements OnInit {
   }
 
   selectedCustomer (customer) {
-    // this.loadForm.get('customer').setValue(customer.item);
     this.loadForm.get('customer.id').setValue(customer.item.id);
     this.loadForm.get('customer.company').setValue(customer.item.company);
     this.loadForm.get('customer.customerEmail').setValue(customer.item.customerEmail);

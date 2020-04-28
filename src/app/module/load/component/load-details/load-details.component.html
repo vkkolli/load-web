@@ -1,6 +1,5 @@
 <app-load-status *ngIf="loadForm.get('loadStatus.id').value > 0" [loadForm]="loadForm"></app-load-status>
 <form [formGroup]="loadForm" novalidate>
-
   <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
       <ngb-panel id="customer">
           <ng-template ngbPanelTitle>
@@ -71,14 +70,14 @@
           </ng-template>
       </ngb-panel>
   </ngb-accordion>
-  <div class="row mb-2 justify-content-end">
+  <!-- <div class="row mb-2 justify-content-end">
       <div class="col-auto">
         <button class="btn btn-danger px-5" routerLink="../">Cancel</button>
       </div>
       <div class="col-auto">
         <button class="btn btn-success px-5" (click)="saveOrUpdate()" [disabled]=!loadForm.valid>Create</button>
       </div>
-  </div>
+  </div> -->
 </form>
 
 <ngx-spinner bdColor="rgba(51,51,51,0.3)" size="large" color="#3c8a67" type="ball-spin-clockwise">
