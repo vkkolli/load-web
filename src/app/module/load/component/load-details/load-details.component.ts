@@ -1,16 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, Injector, Input } from "@angular/core";
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
-import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoadService } from './shared/service/load.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
-import { PricingConstants } from '@app/shared/types/constants';
-
-import { Trip } from '@app/shared/enum/trip.enum';
-import { Observable, Subscription } from 'rxjs';
-import { Load } from '@app/shared/model/load';
+import { ChangeDetectionStrategy, Component, Injector, Input, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { LoadService } from './shared/service/load.service';
+
 
 @Component({
   selector: "app-load-details",
@@ -37,7 +34,7 @@ export class LoadDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activeIds = ['customer','equip','trip', 'pricing'];
+    this.activeIds = ['customer','equip','trip', 'pricing', 'carrier', 'load_carrier'];
 
   }
 

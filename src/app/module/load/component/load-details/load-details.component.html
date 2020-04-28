@@ -58,7 +58,7 @@
             <app-carrier [loadForm]="loadForm"></app-carrier>
           </ng-template>
       </ngb-panel>
-      <ngb-panel id="load_carrier"  *ngIf="loadForm.get('loadStatus.id').value > 20">
+      <ngb-panel id="load_carrier"  *ngIf="loadForm.get('loadStatus.id').value >= 20">
           <ng-template ngbPanelTitle>
               <div class="row justify-content-between text-dark accord-title">
                   <div class="d-flex text-white text-uppercase">Load Carrier Details</div>
@@ -66,7 +66,7 @@
               </div>
           </ng-template>
           <ng-template ngbPanelContent>
-            <app-load-carrier [loadForm]="loadForm "></app-load-carrier>
+            <app-load-carrier [loadForm]="loadForm"></app-load-carrier>
           </ng-template>
       </ngb-panel>
   </ngb-accordion>

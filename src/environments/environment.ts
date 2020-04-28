@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   envName: 'local',
-  loadApiPath: 'https://192.100.0.24/loadboard-rest',
+  loadApiPath: 'http://loadboardpoc.ceiindia.com/loadboard-rest',
 };
 
 

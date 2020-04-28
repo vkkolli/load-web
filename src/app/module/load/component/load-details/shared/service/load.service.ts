@@ -1,16 +1,16 @@
-import { Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { BaseService } from '@app/core/abstracts/base-service.abstract';
+import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
+import { BaseService } from '@app/core/abstracts/base-service.abstract';
 import { LoadApiService } from '@app/core/services/load.api.service';
-import { Load } from '@app/shared/model/load';
 import { RepositoryService } from '@app/core/services/repository.service';
-import { Observable } from 'rxjs';
+import { Carrier } from '@app/shared/model/carrier';
+import { Load } from '@app/shared/model/load';
 import { MapResponse } from '@app/shared/model/map-response';
 import { environment } from 'environments/environment';
-
+import { Observable } from 'rxjs';
 import * as urljoin from "url-join";
-import { Carrier } from '@app/shared/model/carrier';
+
 
 const BASE_PATH = urljoin(environment.loadApiPath, "/load/");
 const CARRIER_PATH = urljoin(environment.loadApiPath, "/carrier/search");
@@ -50,7 +50,7 @@ export class LoadService extends BaseService<Load>{
     onSaveComplete(response: Load) {
       this.spinner.hide();
       this.toastr.success('Load created successfully!');
-      this.router.navigate(['/load', '/']);
+      this.router.navigate(['/load']);
     }
 
     onSaveFailed(error: HttpErrorResponse) {

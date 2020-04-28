@@ -1,11 +1,10 @@
 <div class="progress-status-container" [formGroup]="loadForm">
   <div class="progress-list" formGroupName="loadStatus">
-
-    <div class="progress-item" *ngFor="let status of loadStatuses$ | async">
+    <div class="progress-item" *ngFor="let status of loadStatuses$ | async; let i=index">
       <div class="progress-title">
         <span>{{status.name}}</span>
       </div>
-      <div class="progress-index" [ngClass]="{'active': (loadForm.get('loadStatus.id').value == '10')}">
+      <div class="progress-index" [ngClass]="{'active': (loadForm.get('loadStatus.id').value == status.id)}">
         {{status.id.toString().charAt(0)}}
       </div>
     </div>

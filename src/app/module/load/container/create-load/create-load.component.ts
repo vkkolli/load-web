@@ -86,13 +86,24 @@ export class CreateLoadComponent implements OnInit {
       loadPricings: new FormArray([]),
       carrier: this.fb.group({
         id: [''],
-        carrier_search: ['']
+        carrier_search: [''],
+        carrierName: [''],
+        equipment: [''],
+        carrierContact: [''],
+        emailId: [''],
+        phone: [''],
+        city: [''],
+        stateAbbr: [''],
+        countryAbbr: [''],
+        zip: [''],
+        active: ['']
       }),
       totalRevenue: [''],
       totalCost: [''],
       maxRate: [''],
       loadSize: [''],
       tripMileage:[''],
+      id:[''],
       targetRate: ['']
     });
   }
@@ -171,14 +182,19 @@ export class CreateLoadComponent implements OnInit {
       commodity: data.commodity,
       loadTrips: data.loadTrips,
       loadPricings: data.loadPricings,
-      // totalRevenue: data.totalRevenue,
-      // totalCost: data.totalCost,
+      totalRevenue: data.totalRevenue,
+      totalCost: data.totalCost,
+      id: data.id,
       maxRate: data.maxRate,
       targetRate: data.targetRate,
       loadSize: data.loadSize,
-      tripMileage: data.tripMileage,
-      // carrier: data.carrier
+      tripMileage: data.tripMileage
     });
+    if (data.carrier != null) {
+      this.loadForm.patchValue({
+        carrier: data.carrier
+      })
+    }
   }
 
   modifyFormObjects() {

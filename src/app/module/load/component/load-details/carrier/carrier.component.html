@@ -13,13 +13,13 @@
           </div>
       </div>
       <div class="col-auto">
-          <button class="btn btn-primary px-5" type="button">Assign</button>
+          <button class="btn btn-primary px-5" type="button" [disabled]="disableAssign" (click)="assignCarrier()">Assign</button>
       </div>
   </div>
   <div class="row">
       <div class="col-12">
           <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force"
-          [selectionType]="SelectionType.single"
+          [selectionType]="SelectionType.single" (activate)="onActivate($event)"
           [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50"
           [limit]="10" [rowHeight]="50" [rows]="carriers$ | async">
 

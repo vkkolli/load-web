@@ -11,4 +11,5 @@ export class Carrier  extends IdBase{
   countryAbbr: string;
   zip: string;
   active: boolean;
+  actions : string;
 }

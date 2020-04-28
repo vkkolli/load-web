@@ -44,7 +44,7 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeIds = ['customer'];
-    // this.onChanges();
+    this.onChanges();
   }
 
   onChanges(): void {
