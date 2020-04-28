@@ -39,11 +39,15 @@
 .lbd-dtl-row {
     display: flex;
     padding: 5px 60px;
+    flex-direction: column;
     .lbd-dtl-column {
+        display: flex;
+        flex-direction: row;
         .lbd-dtl-item {
             margin-right: 2rem;
             margin-bottom: 0.5rem;
             font-size: 0.67rem;
+            min-width: 7rem;
             .lbd-dtl-head {
                 font-weight: bold;
                 letter-spacing: 1px;

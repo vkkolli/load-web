@@ -1,18 +1,19 @@
 <section>
   <div class="container-fluid">
-    <nav class="navbar navbar-dark justify-content-start px-1">
-      <button class="navbar-toggler pl-0 border-0" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="sideMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">{{headerText}}</a>
-      <div class="row mb-2 justify-content-end" *ngIf="headerText === 'Post Load'"
-      style="float: right !important;width: 90%;margin-bottom: 0rem !important">
-        <div class="col-auto">
-          <button class="btn btn-danger px-5" routerLink="../">Cancel </button>
-        </div>
-        <div class="col-auto">
-          <button class="btn btn-success px-5" (click)="formSubmit.emit();" [disabled]="!loadFormValid">Create</button>
-        </div>
+    <nav class="navbar navbar-dark px-1">
+      <div class="nav-left">
+        <button class="navbar-toggler pl-0 border-0" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="sideMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">{{headerText}}</a>        
+      </div>
+      <div class="nav-right row" *ngIf="headerText === 'Post Load'">        
+          <div class="col-auto px-2">
+            <button class="btn btn-sm btn-danger px-3" routerLink="../">Cancel </button>
+          </div>
+          <div class="col-auto px-2">
+            <button class="btn btn-sm btn-success px-3" (click)="formSubmit.emit();" [disabled]="!loadFormValid">Create</button>
+          </div>
       </div>
     </nav>
   </div>
