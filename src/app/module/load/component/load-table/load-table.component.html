@@ -79,7 +79,7 @@
       {{ row.loadType }}
     </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="Status" [width]="70">
+  <ngx-datatable-column name="Status" [width]="125">
     <ng-template let-row="row"  ngx-datatable-cell-template>
       {{ row.loadStatus }}
     </ng-template>
@@ -111,14 +111,41 @@
       {{ row.revenueCost }}
     </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="Actual Pickup" [width]="125">
-    <ng-template let-row="row"  ngx-datatable-cell-template>
-        {{ row.pickupDate }}
-    </ng-template>
+  <ngx-datatable-column name="Actual Pickup" [width]="150">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.pickupDate" >
+      <span
+       title="Click to edit"
+       (click)="pickupDateEditing[rowIndex] = true"
+       *ngIf="!pickupDateEditing[rowIndex]">
+       {{row.pickupDate}}
+     </span>
+     <mat-form-field  *ngIf="pickupDateEditing[rowIndex]">
+      <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose datetime" (dateChange)="updatePickupDate($event, 'row.pickupDate', rowIndex)">
+      <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #picker [showSpinners]=false [showSeconds]=false
+         [stepHour]="1" [stepMinute]="5" [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
+         [disableMinute]=false [hideTime]= false> 
+      </ngx-mat-datetime-picker>
+   </mat-form-field>
+   </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="Actual Delivery" [width]="125">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{ row.deliveryDate }}
-    </ng-template>
+  <ngx-datatable-column name="Actual Delivery" [width]="150">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.deliveryDate" >
+      <span
+       title="Click to edit"
+       (click)="deliveryDateEditing[rowIndex] = true"
+       *ngIf="!deliveryDateEditing[rowIndex]">
+       {{row.deliveryDate}}
+     </span>
+     <mat-form-field  *ngIf="deliveryDateEditing[rowIndex]">
+      <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose datetime" (dateChange)="updateDeliveryDate($event, 'row.deliveryDate', rowIndex)">
+      <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #picker [showSpinners]=false [showSeconds]=false
+         [stepHour]="1" [stepMinute]="5" [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
+         [disableMinute]=false [hideTime]= false> 
+      </ngx-mat-datetime-picker>
+   </mat-form-field>
+   </ng-template>
   </ngx-datatable-column>
+  
 </ngx-datatable>
