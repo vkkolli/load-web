@@ -11,7 +11,7 @@
       </div>
       <div class="col-sm-6 col-lg-3 form-group" formGroupName="customerAddress" >
           <label for="drpAddress">Address</label>
-          <select id="drpAddress" class="form-control" formControlName="id" (change)="populateContact($event.target.selectedIndex)" >
+          <select id="drpAddress" *ngIf="customerAddressList" class="form-control" formControlName="id" (change)="populateContact($event.target.selectedIndex)" >
             <option value="">Select Customer Address</option>
             <option *ngFor="let address of customerAddressList; let i = index" [value]="address.id">
               {{address.addressLine1}}

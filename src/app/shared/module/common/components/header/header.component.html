@@ -5,6 +5,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">{{headerText}}</a>
+      <div class="row mb-2 justify-content-end" *ngIf="headerText === 'Post Load'"
+      style="float: right !important;width: 90%;margin-bottom: 0rem !important">
+        <div class="col-auto">
+          <button class="btn btn-danger px-5" routerLink="../">Cancel </button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-success px-5" (click)="formSubmit.emit();" [disabled]="!loadFormValid">Create</button>
+        </div>
+      </div>
     </nav>
   </div>
 </section>

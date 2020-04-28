@@ -1,15 +1,11 @@
 <header class="header">
-  <app-header headerText="Post Load"></app-header>
+  <app-header headerText="Post Load" [loadFormValid]="loadForm.valid" (formSubmit)="saveOrUpdate()"></app-header>
 </header>
+
 <main class="main-body">
   <div class="container-fluid my-2">
     <section>
-      <!-- <div class="row mb-2 justify-content-between">
-          <div class="col-auto">
-            <button class="btn btn-primary px-5" routerLink="../">Back</button>
-          </div>
-      </div> -->
-        <app-load-details></app-load-details>
+      <app-load-details [(loadForm)]="loadForm"></app-load-details>
     </section>
   </div>
 </main>
