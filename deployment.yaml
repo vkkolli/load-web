@@ -43,7 +43,7 @@ kind: Ingress
 metadata:
   name: loadboard-poc-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
     - host: loadboardpoc.ceiindia.com
