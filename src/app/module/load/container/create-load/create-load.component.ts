@@ -1,15 +1,15 @@
-import { Component, OnInit, Injector } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
-import { LoadService } from '../../component/load-details/shared/service/load.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, Injector, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Trip } from '@app/shared/enum/trip.enum';
 import { Load } from '@app/shared/model/load';
 import { PricingConstants } from '@app/shared/types/constants';
-import { Trip } from '@app/shared/enum/trip.enum';
+import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, Subscription } from 'rxjs';
+import { LoadService } from '../../component/load-details/shared/service/load.service';
 
 @Component({
   templateUrl: './create-load.component.html',
@@ -185,12 +185,12 @@ export class CreateLoadComponent implements OnInit {
   modifyFormObjects() {
     this.loadForm.get('customer.customerObj').setValue(this.loadForm.get('customer').value);
     this.loadTrips.controls.forEach(trip => {
-      if (trip.get('expectedTripDate') && trip.get('expectedTripDate').value != '') {
+      if (trip.get('expectedTripDate').value != null && trip.get('expectedTripDate').value != '') {
         let date = trip.get('expectedTripDate').value.split('/');
         let dateObj = {day: parseInt(date[1]), month: parseInt(date[0]), year: parseInt(date[2])};
         trip.get('expectedTripDateObj').setValue(dateObj);
       }
-      if (trip.get('expectedTripTime') && trip.get('expectedTripTime').value != '') {
+      if (trip.get('expectedTripTime').value != null && trip.get('expectedTripTime').value != '') {
         let timer = trip.get('expectedTripTime').value.split(':');
         let timerObj = {hour: parseInt(timer[0]), minute: parseInt(timer[1]), second: parseInt(timer[2])};
         trip.get('expectedTripTimeObj').setValue(timerObj);
