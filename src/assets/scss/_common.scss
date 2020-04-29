@@ -30,3 +30,8 @@
   position: relative;
   bottom: 1px;
 }
+
+// Datatable Checkbox Visibility Overides
+.datatable-checkbox input[type=checkbox]:before {
+  border-color: darken($white, $amount: 40%);
+}
