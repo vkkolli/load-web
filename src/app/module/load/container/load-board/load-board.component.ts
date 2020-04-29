@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { LoadBoardService } from '@app/shared/service/load-board.service';
 import { LoadBoard } from '@app/shared/model/load.model';
+import { PickupDeliveryDates } from '@app/shared/model/pickup-delivery-dates';
+import { Load } from '@app/shared/model/load';
 
 
 @Component({
@@ -9,8 +11,19 @@ import { LoadBoard } from '@app/shared/model/load.model';
 })
 export class LoadBoardComponent implements OnInit {
   loads: LoadBoard[];
-  columns = [];
   editing = {};
+
+  columns = [
+    { name: "Age", prop: "age", width:'80'},
+    { name: "Truck", prop: "equipmentName", width:'70'},
+    { name: "F/P", prop: "loadType",width:'50' },
+    { name: "Status", prop: "loadStatus",width:'80' },
+    { name: "Origin", prop: "originCsz",width:'185' },
+    { name: "Trip", prop: "mileage",width:'60' },
+    { name: "Destination", prop: "destinationCsz",width:'185' },
+    { name: "Company", prop: "customerName" ,width:'135'},
+    { name: "Cost", prop: "revenueCost" ,width:'70'},
+  ];
 
   errorMessage: string;
   public quickSearchState: boolean = false;
@@ -18,16 +31,13 @@ export class LoadBoardComponent implements OnInit {
   constructor(private loadBoardService: LoadBoardService) {}
 
   ngOnInit(): void {
-
     this.loadBoardService.getLoads().subscribe(
       (loads: LoadBoard[]) => {
           this.loads = loads;
       },
       (error: any) => this.errorMessage = <any>error
     );
-
   }
-
   quickSearch() {
     this.quickSearchState =  !this.quickSearchState;
   }

@@ -5,6 +5,8 @@ export class LoadBoard extends Base {
     age: string;
     equipmentName: string;
     equipmentDesc: string;
+    equipmentLength: string;
+    equipmentWeight: string;
     loadType: string;
     loadStatus: string;
     customerName: string;

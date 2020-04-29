@@ -1,4 +1,4 @@
-@import '../../../../../assets/scss/skin';
+@import "../../../../../assets/scss/skin";
 
 .datatable-body-row {
     .datatable-body-cell {
@@ -19,28 +19,28 @@
 .md-datepicker-input-container {
     width: 50%;
     margin-left: 0px;
-  }
+}
 
-  .mat-form-field-infix{
-    width: 100px!important;
-  }
+.mat-form-field-infix {
+    width: 100px !important;
+}
 
-  .mat-datepicker-content .time-container {
-      padding-top: 0px!important;
-  }
+.mat-datepicker-content .time-container {
+    padding-top: 0px !important;
+}
 
-  .table th, .table td {
+.table th,
+.table td {
     vertical-align: middle;
-  }
+}
 
-  .table {
-    
-    margin-bottom: 0rem!important;
-    
+
+.table {
+    margin-bottom: 0rem !important;
 }
 ::ng-deep .mat-datepicker-content .ngx-mat-datetime-picker {
-    width: 200px!important;
-    height: 200px!important;
+    width: 200px !important;
+    height: 200px !important;
 }
 
 .ngx-datatable.material {
@@ -51,7 +51,7 @@
         }
     }
     .datatable-body {
-        .datatable-row-detail{
+        .datatable-row-detail {
             background-color: lighten($tm-vt, 60%);
             color: $white;
         }
@@ -87,5 +87,3 @@
         }
     }
 }
-
-
