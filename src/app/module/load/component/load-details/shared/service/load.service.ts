@@ -44,12 +44,18 @@ export class LoadService extends BaseService<Load>{
     }
 
     calculateMileage(origin: number, dest: number): Observable<MapResponse> {
-      return this.repo.get<MapResponse>('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + origin + '&destinations=' + dest + '&key=' + this.API_KEY + '&units=imperial');
+      return this.repo.getMap<MapResponse>('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + origin + '&destinations=' + dest + '&key=' + this.API_KEY + '&units=imperial');
     }
 
     onSaveComplete(response: Load) {
       this.spinner.hide();
-      this.toastr.success('Load created successfully!');
+      this.toastr.success('Load Created Successfully!');
+      this.router.navigate(['/load']);
+    }
+
+    onEditComplete(response: Load) {
+      this.spinner.hide();
+      this.toastr.success('Load Updated Successfully!');
       this.router.navigate(['/load']);
     }
 

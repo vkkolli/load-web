@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LookupService } from '@app/module/load/service/lookup.service';
+import { Trip } from '@app/shared/enum/trip.enum';
+import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { LookupService } from '@app/module/load/service/lookup.service';
 import { LoadService } from '../shared/service/load.service';
-import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { Trip } from '@app/shared/enum/trip.enum';
 // import { google } from '@agm/core/services/google-maps-types';
 
 @Component({
@@ -89,7 +89,7 @@ export class TripComponent implements OnInit {
     if (this.loadTrips.controls[0].get('zipCode').value != '' && this.loadTrips.controls[1].get('zipCode').value != '') {
       this.loadService.calculateMileage((this.loadTrips.controls[0].get('zipCode').value).trim(),
       (this.loadTrips.controls[1].get('zipCode').value).trim()).subscribe(response => {
-        this.loadForm.get('tripMileage').setValue(response.rows[0].elements[0].distance.text);
+        this.loadForm.get('tripMileage').setValue(parseInt(response.rows[0].elements[0].distance.text.split(' ')[0].replace (/,/g, "")));
       },
       error => {
         this.loadForm.get('tripMileage').setValue(1330.50);
