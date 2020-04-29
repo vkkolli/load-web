@@ -11,10 +11,12 @@
       </div>
       <div class="col-sm-6 col-lg-3 form-group">
           <label for="txtOrigCity">City / State / Zip</label>
-          <input type="text" id="txtOrigCity" class="form-control" formControlName="cityStateZip" placeholder="Type to Search"
-          [ngbTypeahead]="searchCityStateZip" container="body" (selectItem)="selectedTripItem(tripObj, $event, i)">
-          <div *ngIf="tripObj.get('cityStateZip').touched && tripObj.get('cityStateZip').invalid" class="invalid-element">
-            City / State / Zip is required.
+          <div class="position-relative">
+            <input type="text" id="txtOrigCity" class="form-control" formControlName="cityStateZip" placeholder="Type to Search"
+            [ngbTypeahead]="searchCityStateZip" (selectItem)="selectedTripItem(tripObj, $event, i)">
+            <div *ngIf="tripObj.get('cityStateZip').touched && tripObj.get('cityStateZip').invalid" class="invalid-element">
+              City / State / Zip is required.
+            </div>
           </div>
       </div>
       <div class="col-sm-12 col-md-6 col-lg-4 form-group">

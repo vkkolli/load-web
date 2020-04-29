@@ -1,12 +1,21 @@
-.ng-invalid:not(form)  {
-    //border-color: #dc3545;
+.ng-invalid:not(form) {
+  //border-color: #dc3545;
 }
 
 .is-invalid {
   border-color: #dc3545;
 }
+
 .cur-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 
+// Typeahead to match its parent width
+.accordion {
+  .card {
+    ngb-typeahead-window.dropdown-menu {
+      width: 100% !important;
+    }
+  }
+}
