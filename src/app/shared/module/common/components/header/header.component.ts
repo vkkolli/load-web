@@ -1,11 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild, Injector, Output, EventEmitter } from '@angular/core';
-import { SideMenuComponent } from '../side-menu/side-menu.component';
-import { SideNavService } from '../../side-nav.service';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
-import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectionStrategy, Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadService } from '@app/module/load/component/load-details/shared/service/load.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -20,6 +18,7 @@ export class HeaderComponent implements OnInit {
   // @ViewChild(SideMenuComponent) sideMenu: SideMenuComponent;
 
   @Input() headerText: string;
+  @Input() isEdit: boolean;
   public isCollapsed = true;
   protected spinner: NgxSpinnerService;
   protected toastr: ToastrService;
