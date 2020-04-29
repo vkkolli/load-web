@@ -3,7 +3,7 @@
         <legend  class="w-auto small font-weight-bold">Equipment</legend>
         <div class="form-row pb-sm-3">
             <div class="col-sm-6 col-lg-3 form-group" formGroupName="equipment">
-                <label for="drpType">Type</label>
+                <label for="drpType">Type<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
                 <select id="drpType" class="form-control" formControlName="id">
                     <option value="">Select Equipment Type</option>
                     <option value="1">Van</option>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3 form-group">
-                <label for="txtConName">Load Size</label>
+                <label for="txtConName">Load Size<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
                 <div class="row px-3">
                     <div class="col custom-control custom-radio custom-control-inline">
                         <input type="radio" id="rdoSizeFull" formControlName="loadSize" name="loadSize" class="custom-control-input" value="F">
