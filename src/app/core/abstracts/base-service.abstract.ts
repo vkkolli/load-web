@@ -1,17 +1,15 @@
-import { NgxSpinnerService } from "ngx-spinner";
-import { ToastrService } from "ngx-toastr";
-import { Injector, EventEmitter, OnDestroy, OnInit } from "@angular/core";
-import { BaseCRUD } from "./BaseCRUD.abstract";
-import { Subscription, BehaviorSubject, Observable } from "rxjs";
-import { Base } from "@shared/model/base";
-import { Router } from "@angular/router";
-import { tap, takeWhile } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
+import { EventEmitter, Injector, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { SERVER_ERROR_MSG } from "@app/shared/types/constants";
 import { PageParam } from "@app/shared/types/page-param.type";
 import { Paginated } from "@app/shared/types/paginated.type";
-import {
-  SERVER_ERROR_MSG
-} from "@app/shared/types/constants";
+import { Base } from "@shared/model/base";
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { takeWhile, tap } from "rxjs/operators";
+import { BaseCRUD } from "./BaseCRUD.abstract";
 
 export abstract class BaseService<T extends Base> implements OnInit, OnDestroy {
   protected isAlive = true;
@@ -45,6 +43,7 @@ export abstract class BaseService<T extends Base> implements OnInit, OnDestroy {
 
   abstract copyData(newData: T, isUpdate: boolean): T;
   abstract onSaveComplete(response: T);
+  abstract onEditComplete(response: T);
   abstract onSaveFailed(response: HttpErrorResponse);
   abstract onDestroy();
 
@@ -88,7 +87,7 @@ export abstract class BaseService<T extends Base> implements OnInit, OnDestroy {
   saveOrUpdate(newData: T): void {
     this.spinner.show();
     const sub = this.api.save(newData).subscribe({
-      next: response => this.onSaveComplete(response),
+      next: response => !newData.id ? this.onSaveComplete(response): this.onEditComplete(response),
       error: error => this.onSaveFailed(error)
     });
     this.subscriptions.add(sub);

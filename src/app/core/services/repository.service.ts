@@ -22,6 +22,26 @@ export class RepositoryService {
     );
   }
 
+  public getMap<T>(url: string, params?: any): Observable<T> {
+    let reqParams: HttpParams = null;
+    if (params) {
+      reqParams = new HttpParams();
+      Object.keys(params).forEach(key => {
+        reqParams = reqParams.append(key, params[key]);
+      });
+    }
+
+    const reqHeaders = new HttpHeaders();
+    reqHeaders.set('Content-Type', 'application/json');
+    reqHeaders.set('Accept', 'application/json');
+    reqHeaders.set('Access-Control-Allow-Origin', 'http://localhost:4200');
+    reqHeaders.set('Access-Control-Allow-Credentials', 'true');
+    reqHeaders.set('GET', 'POST');
+    return this.handleRequest<T>('Get', url, null, reqParams, reqHeaders).pipe(
+      map((request: any) => ('body' in request ? request.body : request))
+    );
+  }
+
   public post<T>(url: string, body: any): Observable<T> {
     return this.handleRequest<T>('Post', url, body).pipe(
       map((request: any) => ('body' in request ? request.body : request))

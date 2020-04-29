@@ -1,4 +1,5 @@
 import { AgmCoreModule } from '@agm/core';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PortalModule } from '@angular/cdk/portal';
@@ -46,7 +47,6 @@ import { MatTreeModule } from '@angular/material/tree';
 import { AppCommonModule } from '@app/shared/module/common/app-common.module';
 import { LoadBoardService } from '@app/shared/service/load-board.service';
 import { NgbAccordionModule, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule} from '@angular-material-components/datetime-picker';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { NgxMaskModule } from 'ngx-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
