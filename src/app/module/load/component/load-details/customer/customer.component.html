@@ -1,7 +1,7 @@
 <form [formGroup]="loadForm">
   <div class="form-row pb-sm-3">
       <div class="col-sm-6 col-lg-3 form-group" formGroupName="customer">
-          <label for="txtName">Customer</label>
+          <label for="txtName">Customer<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <div class="position-relative">
             <input type="text" id="txtName" class="form-control" formControlName="customerObj"
             [ngbTypeahead]="searchCustomer" [inputFormatter]="formatter"
@@ -12,7 +12,7 @@
           </div>
       </div>
       <div class="col-sm-6 col-lg-3 form-group" formGroupName="customerAddress" >
-          <label for="drpAddress">Address</label>
+          <label for="drpAddress">Address<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <select id="drpAddress" class="form-control" formControlName="id" (change)="populateContact($event.target.selectedIndex)" >
             <option value="">Select Customer Address</option>
             <option *ngFor="let address of customerAddressList; let i = index" [value]="address.id">

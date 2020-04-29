@@ -3,7 +3,7 @@
   <div formGroupName="commodity" >
     <div class="form-row pb-sm-3" *ngFor="let commodityObj of loadCommodity.controls; let i = index" [formGroupName]="i">
       <div class="col-sm-6 col-lg-3 form-group">
-          <label for="txtCommName">Name</label>
+          <label for="txtCommName">Name<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <input type="text" id="txtCommName" class="form-control" formControlName="commodityName" placeholder="Commodity Name">
           <div *ngIf="commodityObj.get('commodityName').touched && commodityObj.get('commodityName').invalid" class="invalid-element">
             Commodity Name is required.

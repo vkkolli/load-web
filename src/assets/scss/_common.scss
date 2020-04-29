@@ -1,3 +1,5 @@
+@import '../scss/skin';
+
 .ng-invalid:not(form) {
   //border-color: #dc3545;
 }
@@ -18,4 +20,13 @@
       width: 100% !important;
     }
   }
+}
+
+// Mandatory Form-fields
+.mandatory {
+  color: $tm-rd;
+  font-size: 0.5rem;
+  margin-left: 0.5rem;
+  position: relative;
+  bottom: 1px;
 }
