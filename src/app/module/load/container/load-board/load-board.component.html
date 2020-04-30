@@ -5,30 +5,84 @@
   <div class="container-fluid my-2">
     <section>
       <div class="row">
-        <div class="mt-5" [ngClass]="quickSearchState ?'col-10':'col-12'">
+        <div class="mt-1" [ngClass]="quickSearchState ?'col-3 col-sm-8 col-md-9 col-lg-10':'col-12 col-sm-12 col-md-12 col-lg-12'">
           <app-load-table [rows]="loads" [columns]="columns"></app-load-table>                 
           <button type="button" class="btn-quicksearch" (click)="quickSearch()">
             <i class="fa" [ngClass]="quickSearchState ?'fa-chevron-right':'fa-chevron-left'"></i>
           </button>
         </div>
-        <div class="mt-1 quick-search" [ngClass]="quickSearchState ?'col-2':'d-none'">
-          <h3>Refine your Search</h3>
+        <div class="mt-1 quick-search" [ngClass]="quickSearchState ?'col-9 col-sm-4 col-md-3 col-lg-2':'d-none'">
+          <h4 class="my-2">Filter Results</h4>
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Age</h4>
-              <mat-slider></mat-slider>
+              <h4 class="card-title">Load Id</h4>
+              <div class="form-group">
+                <label for="loadId">Enter Load Id</label>
+                <input type="text" id="loadId" class="form-control form-control-sm wr-3">
+              </div>
+              <div class="text-right">
+                <button type="button" class="btn btn-sm btn-info">Search</button>
+              </div>              
             </div>
           </div>
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Age</h4>
-              <label for="age">Age</label>
+              <h4 class="card-title">Equipment</h4>
+              <label for="overLength">Length:</label>
+              <div class="form-group">
+                <label for="overLength" class="d-block mb-0">Over</label>
+                <input type="text" id="overLength" class="form-control form-control-sm d-inline-block wr-8">
+                <span class="ml-1">ft</span>
+              </div>
+              <label for="overWeight">Weight:</label>
+              <div class="form-group">
+                <label for="overWeight" class="d-block mb-0">Over</label>
+                <input type="text" id="overWeight" class="form-control form-control-sm d-inline-block wr-8">
+                <span class="ml-1">lb</span>
+              </div>
+              <label for="fullPartial" class="mb-0">Full/Partial:</label>
+              <div class="form-group">
+                <select class="form-control form-control-sm" id="fullPartial">
+                  <option>100</option>
+                  <option>150</option>
+                  <option>200</option>
+                </select>
+              </div>
+              <div class="text-right">
+                <button type="button" class="btn btn-sm btn-info">Search</button>
+              </div> 
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body p-2">
+              <h4 class="card-title">Trip</h4>
+              <label for="originDst">Origin:</label>
+              <div class="form-group">
+                <input type="text" id="originDst" class="form-control form-control-sm d-inline-block wr-8">
+                <span class="ml-1">mi</span>
+                <mat-slider></mat-slider>
+              </div>
+              <label for="destinationDst">Destination:</label>
+              <div class="form-group">
+                <input type="text" id="destinationDst" class="form-control form-control-sm d-inline-block wr-8">
+                <span class="ml-1">mi</span>
+                <mat-slider></mat-slider>
+              </div>
+              <div class="text-right">
+                <button type="button" class="btn btn-sm btn-info">Search</button>
+              </div> 
             </div>
           </div>
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Age</h4>
-              <label for="age">Age</label>
+              <h4 class="card-title">Customer</h4>
+              <div class="form-group">
+                <label for="custDetails">Enter Customer Details</label>
+                <input type="text" id="custDetails" class="form-control form-control-sm wr-3">
+              </div>
+              <div class="text-right">
+                <button type="button" class="btn btn-sm btn-info">Search</button>
+              </div> 
             </div>
           </div>
         </div>

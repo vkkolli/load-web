@@ -1,17 +1,24 @@
 @import '../scss/skin';
 
-.ng-invalid:not(form) {
-  //border-color: #dc3545;
-}
+// .ng-invalid:not(form) {
+//   border-color: #dc3545;
+// }
 
 .is-invalid {
-  border-color: #dc3545;
+  border-color: $tm-rd;
 }
 
 .cur-pointer {
   cursor: pointer;
 }
 
+// Width Varients
+.wr-5 {
+  width: 50%;
+}
+.wr-8 {
+  width: 80%;
+}
 
 // Typeahead to match its parent width
 .accordion {
@@ -22,7 +29,7 @@
   }
 }
 
-// Mandatory Form-fields
+// Mandatory Asteriks - Form-fields
 .mandatory {
   color: $tm-rd;
   font-size: 0.5rem;
@@ -31,7 +38,39 @@
   bottom: 1px;
 }
 
-// Datatable Checkbox Visibility Overides
+// Ngx Datatable - Checkbox Visibility Overides
 .datatable-checkbox input[type=checkbox]:before {
   border-color: darken($white, $amount: 40%);
+}
+
+// Ngx Datatable - Placing Totals, Pagination at Top
+.ngx-datatable {
+  .datatable-header {
+    position: absolute;
+    top: 50px;
+  }
+  .datatable-body {
+    margin-top: 100px;
+  }
+  .datatable-footer {
+    position: absolute;
+    top: -1px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);  
+    .datatable-footer-inner {
+      background-color: lighten($tm-vt, $amount: 60%);
+    }
+  }
+  // material theme overides
+  &.material {
+    .datatable-header {
+      .datatable-header-cell {
+        padding: 0.3125rem 1.2rem;
+      }
+    }
+  }
+}
+
+// Mateials - Slider
+.mat-slider-horizontal {
+  width: 100%;
 }
