@@ -18,6 +18,7 @@ export class CreateLoadComponent implements OnInit {
   protected spinner: NgxSpinnerService;
   protected toastr: ToastrService;
   private routeSub: Subscription;
+  isEdit: boolean;
 
   constructor(injector: Injector, private fb: FormBuilder,
     config: NgbAccordionConfig, private loadService: LoadService, private router: Router, private route: ActivatedRoute) {
@@ -41,6 +42,7 @@ export class CreateLoadComponent implements OnInit {
     if (this.router.url.includes('/load/edit/')) {
       this.routeSub = this.route.params.subscribe(params => {
         this.getLoadById(params['id']);
+        this.isEdit = true;
       });
     }
 
