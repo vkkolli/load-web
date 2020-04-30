@@ -13,11 +13,13 @@
 }
 
 // Width Varients
-.wr-5 {
-  width: 50%;
-}
-.wr-8 {
+.w-80 {
   width: 80%;
+}
+
+// Line-Height
+.ln-h-05 {
+  line-height: 0.5 !important;
 }
 
 // Typeahead to match its parent width
@@ -49,22 +51,51 @@
     position: absolute;
     top: 50px;
   }
+
   .datatable-body {
-    margin-top: 100px;
+    margin-top: 80px;
+    .datatable-body-row {
+      .datatable-body-cell {
+        padding: 0.3rem 1.2rem !important;
+        .datatable-body-cell-label {
+          font-size: 0.67rem;
+
+          a {
+            color: $tm-vt !important;
+            text-decoration: none;
+
+            &::before {
+              font-size: 1.2rem !important;
+            }
+          }
+        }
+      }
+    }
   }
+
   .datatable-footer {
     position: absolute;
     top: -1px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);  
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     .datatable-footer-inner {
       background-color: lighten($tm-vt, $amount: 60%);
     }
   }
-  // material theme overides
+
+  // Angulr-Material theme overides
   &.material {
     .datatable-header {
       .datatable-header-cell {
         padding: 0.3125rem 1.2rem;
+        background-color: lighten($tm-vt, 10%);
+        color: $white;
+      }
+    }
+
+    .datatable-body {
+      .datatable-row-detail {
+        background-color: lighten($tm-vt, 60%);
+        color: $white;
       }
     }
   }
