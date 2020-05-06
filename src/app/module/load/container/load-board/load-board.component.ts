@@ -44,11 +44,16 @@ export class LoadBoardComponent implements OnInit {
       (error: any) => this.errorMessage = <any>error
     );
   }
+
   quickSearch() {
     this.quickSearchState =  !this.quickSearchState;
   }
 
   searchLoads(){
+    if (this.searchForm.get('customerObj').value == '') {
+      this.searchForm.get('customerId').setValue(null);
+    }
+
     this.loadBoardService.getLoadSearch(this.searchForm.value).subscribe(
       data => {
           this.loads = data;
