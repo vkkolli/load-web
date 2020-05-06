@@ -86,6 +86,13 @@ export class LoadCarrierComponent implements OnInit {
         carrier: data.carrier
       })
     }
+    else {
+      let carrier = new Carrier();
+      carrier.id = null;
+      this.loadForm.patchValue({
+        carrier: carrier
+      })
+    }
   }
 
   modifyFormObjects() {
