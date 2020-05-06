@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { LoadBoardService } from '@app/shared/service/load-board.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadBoard } from '@app/shared/model/load.model';
-import { PickupDeliveryDates } from '@app/shared/model/pickup-delivery-dates';
-import { Load } from '@app/shared/model/load';
+import { LoadBoardParameters } from '@app/shared/model/params/load-board-parameters';
+import { LoadBoardService } from '@app/shared/service/load-board.service';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { LookupService } from '../../service/lookup.service';
 
 
 @Component({
@@ -11,6 +14,7 @@ import { Load } from '@app/shared/model/load';
 })
 export class LoadBoardComponent implements OnInit {
   loads: LoadBoard[];
+  loadSearch: LoadBoardParameters;
   editing = {};
 
   columns = [
@@ -27,10 +31,12 @@ export class LoadBoardComponent implements OnInit {
 
   errorMessage: string;
   public quickSearchState: boolean = false;
+  searchForm: FormGroup;
 
-  constructor(private loadBoardService: LoadBoardService) {}
+  constructor(private loadBoardService: LoadBoardService, private fb: FormBuilder, private lookupService: LookupService) {}
 
   ngOnInit(): void {
+    this.createSerchForm();
     this.loadBoardService.getLoads().subscribe(
       (loads: LoadBoard[]) => {
           this.loads = loads;
@@ -40,5 +46,60 @@ export class LoadBoardComponent implements OnInit {
   }
   quickSearch() {
     this.quickSearchState =  !this.quickSearchState;
+  }
+
+  searchLoads(){
+    this.loadBoardService.getLoadSearch(this.searchForm.value).subscribe(
+      data => {
+          this.loads = data;
+      },
+      (error: any) => this.errorMessage = <any>error
+    );
+  }
+
+  createSerchForm () {
+    this.searchForm = this.fb.group({
+      loadId: [''],
+      customerId: [''],
+      customerObj: [''],
+      equipmentId: [''],
+      originCsz: ['',[Validators.required, Validators.pattern('^(.+)[,\\s]+(.+?)\s*(\d{5})?$')]],
+      destinationCsz:['',[Validators.required, Validators.pattern('^(.+)[,\\s]+(.+?)\s*(\d{5})?$')]]
+    });
+  }
+
+  searchCityStateZip = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(500),
+    distinctUntilChanged(),
+    switchMap(searchText => {
+      if (searchText.length < 3 ) {
+        return of([]);
+      }
+      return this.lookupService.fetchCityStateZip(searchText)
+      .pipe(map(list => list.length < 2 ? [] : (list.length > 10 ? list.splice(0, 10) : list)));
+    })
+  );
+
+
+  searchCustomer = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(500),
+    distinctUntilChanged(),
+    switchMap(term => {
+      if (!term) {
+        return of([]);
+      }
+
+      return this.lookupService
+        .fetchCustDetails(term)
+        .pipe(map(list => (list.length > 10 ? list.splice(0, 10) : list)))
+    })
+  );
+
+  formatter = (x: {company: string}) => x.company;
+
+  selectedCustomer (customer) {
+    this.searchForm.get('customerId').setValue(customer.item.id);
   }
 }

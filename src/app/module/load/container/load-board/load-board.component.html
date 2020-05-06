@@ -6,20 +6,21 @@
     <section>
       <div class="row">
         <div class="mt-1" [ngClass]="quickSearchState ?'col-3 col-sm-8 col-md-9 col-lg-10':'col-12 col-sm-12 col-md-12 col-lg-12'">
-          <app-load-table [rows]="loads" [columns]="columns"></app-load-table>                 
+          <app-load-table [rows]="loads" [columns]="columns"></app-load-table>
           <button type="button" class="btn-quicksearch" (click)="quickSearch()">
             <i class="fa" [ngClass]="quickSearchState ?'fa-chevron-right':'fa-chevron-left'"></i>
           </button>
         </div>
-        <div class="mt-1 quick-search" [ngClass]="quickSearchState ?'col-9 col-sm-4 col-md-3 col-lg-2':'d-none'">
+        <div class="mt-1 quick-search" [formGroup]="searchForm"
+        [ngClass]="quickSearchState ?'col-9 col-sm-4 col-md-3 col-lg-2':'d-none'">
           <h4 class="my-2">Filter Results</h4>
           <div class="card mb-1">
             <div class="card-body p-1">
               <h4 class="card-title mb-1">Load</h4>
               <div class="form-group mb-0">
                 <label for="loadId" class="mb-0">Enter Load Id</label>
-                <input type="text" id="loadId" class="form-control form-control-sm w-50">
-              </div>             
+                <input type="text" id="loadId" class="form-control form-control-sm w-50" formControlName="loadId">
+              </div>
             </div>
           </div>
           <div class="card mb-1">
@@ -43,14 +44,17 @@
               </div>
               <div class="d-flex justify-content-between align-items-center">
                 <label for="fullPartial" class="mb-0">Full/Partial:</label>
-                <div class="d-flex justify-content-end align-items-center">                  
-                  <select class="form-control form-control-sm w-75" id="fullPartial">
-                    <option>100</option>
-                    <option>150</option>
-                    <option>200</option>
-                  </select>
+
+                <div class="d-flex justify-content-end align-items-center">
+                  <select id="drpType" class="form-control form-control-sm w-75" formControlName="equipmentId">
+                    <option value="">Select Equipment Type</option>
+                    <option value="1">Van</option>
+                    <option value="2">Reefer</option>
+                    <option value="3">Flat Bed</option>
+                </select>
                 </div>
-              </div>              
+
+              </div>
             </div>
           </div>
           <div class="card mb-1">
@@ -58,13 +62,17 @@
               <h4 class="card-title mb-1">Trip</h4>
               <label for="originDst" class="mb-0">Origin:  <span>City/State/Zip</span></label>
               <div class="form-group mb-2">
-                <input type="text" id="originDst" class="form-control form-control-sm d-inline-block w-50">
+                <input type="text" id="originDst" class="form-control form-control-sm d-inline-block w-50"
+                formControlName="originCsz" placeholder="Type to Search" [ngbTypeahead]="searchCityStateZip">
+
                 <span class="ml-1 d-none">mi</span>
                 <mat-slider class="d-none"></mat-slider>
               </div>
               <label for="destinationDst" class="mb-0">Destination:  <span>City/State/Zip</span></label>
               <div class="form-group mb-0">
-                <input type="text" id="destinationDst" class="form-control form-control-sm d-inline-block w-50">
+                <input type="text" id="destinationDst" class="form-control form-control-sm d-inline-block w-50"
+                formControlName="destinationCsz" placeholder="Type to Search" [ngbTypeahead]="searchCityStateZip">
+
                 <span class="ml-1 d-none">mi</span>
                 <mat-slider class="d-none"></mat-slider>
               </div>
@@ -75,13 +83,16 @@
               <h4 class="card-title mb-1">Customer</h4>
               <div class="form-group mb-0">
                 <label for="custDetails" class="mb-0">Enter Customer Details</label>
-                <input type="text" id="custDetails" class="form-control form-control-sm w-50">
+                <input type="text" id="custDetails" class="form-control form-control-sm w-50" formControlName="customerObj"
+                  [ngbTypeahead]="searchCustomer" [inputFormatter]="formatter"
+                  [resultFormatter]="formatter" (selectItem)="selectedCustomer($event)" placeholder="Customer Name">
+
               </div>
             </div>
-          </div>          
+          </div>
           <div class="text-right mb-2">
-            <button type="button" class="btn btn-sm btn-info">Search</button>
-          </div> 
+            <button type="button" class="btn btn-sm btn-info" [disabled]="searchForm.invalid" (click)="searchLoads()">Search</button>
+          </div>
         </div>
       </div>
     </section>
