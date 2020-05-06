@@ -7,7 +7,7 @@
                   <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                       <span *ngIf="value != 'remove'">{{value}}</span>
                       <span *ngIf="value == 'remove'" title="Remove">
-                        <button class="btn btn-sm btn-warning text-white p-1 ln-h-05" (click)="unAssignCarrier()"><i class="fa fa-remove"></i>
+                        <button class="btn btn-sm btn-warning text-white" [disabled]="loadForm.get('loadStatus.id').value == 40" (click)="unAssignCarrier()"><i class="fa fa-remove"></i>
                         </button>
                       </span>
                   </ng-template>
