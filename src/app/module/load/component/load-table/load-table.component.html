@@ -96,7 +96,7 @@
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.actualDeliveryDate">
       <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true"
         *ngIf="row.actualDeliveryDate==='' && !deliveryDateEditing[rowIndex]">
-        <button class="btn btn-xs btn-primary" style="font-size: 0.57rem; background-color: #2e2e62;" [disabled]="row.loadStatus!=='In Transit'">Confirm Delivery</button>
+        <button class="btn btn-xs btn-primary btn-blue" [disabled]="row.loadStatus!=='In Transit'">Confirm Delivery</button>
       </span>
       <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true" *ngIf="row.actualDeliveryDate!==''">
         {{row.actualDeliveryDate}}
