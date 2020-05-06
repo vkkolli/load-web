@@ -79,7 +79,7 @@
         *ngIf="!row.actualPickupDate && !pickupDateEditing[rowIndex]">
         <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmPickupEnable">Confirm Pickup</button>
       </span>
-      <span title="Click to edit" (click)="pickupDateEditing[rowIndex] = true" *ngIf="row.actualPickupDate!==''">
+      <span *ngIf="row.actualPickupDate">
         {{row.actualPickupDate}}
       </span>
       <mat-form-field *ngIf="pickupDateEditing[rowIndex]">
@@ -98,7 +98,7 @@
         *ngIf="!row.actualDeliveryDate && !deliveryDateEditing[rowIndex]">
         <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmDeliveryEnable">Confirm Delivery</button>
       </span>
-      <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true" *ngIf="row.actualDeliveryDate!==''">
+      <span *ngIf="row.actualDeliveryDate">
         {{row.actualDeliveryDate}}
       </span>
       <mat-form-field *ngIf="deliveryDateEditing[rowIndex]">
