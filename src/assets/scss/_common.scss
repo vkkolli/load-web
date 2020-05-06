@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+}
+
 // Width Varients
 .w-80 {
   width: 80%;
@@ -50,10 +54,16 @@
   .datatable-header {
     position: absolute;
     top: 50px;
+    @include media-breakpoint-up(lg) { 
+      top: 35px !important;
+    }
   }
 
   .datatable-body {
     margin-top: 80px;
+    @include media-breakpoint-up(lg) { 
+      margin-top: 65px !important;
+    }
     .datatable-body-row {
       .datatable-body-cell {
         padding: 0.3rem 1.2rem !important;
@@ -79,6 +89,10 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     .datatable-footer-inner {
       background-color: lighten($tm-vt, $amount: 60%);
+      @include media-breakpoint-up(lg) { 
+        height: 35px !important;        
+        overflow: hidden;
+      }
     }
   }
 

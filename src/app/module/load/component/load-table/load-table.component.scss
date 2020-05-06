@@ -1,3 +1,4 @@
+@import "../../../../../assets/scss/vendor/bootstrap/config";
 @import "../../../../../assets/scss/skin";
 
 .md-datepicker-input-container {
@@ -25,6 +26,17 @@
 ::ng-deep .mat-datepicker-content .ngx-mat-datetime-picker {
     width: 200px !important;
     height: 200px !important;
+}
+
+.btn-blue {
+    font-size: 0.57rem !important; 
+    background-color: $tm-bu !important;
+}
+
+.btn-blue:disabled {
+    background-color: lighten($tm-bu, $amount: 50%) !important;
+    border-color: lighten($tm-bu, $amount: 50%);
+    color: lighten($tm-bu, $amount: 10%);
 }
 
 .is-header-row {

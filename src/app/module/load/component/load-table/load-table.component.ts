@@ -78,6 +78,7 @@ export class LoadTableComponent implements OnInit {
     this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
       data => {
         this.rows[rowIndex].loadStatus = 'In Transit';
+        this.rows[rowIndex].isConfirmDeliveryEnable = true;
         this.toastr.success('Pickup Confirmed');
       },
       error => {
@@ -100,6 +101,7 @@ export class LoadTableComponent implements OnInit {
     pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
     this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
       data => {
+        this.rows[rowIndex].isConfirmDeliveryEnable = false;
         this.rows[rowIndex].loadStatus = 'Delivered';
         this.toastr.success('Delivery Confirmed');
       },
