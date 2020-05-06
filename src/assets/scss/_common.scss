@@ -1,17 +1,26 @@
 @import '../scss/skin';
 
-.ng-invalid:not(form) {
-  //border-color: #dc3545;
-}
+// .ng-invalid:not(form) {
+//   border-color: #dc3545;
+// }
 
 .is-invalid {
-  border-color: #dc3545;
+  border-color: $tm-rd;
 }
 
 .cur-pointer {
   cursor: pointer;
 }
 
+// Width Varients
+.w-80 {
+  width: 80%;
+}
+
+// Line-Height
+.ln-h-05 {
+  line-height: 0.5 !important;
+}
 
 // Typeahead to match its parent width
 .accordion {
@@ -22,7 +31,7 @@
   }
 }
 
-// Mandatory Form-fields
+// Mandatory Asteriks - Form-fields
 .mandatory {
   color: $tm-rd;
   font-size: 0.5rem;
@@ -31,7 +40,68 @@
   bottom: 1px;
 }
 
-// Datatable Checkbox Visibility Overides
+// Ngx Datatable - Checkbox Visibility Overides
 .datatable-checkbox input[type=checkbox]:before {
   border-color: darken($white, $amount: 40%);
+}
+
+// Ngx Datatable - Placing Totals, Pagination at Top
+.ngx-datatable {
+  .datatable-header {
+    position: absolute;
+    top: 50px;
+  }
+
+  .datatable-body {
+    margin-top: 80px;
+    .datatable-body-row {
+      .datatable-body-cell {
+        padding: 0.3rem 1.2rem !important;
+        .datatable-body-cell-label {
+          font-size: 0.67rem;
+
+          a {
+            color: $tm-vt !important;
+            text-decoration: none;
+
+            &::before {
+              font-size: 1.2rem !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .datatable-footer {
+    position: absolute;
+    top: -1px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    .datatable-footer-inner {
+      background-color: lighten($tm-vt, $amount: 60%);
+    }
+  }
+
+  // Angulr-Material theme overides
+  &.material {
+    .datatable-header {
+      .datatable-header-cell {
+        padding: 0.3125rem 1.2rem;
+        background-color: lighten($tm-vt, 10%);
+        color: $white;
+      }
+    }
+
+    .datatable-body {
+      .datatable-row-detail {
+        background-color: lighten($tm-vt, 60%);
+        color: $white;
+      }
+    }
+  }
+}
+
+// Mateials - Slider
+.mat-slider-horizontal {
+  width: 100%;
 }

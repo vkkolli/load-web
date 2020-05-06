@@ -1,8 +1,8 @@
 <div [formGroup]="loadForm">
   <div class="row" formGroupName="carrier">
       <div class="col-12">
-          <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force" [scrollbarV]="false"
-          [scrollbarH]="true" headerHeight="50" footerHeight="50" [limit]="10" [rowHeight]="50" [rows]="carrier">
+          <ngx-datatable class="material striped" [columns]="columns" [columnMode]="ColumnMode.force" [scrollbarV]="false"
+          [scrollbarH]="true" headerHeight="30" footerHeight="50" [limit]="10" [rowHeight]="'auto'" [rows]="carrier">
               <ngx-datatable-column *ngFor="let column of columns" name="{{column.name}}" prop="{{column.prop}}">
                   <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                       <span *ngIf="value != 'remove'">{{value}}</span>

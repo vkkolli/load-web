@@ -1,24 +1,32 @@
 @import '../../../../../assets/scss/skin';
 
 .quick-search {
-    padding: 2rem 1rem;
     background-color: darken($tm-vt, 12%);
-    h3 {
+
+    h4 {
         color: $white;
     }
+
     .card {
         background-color: lighten($tm-vt, 60%);
         margin-bottom: 1rem;
+
+        h4 {
+            color: $tm-vt;
+            border-bottom: 1px solid $tm-vt;
+            font-weight: bold;
+        }
     }
 }
+
 .btn-quicksearch {
     position: absolute;
-    top: -44px;
+    top: 0;
     right: 0;
     background-color: darken($tm-vt, 12%);
     color: $white;
     border: 1px solid darken($tm-vt, 12%);
     padding: 0.5rem;
     border-radius: 4px 0 0 4px;
-    outline: none;    
+    outline: none;
 }

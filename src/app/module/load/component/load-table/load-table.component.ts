@@ -2,6 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, ViewEncapsulation, V
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { ThemePalette } from '@angular/material/core';
 import { formatDate } from '@angular/common';
+import { EventEmitter } from 'protractor';
+import { LoadBoardService } from '@app/shared/service/load-board.service';
+import { PickupDeliveryDates } from '@app/shared/model/pickup-delivery-dates';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-load-table',
@@ -13,9 +17,6 @@ import { formatDate } from '@angular/common';
 export class LoadTableComponent implements OnInit {
 
   @ViewChild('myTable') table: any;
-
-  @Input() rows;
-  @Input() columns;
 
   @ViewChild('picker') picker: any;
 
@@ -30,11 +31,18 @@ export class LoadTableComponent implements OnInit {
   public stepSecond = 1;
   public color: ThemePalette = 'primary';
 
+ 
+
+  @Input() rows;
+  @Input() columns;
+
   pickupDateEditing = {};
   deliveryDateEditing = {};
 
+  public isPickupButtonVisible: boolean = true;
+
   ColumnMode = ColumnMode.standard;
-  constructor() { }
+  constructor(private loadBoardService: LoadBoardService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -57,19 +65,47 @@ export class LoadTableComponent implements OnInit {
 
   updatePickupDate(event, cell, rowIndex) {
     this.pickupDateEditing[rowIndex] = false;
-    var val = event instanceof Date ? event :event.target.value;
+    var val = event instanceof Date ? event : event.target.value;
     const format = 'yyyy-MM-dd, HH:mm:ss';
     const locale = 'en-US';
     const formattedDate = formatDate(val, format, locale);
-    this.rows[rowIndex].pickupDate = formattedDate;
+    this.rows[rowIndex].actualPickupDate = formattedDate;
+    const pickupDeliveryDates = new PickupDeliveryDates();
+    pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+    pickupDeliveryDates.tripType='ORGIN';
+    pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(', ')[0];
+    pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
+    this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
+      data => {
+        this.rows[rowIndex].loadStatus = 'In Transit';
+        this.toastr.success('Pickup Confirmed');
+      },
+      error => {
+        this.toastr.error('Pickup Confirmation Error ...');
+      }
+      );
   }
 
   updateDeliveryDate(event, cell, rowIndex) {
     this.deliveryDateEditing[rowIndex] = false;
-    var val = event instanceof Date ? event :event.target.value;
+    var val = event instanceof Date ? event : event.target.value;
     const format = 'yyyy-MM-dd, HH:mm:ss';
     const locale = 'en-US';
     const formattedDate = formatDate(val, format, locale);
-    this.rows[rowIndex].deliveryDate = formattedDate;
+    this.rows[rowIndex].actualDeliveryDate = formattedDate;
+    const pickupDeliveryDates = new PickupDeliveryDates();
+    pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+    pickupDeliveryDates.tripType='DESTINATION';
+    pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(', ')[0];
+    pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
+    this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
+      data => {
+        this.rows[rowIndex].loadStatus = 'Delivered';
+        this.toastr.success('Delivery Confirmed');
+      },
+      error => {
+        this.toastr.error('Delivery Confirmation Error ...');
+      }
+      );
   }
 }
