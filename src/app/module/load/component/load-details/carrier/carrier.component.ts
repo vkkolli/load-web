@@ -11,7 +11,6 @@ import { Load } from '@app/shared/model/load';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { LoadService } from '../shared/service/load.service';
 
 @Component({
@@ -33,7 +32,7 @@ export class CarrierComponent implements OnInit {
     { name: "Contact Phone", prop: "phone" }
   ];
 
-  carriers$: Observable<Array<Carrier>>;
+  carriers$: Carrier[];
 
   protected spinner: NgxSpinnerService;
   protected toastr: ToastrService;
@@ -54,7 +53,13 @@ export class CarrierComponent implements OnInit {
   }
 
   searchCarriers () {
-    this.carriers$ = this.lookupService.fetchCarrierDetails(this.carrierForm.get('carrier_search').value);
+    this.spinner.show();
+    this.lookupService.fetchCarrierDetails(this.carrierForm.get('carrier_search').value).subscribe(data => {
+      this.carriers$ = data;
+      this.spinner.hide();
+    }, error => {
+      this.spinner.hide();
+    });
   }
 
   get formControls() { return this.loadForm.controls; }

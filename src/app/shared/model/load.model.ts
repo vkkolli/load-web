@@ -30,6 +30,8 @@ export class LoadBoard extends Base {
     carrierAddress: string;
     actualPickupDate: string;
     actualDeliveryDate: string;
+    isConfirmPickupEnable: boolean;
+    isConfirmDeliveryEnable: boolean;
 
     public modelMapper(formData: any) {
         Object.assign(this, {

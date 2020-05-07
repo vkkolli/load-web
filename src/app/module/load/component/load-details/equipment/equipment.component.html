@@ -33,12 +33,12 @@
             <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="equipment">
                 <label for="txtLen">Length (FT)</label>
                 <input type="text" id="txtLen" class="form-control" formControlName="length" placeholder="Trailer Length"
-                pattern="[0-9]+">
+                mask="separator.2" separatorLimit="100" thousandSeparator="">
             </div>
             <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="equipment">
                 <label for="txtWeight">Weight (LBS)</label>
                 <input type="text" id="txtWeight" class="form-control" formControlName="weight" placeholder="Trailer Capacity"
-                pattern="[0-9]+">
+                mask="separator.2" separatorLimit="100000" thousandSeparator="">
             </div>
         </div>
     </fieldset>

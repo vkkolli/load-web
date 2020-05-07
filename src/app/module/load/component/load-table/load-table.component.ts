@@ -78,6 +78,7 @@ export class LoadTableComponent implements OnInit {
     this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
       data => {
         this.rows[rowIndex].loadStatus = 'In Transit';
+        this.rows[rowIndex].isConfirmDeliveryEnable = true;
         this.toastr.success('Pickup Confirmed');
       },
       error => {
@@ -92,20 +93,33 @@ export class LoadTableComponent implements OnInit {
     const format = 'yyyy-MM-dd, HH:mm:ss';
     const locale = 'en-US';
     const formattedDate = formatDate(val, format, locale);
-    this.rows[rowIndex].actualDeliveryDate = formattedDate;
-    const pickupDeliveryDates = new PickupDeliveryDates();
-    pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
-    pickupDeliveryDates.tripType='DESTINATION';
-    pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(', ')[0];
-    pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
-    this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
-      data => {
-        this.rows[rowIndex].loadStatus = 'Delivered';
-        this.toastr.success('Delivery Confirmed');
-      },
-      error => {
-        this.toastr.error('Delivery Confirmation Error ...');
-      }
-      );
+    var result = this.checkforValidation(this.rows[rowIndex].actualPickupDate, formattedDate);
+    if(result) {
+      this.rows[rowIndex].actualDeliveryDate = formattedDate;
+      const pickupDeliveryDates = new PickupDeliveryDates();
+      pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+      pickupDeliveryDates.tripType='DESTINATION';
+      pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(', ')[0];
+      pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
+      this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
+        data => {
+          this.rows[rowIndex].isConfirmDeliveryEnable = false;
+          this.rows[rowIndex].loadStatus = 'Delivered';
+          this.toastr.success('Delivery Confirmed');
+        },
+        error => {
+          this.toastr.error('Delivery Confirmation Error ...');
+        }
+        );
+    } else {
+        this.toastr.error('Delivery date cannot be prior to Pickup date');
+    }
+  }
+
+  checkforValidation(pickup, delivery) : boolean{
+    if(delivery > pickup)
+       return true;
+    else 
+        return false;
   }
 }
