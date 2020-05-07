@@ -45,7 +45,16 @@ export class TripComponent implements OnInit {
 
   get formControls() { return this.loadForm.controls; }
 
-  get loadTrips() { return this.formControls.loadTrips as FormArray; }
+  get loadTrips() {
+    return this.formControls.loadTrips as FormArray;
+  }
+
+  sortForm () {
+    let trips =  this.loadForm.controls.loadTrips.value;
+    console.log(trips)
+    trips.sort((a, b) => a.tripType < b.tripType)
+    this.loadForm.controls.loadTrips.patchValue(trips)
+  }
 
   get tripEnum() { return Trip; }
 
@@ -73,6 +82,13 @@ export class TripComponent implements OnInit {
   }
 
   onValueChanges(): void {
+    // this.loadForm.get('loadTrips.0.city').valueChanges.subscribe(val =>{
+    //   let trips =  this.loadForm.controls.loadTrips.value;
+    //   console.log(trips)
+    //   trips.sort((a, b) => a.tripType < b.tripType)
+    //   console.log(trips)
+    //   // this.loadForm.controls.loadTrips.patchValue(trips)
+    // })
   }
 
   selectedTripItem(tripObj, csz, index) {
