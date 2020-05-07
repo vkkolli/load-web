@@ -1,15 +1,15 @@
 <div [formGroup]="loadForm">
 <div formArrayName="loadTrips">
 <fieldset class="border p-2 mb-2" *ngFor="let tripObj of loadTrips.controls; let i = index"  [formGroupName]="i">
-  <legend  class="w-auto small font-weight-bold">{{tripObj.get('tripType').value == 'ORGIN' || tripObj.get('tripType').value == 0 ? 'Origin' : 'Destination' }}</legend>
-  <div class="form-row pb-sm-3">
-      <div class="col-sm-6 col-lg-3 form-group">
+  <legend  class="w-auto small font-weight-bold m-0">{{tripObj.get('tripType').value == 'ORGIN' || tripObj.get('tripType').value == 0 ? 'Origin' : 'Destination' }}</legend>
+  <div class="form-row">
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
           <label for="txtOrigName">Name</label>
           <input type="text" id="txtOrigName" class="form-control" formControlName="companyName"
           placeholder="{{ tripObj.get('tripType').value == 'ORGIN' || tripObj.get('tripType').value == 0 ? 'Origin' : 'Destination' }} Company Name">
 
       </div>
-      <div class="col-sm-6 col-lg-3 form-group">
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
           <label for="txtOrigCity">City / State / Zip<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <div class="position-relative">
             <input type="text" id="txtOrigCity" class="form-control" formControlName="cityStateZip" placeholder="Type to Search"
@@ -19,7 +19,7 @@
             </div>
           </div>
       </div>
-      <div class="col-sm-12 col-md-6 col-lg-4 form-group">
+      <div class="col-sm-12 col-md-6 col-lg-4 form-group mb-sm-2">
           <label for="txtPickDate">{{ tripObj.get('tripType').value == 'ORGIN' || tripObj.get('tripType').value == 0 ? 'Pickup' : 'Delivery' }} Date<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <div class="form-row">
               <div class="col-6">
@@ -38,13 +38,16 @@
           </div>
       </div>
   </div>
-  <div class="form-row pb-sm-3">
-      <div class="col-md-6 form-group">
+  <div class="form-row">
+      <div class="col-md-6 form-group mb-sm-2">
           <label for="txtOrigNotes">Notes</label>
           <textarea id="txtOrigNotes" class="form-control" formControlName="tripNotes" placeholder="{{ tripObj.get('tripType').value == 'ORGIN' || tripObj.get('tripType').value == 0 ? 'Origin' : 'Destination' }} Notes"></textarea>
       </div>
   </div>
 </fieldset>
+  <div class="row">
+    <div class="col-md-12">Mileage:<span class="ml-2">1500</span></div>
+  </div>
 </div>
 
 <!-- <agm-map

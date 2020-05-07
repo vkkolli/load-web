@@ -1,11 +1,11 @@
 <div [formGroup]="loadForm">
-  <div class="form-row pb-sm-3">
-    <div class="col-sm-6 col-lg-3 form-group">
+  <div class="form-row">
+    <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
       <label for="txtTarget">Target</label>
       <input type="text" id="txtTarget" class="form-control" formControlName="targetRate" placeholder="Type to Search"
       mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000">
     </div>
-    <div class="col-sm-6 col-lg-3 form-group">
+    <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
       <label for="txtPriceMax">Max</label>
       <input type="text" id="txtPriceMax" class="form-control" formControlName="maxRate"
       mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000">
@@ -13,8 +13,8 @@
   </div>
   <div formArrayName="loadPricings">
     <div *ngFor="let pricingObj of loadPricings.controls; let i = index" [formGroupName]="i">
-    <div class="form-row pb-sm-3" >
-      <div class="col-sm-6 col-md-4 col-lg-3 form-group">
+    <div class="form-row" >
+      <div class="col-sm-6 col-md-4 col-lg-3 form-group mb-sm-2">
           <label for="drpRev">{{pricingObj.get('pricingTypeId').value == 1 ? 'Revenue' : 'Cost'}}<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <select id="drpRev" class="form-control" formControlName="pricingLineItem"
           (change)="calculateTotal(pricingObj.get('pricingTypeId'), i)">
@@ -26,13 +26,13 @@
               Required
           </div>
       </div>
-      <div class="col-sm-6 col-md-4 col-lg-3 form-group">
+      <div class="col-sm-6 col-md-4 col-lg-3 form-group mb-sm-2">
           <label for="txtRevVal">Value<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <input type="text" id="txtRevVal" class="form-control" formControlName="pricingLineItemValue"
           mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000"
           (keyup)="calculateTotal(pricingObj.get('pricingTypeId'), i)">
       </div>
-      <div class="col-sm-6 col-md-4 col-lg-3 form-group">
+      <div class="col-sm-6 col-md-4 col-lg-3 form-group mb-sm-2">
           <label for="txtRevTot">Total</label>
           <input type="text" id="txtRevTot" class="form-control" formControlName="pricingLineItemSubtotal"
           mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000" readonly>
