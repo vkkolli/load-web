@@ -21,7 +21,7 @@
           <ngx-datatable class="material" [columns]="columns" [columnMode]="ColumnMode.force"
           [selectionType]="SelectionType.single" (activate)="onActivate($event)"
           [scrollbarV]="false" [scrollbarH]="true" headerHeight="50" footerHeight="50"
-          [limit]="10" [rowHeight]="50" [rows]="carriers$ | async">
+          [limit]="10" [rowHeight]="50" [rows]="carriers$">
 
           </ngx-datatable>
       </div>

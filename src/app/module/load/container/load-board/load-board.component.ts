@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Injector, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadBoard } from '@app/shared/model/load.model';
 import { LoadBoardParameters } from '@app/shared/model/params/load-board-parameters';
 import { LoadBoardService } from '@app/shared/service/load-board.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { LookupService } from '../../service/lookup.service';
@@ -32,8 +34,15 @@ export class LoadBoardComponent implements OnInit {
   errorMessage: string;
   public quickSearchState: boolean = false;
   searchForm: FormGroup;
+  spinner: NgxSpinnerService;
+  toastr: ToastrService;
 
-  constructor(private loadBoardService: LoadBoardService, private fb: FormBuilder, private lookupService: LookupService) {}
+  constructor(injector: Injector,
+    private loadBoardService: LoadBoardService,
+    private fb: FormBuilder, private lookupService: LookupService) {
+    this.spinner = injector.get(NgxSpinnerService);
+
+  }
 
   ngOnInit(): void {
     this.createSerchForm();
@@ -50,6 +59,7 @@ export class LoadBoardComponent implements OnInit {
   }
 
   searchLoads(){
+    this.spinner.show();
     if (this.searchForm.get('customerObj').value == '') {
       this.searchForm.get('customerId').setValue(null);
     }
@@ -57,8 +67,17 @@ export class LoadBoardComponent implements OnInit {
     this.loadBoardService.getLoadSearch(this.searchForm.value).subscribe(
       data => {
           this.loads = data;
+          this.quickSearch();
+          this.spinner.hide();
+          if (data.length == 0) {
+            this.toastr.info("No Loads found in such criteria");
+          }
       },
-      (error: any) => this.errorMessage = <any>error
+      error => {
+        this.spinner.hide();
+        this.toastr.error("Load Search Failed");
+      }
+
     );
   }
 
