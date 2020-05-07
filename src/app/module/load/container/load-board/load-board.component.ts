@@ -49,8 +49,12 @@ export class LoadBoardComponent implements OnInit {
     this.loadBoardService.getLoads().subscribe(
       (loads: LoadBoard[]) => {
           this.loads = loads;
+          this.spinner.hide();
       },
-      (error: any) => this.errorMessage = <any>error
+      (error: any) => {
+        this.errorMessage = <any>error;
+        this.spinner.hide();
+      }
     );
   }
 
