@@ -1,12 +1,12 @@
-import { Base } from './base';
-import { Customer } from './customer';
-import { LoadStatus } from './load-status';
-import { Carrier } from './carrier';
-import { Equipment } from './equipment';
-import { Commodity } from './commodity';
-import { Trip } from './trip';
-import { Pricing } from './pricing';
 import { Address } from './address';
+import { Base } from './base';
+import { Carrier } from './carrier';
+import { Commodity } from './commodity';
+import { Customer } from './customer';
+import { Equipment } from './equipment';
+import { LoadStatus } from './load-status';
+import { Pricing } from './pricing';
+import { Trip } from './trip';
 
 export class Load extends Base{
   loadDescription: string;
@@ -24,4 +24,6 @@ export class Load extends Base{
   loadPricings: Pricing[];
   commodity: Commodity;
   loadTrips: Trip[];
+  length: number;
+  weight: number;
 }

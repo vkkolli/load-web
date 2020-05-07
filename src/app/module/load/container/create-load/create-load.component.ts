@@ -192,6 +192,8 @@ export class CreateLoadComponent implements OnInit {
       maxRate: data.maxRate,
       targetRate: data.targetRate,
       loadSize: data.loadSize,
+      length: data.length ? data.length : 0,
+      weight: data.weight ? data.weight : 0,
       tripMileage: data.tripMileage
     });
     if (data.carrier != null) {
