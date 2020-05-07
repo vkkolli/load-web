@@ -105,6 +105,8 @@ export class CreateLoadComponent implements OnInit {
       maxRate: [''],
       loadSize: [''],
       tripMileage:[''],
+      length:[''],
+      weight:[''],
       id:[''],
       targetRate: ['']
     });
