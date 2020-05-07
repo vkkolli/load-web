@@ -1,8 +1,8 @@
 <form [formGroup]="loadForm" novalidate>
     <fieldset class="border p-2 mb-2">
-        <legend  class="w-auto small font-weight-bold">Equipment</legend>
-        <div class="form-row pb-sm-3">
-            <div class="col-sm-6 col-lg-3 form-group" formGroupName="equipment">
+        <legend  class="w-auto small font-weight-bold m-0">Equipment</legend>
+        <div class="form-row">
+            <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="equipment">
                 <label for="drpType">Type<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
                 <select id="drpType" class="form-control" formControlName="id">
                     <option value="">Select Equipment Type</option>
@@ -14,7 +14,7 @@
                     Equipment Type is required.
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3 form-group">
+            <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
                 <label for="txtConName">Load Size<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
                 <div class="row px-3">
                     <div class="col custom-control custom-radio custom-control-inline">
@@ -30,12 +30,12 @@
                     Load Size is required.
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3 form-group" formGroupName="equipment">
+            <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="equipment">
                 <label for="txtLen">Length (FT)</label>
                 <input type="text" id="txtLen" class="form-control" formControlName="length" placeholder="Trailer Length"
                 pattern="[0-9]+">
             </div>
-            <div class="col-sm-6 col-lg-3 form-group" formGroupName="equipment">
+            <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="equipment">
                 <label for="txtWeight">Weight (LBS)</label>
                 <input type="text" id="txtWeight" class="form-control" formControlName="weight" placeholder="Trailer Capacity"
                 pattern="[0-9]+">

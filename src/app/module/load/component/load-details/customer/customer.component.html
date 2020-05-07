@@ -1,6 +1,6 @@
 <form [formGroup]="loadForm">
-  <div class="form-row pb-sm-3">
-      <div class="col-sm-6 col-lg-3 form-group" formGroupName="customer">
+  <div class="form-row">
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="customer">
           <label for="txtName">Customer<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <div class="position-relative">
             <input type="text" id="txtName" class="form-control" formControlName="customerObj"
@@ -11,7 +11,7 @@
             </div>
           </div>
       </div>
-      <div class="col-sm-6 col-lg-3 form-group" formGroupName="customerAddress" >
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="customerAddress" >
           <label for="drpAddress">Address<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <select id="drpAddress" class="form-control" formControlName="id" (change)="populateContact($event.target.selectedIndex)" >
             <option value="">Select Customer Address</option>
@@ -20,19 +20,19 @@
             </option>
           </select>
       </div>
-      <div class="col-sm-6 col-lg-3 form-group" formGroupName="customerAddress" >
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="customerAddress" >
           <label for="txtConName">Contact Name</label>
           <input type="text" id="txtConName" class="form-control" formControlName="contactPerson"
           placeholder="Contact Person" readonly>
       </div>
-      <div class="col-sm-6 col-lg-3 form-group" formGroupName="customerAddress" >
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="customerAddress" >
           <label for="txtConEmail">Contact Email</label>
           <input type="text" id="txtConEmail" class="form-control" formControlName="emailId"
           placeholder="Contact Email" readonly>
       </div>
     </div>
   <div class="form-row" formGroupName="customerAddress">
-      <div class="col-sm-6 col-lg-3 form-group">
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
           <label for="txtContPhone">Contact Phone</label>
           <input type="text" id="txtContPhone" class="form-control" formControlName="phoneNo"
           mask="(000) 000-0000" placeholder="(000) 000-0000" readonly>

@@ -1,20 +1,20 @@
 <fieldset class="border p-2 mb-2" [formGroup]="loadForm">
-  <legend  class="w-auto small font-weight-bold">Commodity</legend>
+  <legend  class="w-auto small font-weight-bold m-0">Commodity</legend>
   <div formGroupName="commodity" >
-    <div class="form-row pb-sm-3" *ngFor="let commodityObj of loadCommodity.controls; let i = index" [formGroupName]="i">
-      <div class="col-sm-6 col-lg-3 form-group">
+    <div class="form-row" *ngFor="let commodityObj of loadCommodity.controls; let i = index" [formGroupName]="i">
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
           <label for="txtCommName">Name<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <input type="text" id="txtCommName" class="form-control" formControlName="commodityName" placeholder="Commodity Name">
           <div *ngIf="commodityObj.get('commodityName').touched && commodityObj.get('commodityName').invalid" class="invalid-element">
             Commodity Name is required.
            </div>
       </div>
-      <div class="col-sm-6 col-lg-3 form-group">
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
           <label for="txtCommWeight">Weight (LBS)</label>
           <input type="text" id="txtCommWeight" class="form-control" formControlName="commodityWeight" pattern="[0-9]+"
           placeholder="Commodity Weight">
       </div>
-      <div class="col-sm-6 col-lg-3 form-group">
+      <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
           <label for="txtCommVal">Value</label>
           <input type="text" id="txtCommVal" class="form-control" formControlName="commodityValue"
           mask="separator.2" prefix="$" thousandSeparator="," separatorLimit="10000000"  placeholder="Commodity Value">
