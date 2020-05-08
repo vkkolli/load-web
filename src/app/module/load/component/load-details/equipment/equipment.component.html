@@ -16,26 +16,26 @@
             </div>
             <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
                 <label for="txtConName">Load Size<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
-                <div class="row px-3">
-                    <div class="col custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="rdoSizeFull" formControlName="loadSize" name="loadSize" class="custom-control-input" value="F">
-                        <label class="custom-control-label" for="rdoSizeFull">Full</label>
+                <div [formGroup]="radioGroupForm">
+                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="model">
+                        <label ngbButtonLabel class="btn-info btn-sm" for="rdoSizeFull">
+                            <input ngbButton type="radio" [value]="1" id="rdoSizeFull" formControlName="loadSize" name="loadSize"> Full
+                        </label>
+                        <label ngbButtonLabel class="btn-info btn-sm" for="rdoSizePart">
+                            <input ngbButton type="radio" [value]="false" id="rdoSizePart" formControlName="loadSize" name="loadSize"> Partial
+                        </label>
                     </div>
-                    <div class="col custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="rdoSizePart" formControlName="loadSize" name="loadSize" class="custom-control-input" value="P">
-                        <label class="custom-control-label" for="rdoSizePart">Partial</label>
-                    </div>
-                </div>
+                </div>             
                 <div *ngIf="loadForm.get('loadSize').touched && loadForm.get('loadSize').invalid" class="invalid-element">
                     Load Size is required.
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="equipment">
+            <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
                 <label for="txtLen">Length (FT)</label>
                 <input type="text" id="txtLen" class="form-control" formControlName="length" placeholder="Trailer Length"
                 mask="separator.2" separatorLimit="100" thousandSeparator="">
             </div>
-            <div class="col-sm-6 col-lg-3 form-group mb-sm-2" formGroupName="equipment">
+            <div class="col-sm-6 col-lg-3 form-group mb-sm-2">
                 <label for="txtWeight">Weight (LBS)</label>
                 <input type="text" id="txtWeight" class="form-control" formControlName="weight" placeholder="Trailer Capacity"
                 mask="separator.2" separatorLimit="100000" thousandSeparator="">

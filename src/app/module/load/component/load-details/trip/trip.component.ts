@@ -6,7 +6,6 @@ import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { LoadService } from '../shared/service/load.service';
-// import { google } from '@agm/core/services/google-maps-types';
 
 @Component({
   selector: 'app-trip',
@@ -19,7 +18,6 @@ export class TripComponent implements OnInit {
   zipSearchList: Observable<Array<String>>;
   time: NgbTimeStruct;
   date: any;
-  // directionsService = new google.maps.DirectionsService();
 
   searchCityStateZip = (text$: Observable<string>) =>
   text$.pipe(
@@ -40,12 +38,21 @@ export class TripComponent implements OnInit {
 
   ngOnInit() {
 
-    this.onValueChanges();
+    // this.onValueChanges();
   }
 
   get formControls() { return this.loadForm.controls; }
 
-  get loadTrips() { return this.formControls.loadTrips as FormArray; }
+  get loadTrips() {
+    return this.formControls.loadTrips as FormArray;
+  }
+
+  sortForm () {
+    let trips =  this.loadForm.controls.loadTrips.value;
+    console.log(trips)
+    trips.sort((a, b) => a.tripType < b.tripType)
+    this.loadForm.controls.loadTrips.patchValue(trips)
+  }
 
   get tripEnum() { return Trip; }
 
@@ -72,8 +79,14 @@ export class TripComponent implements OnInit {
     }));
   }
 
-  onValueChanges(): void {
-  }
+  // onValueChanges(): void {
+  //   this.loadForm.get('cityStateZip').valueChanges.subscribe(val =>{
+  //     let trips =  this.loadForm.controls.loadTrips.value;
+  //     console.log(trips)
+  //     trips.sort((a, b) => a.tripType < b.tripType)
+  //     this.loadForm.controls.loadTrips.patchValue(trips)
+  //   })
+  // }
 
   selectedTripItem(tripObj, csz, index) {
     if (tripObj.get('tripType').value == 0) {
@@ -96,32 +109,4 @@ export class TripComponent implements OnInit {
       })
     }
   }
-
-//   findMilleage (){
-
-//     if (this.originLocation && this.destLocation) {
-//         let request = {
-//             origin: this.originLocation,
-//             destination: this.destLocation,
-//             optimizeWaypoints: true,
-//             travelMode: google.maps.DirectionsTravelMode.DRIVING
-//         };
-
-//         this.directionsService.route(request, function (response, status) {
-//             if (status == google.maps.DirectionsStatus.OK) {
-
-//                 let legs = response.routes[0].legs;
-//                 let tripDistance = 0;
-//                 for (let i = 0; i < legs.length; i++) {
-//                     tripDistance = tripDistance + legs[i].distance.value;
-//                 }
-//                 // Do not calculate the mileage if the load is EDI and there is Mileage But Do Calculate when the Origin or destination changes
-//                 this.loadForm.tripMileage = (tripDistance * 0.000621371192).toFixed(2);;
-//                 // this.$apply();
-//             }
-//         });
-//     }
-// };
-
-
 }
