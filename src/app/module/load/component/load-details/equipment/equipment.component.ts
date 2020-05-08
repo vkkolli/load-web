@@ -18,8 +18,6 @@ export class EquipmentComponent implements OnInit {
   ColumnMode = ColumnMode;
   
   SelectionType = SelectionType;
-
-  public radioGroupForm: FormGroup;
   
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -34,9 +32,7 @@ export class EquipmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.radioGroupForm = this.fb.group({
-      'model': 1
-    });
+
   }
 
   get formControls() { return this.equipForm.controls; }
