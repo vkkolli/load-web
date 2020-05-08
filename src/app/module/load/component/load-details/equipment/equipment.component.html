@@ -19,13 +19,13 @@
                 <div class="btn-toggle-container" >
                     <div ngbRadioGroup class="btn-group btn-group-toggle" formControlName="loadSize">
                         <label ngbButtonLabel class="btn-info btn-sm" for="rdoSizeFull">
-                            <input ngbButton type="radio" [value]="true" id="rdoSizeFull" name="loadSize"> Full
+                            <input ngbButton type="radio" value="F" id="rdoSizeFull" name="loadSize"> Full
                         </label>
                         <label ngbButtonLabel class="btn-info btn-sm" for="rdoSizePart">
-                            <input ngbButton type="radio" [value]="false" id="rdoSizePart" name="loadSize"> Partial
+                            <input ngbButton type="radio" value="P" id="rdoSizePart" name="loadSize"> Partial
                         </label>
                     </div>
-                </div>             
+                </div>
                 <div *ngIf="loadForm.get('loadSize').touched && loadForm.get('loadSize').invalid" class="invalid-element">
                     Load Size is required.
                 </div>

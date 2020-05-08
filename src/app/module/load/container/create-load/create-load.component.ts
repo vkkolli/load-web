@@ -103,7 +103,7 @@ export class CreateLoadComponent implements OnInit {
       totalRevenue: [''],
       totalCost: [''],
       maxRate: [''],
-      loadSize: [''],
+      loadSize: ['', Validators.required],
       tripMileage:[''],
       length:[''],
       weight:[''],

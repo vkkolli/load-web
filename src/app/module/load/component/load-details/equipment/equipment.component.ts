@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
-import {ColumnMode, SelectionType} from '@swimlane/ngx-datatable';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Router } from '@angular/router';
 const searchList = ['Abc', 'Abcde', 'bcd', 'def', 'cde', 'xyz', 'qwerty', 'asdfg', 'poiuy', 'lkjhg', 'mnbv', 'jkl'];
 
 @Component({
@@ -16,7 +16,7 @@ export class EquipmentComponent implements OnInit {
   @Input() loadForm : FormGroup;
   activeIds = [];
   ColumnMode = ColumnMode;
-  
+
   SelectionType = SelectionType;
   
   search = (text$: Observable<string>) =>
@@ -32,13 +32,12 @@ export class EquipmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   get formControls() { return this.equipForm.controls; }
 
   equipForm = this.fb.group({
-    
+
     equipment: this.fb.group({
       type: ['', Validators.required],
       load_size: ['', Validators.required],
