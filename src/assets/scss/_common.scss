@@ -99,6 +99,7 @@
   // Angulr-Material theme overides
   &.material {
     .datatable-header {
+      background-color: lighten($tm-vt, 10%);
       .datatable-header-cell {
         padding: 0.3125rem 1.2rem;
         background-color: lighten($tm-vt, 10%);

@@ -1,5 +1,6 @@
-<ngx-datatable #myTable class="material striped" [columns]="columns" [columnMode]="ColumnMode" headerHeight="30"
-  footerHeight="50" [limit]="10" [rowHeight]="'auto'" [rowClass]="getRowClass" [scrollbarV]="false" [scrollbarH]="true"
+<div class="ngx-datatable-container">
+<ngx-datatable #myTable class="material striped" style="height: 89vh;" [columns]="columns" [columnMode]="ColumnMode" headerHeight="30"
+  footerHeight="50" [limit]="10" [rowHeight]="50" [rowClass]="getRowClass" [scrollbarV]="true" [scrollbarH]="true"
   [rows]="rows">
 
   <!-- Row Detail Template -->
@@ -73,7 +74,7 @@
   <ngx-datatable-column *ngFor="let column of columns" name="{{column.name}}" prop="{{column.prop}}"
     width="{{column.width}}">
   </ngx-datatable-column>
-  <ngx-datatable-column name="Actual Pickup" [width]="150">
+  <ngx-datatable-column name="Actual Pickup" [width]="140">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.pickupDate">
       <span title="Click to edit" (click)="pickupDateEditing[rowIndex] = true"
         *ngIf="!row.actualPickupDate && !pickupDateEditing[rowIndex]">
@@ -92,7 +93,7 @@
       </mat-form-field>
     </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="Actual Delivery" [width]="150">
+  <ngx-datatable-column name="Actual Delivery" [width]="140">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.actualDeliveryDate">
       <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true"
         *ngIf="!row.actualDeliveryDate && !deliveryDateEditing[rowIndex]">
@@ -112,3 +113,4 @@
     </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>
+</div>
