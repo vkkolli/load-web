@@ -32,9 +32,9 @@ export class LoadBoardService {
     return this.repo.post<LoadBoard[]>(url,searchLoad);
   }
 
-  setPickupDeliveryDate(pickupDeliveryDates : PickupDeliveryDates) {
+  setPickupDeliveryDate(pickupDeliveryDates : PickupDeliveryDates): Observable<LoadBoard> {
       const url = urljoin(environment.loadApiPath, 'load/confirmPickupDelivery');
-      return this.repo.post<Load>(url,pickupDeliveryDates);
+      return this.repo.post<LoadBoard>(url,pickupDeliveryDates);
     }
 
 

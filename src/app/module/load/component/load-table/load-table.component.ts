@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewEncapsulation, ViewChild, Injector } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { ThemePalette } from '@angular/material/core';
 import { formatDate } from '@angular/common';
@@ -6,6 +6,7 @@ import { EventEmitter } from 'protractor';
 import { LoadBoardService } from '@app/shared/service/load-board.service';
 import { PickupDeliveryDates } from '@app/shared/model/pickup-delivery-dates';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-load-table',
@@ -19,6 +20,8 @@ export class LoadTableComponent implements OnInit {
   @ViewChild('myTable') table: any;
 
   @ViewChild('picker') picker: any;
+
+  protected spinner: NgxSpinnerService;
 
 
   public disabled = false;
@@ -42,7 +45,9 @@ export class LoadTableComponent implements OnInit {
   public isPickupButtonVisible: boolean = true;
 
   ColumnMode = ColumnMode.standard;
-  constructor(private loadBoardService: LoadBoardService, private toastr: ToastrService) { }
+  constructor(injector: Injector,private loadBoardService: LoadBoardService, private toastr: ToastrService) {
+    this.spinner = injector.get(NgxSpinnerService);
+   }
 
   ngOnInit(): void {
   }
@@ -64,6 +69,7 @@ export class LoadTableComponent implements OnInit {
   }
 
   updatePickupDate(event, cell, rowIndex) {
+    this.spinner.show();
     this.pickupDateEditing[rowIndex] = false;
     var val = event instanceof Date ? event : event.target.value;
     const format = 'yyyy-MM-dd, HH:mm:ss';
@@ -77,17 +83,19 @@ export class LoadTableComponent implements OnInit {
     pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
     this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
       data => {
-        this.rows[rowIndex].loadStatus = 'In Transit';
-        this.rows[rowIndex].isConfirmDeliveryEnable = true;
-        this.toastr.success('Pickup Confirmed');
+        this.rows[rowIndex]=data;
+        this.rows = [...this.rows];
+        this.spinner.hide();
       },
       error => {
+        this.spinner.hide();
         this.toastr.error('Pickup Confirmation Error ...');
       }
       );
   }
 
   updateDeliveryDate(event, cell, rowIndex) {
+    this.spinner.show();
     this.deliveryDateEditing[rowIndex] = false;
     var val = event instanceof Date ? event : event.target.value;
     const format = 'yyyy-MM-dd, HH:mm:ss';
@@ -103,11 +111,12 @@ export class LoadTableComponent implements OnInit {
       pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
       this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
         data => {
-          this.rows[rowIndex].isConfirmDeliveryEnable = false;
-          this.rows[rowIndex].loadStatus = 'Delivered';
-          this.toastr.success('Delivery Confirmed');
+          this.rows[rowIndex]=data;
+          this.rows = [...this.rows];
+          this.spinner.hide();
         },
         error => {
+          this.spinner.hide();
           this.toastr.error('Delivery Confirmation Error ...');
         }
         );
@@ -123,3 +132,4 @@ export class LoadTableComponent implements OnInit {
         return false;
   }
 }
+
