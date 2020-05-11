@@ -24,7 +24,17 @@ export class PricingComponent implements OnInit {
 
   get formControls() { return this.loadForm.controls; }
 
-  get loadPricings() { return this.formControls.loadPricings as FormArray; }
+  get loadPricings() {
+    this.sortForm();
+    return this.formControls.loadPricings as FormArray;
+  }
+
+  sortForm () {
+    let pricings =  this.loadForm.controls.loadPricings.value;
+    const pricingEnum = [1, 2];
+    const orderedPricing = pricings.sort((a, b) => pricingEnum.indexOf(a.pricingTypeId) - pricingEnum.indexOf(b.pricingTypeId));
+    this.loadForm.controls.loadPricings.patchValue(orderedPricing)
+  }
 
   addPricing(priceType: number) {
     this.loadPricings.push(this.fb.group({
