@@ -35,7 +35,7 @@ export class CustomerComponent implements OnInit {
   );
 
   formatter = (x: {company: string}) => x.company;
-  customerAddressList: Address[];
+  customerAddressList: Observable<Array<Address>>;
 
   constructor(private fb: FormBuilder, config: NgbAccordionConfig, private router: Router,
     private lookupService: LookupService, private customerService: CustomerService) {
@@ -50,9 +50,7 @@ export class CustomerComponent implements OnInit {
   onChanges(): void {
     if(this.loadForm.get('customerAddress.emailId').invalid) {
       this.loadForm.get('customer.id').valueChanges.subscribe(customerId => {
-        this.customerService.getCustomerAddress(customerId).subscribe(response => {
-          this.customerAddressList = response;
-        })
+        this.customerAddressList = this.customerService.getCustomerAddress(customerId);
       });
     }
   }
@@ -63,9 +61,7 @@ export class CustomerComponent implements OnInit {
     this.loadForm.get('customer.customerEmail').setValue(customer.item.customerEmail);
     this.loadForm.get('customer.active').setValue(customer.item.active);
     if (customer) {
-      this.customerService.getCustomerAddress(customer.item.id).subscribe(response => {
-          this.customerAddressList = response;
-        })
+      this.customerAddressList = this.customerService.getCustomerAddress(customer.item.id);
     }
   }
 

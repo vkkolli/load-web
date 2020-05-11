@@ -15,7 +15,7 @@
           <label for="drpAddress">Address<i class="fa fa-asterisk mandatory" aria-hidden="true"></i></label>
           <select id="drpAddress" class="form-control" formControlName="id" (change)="populateContact($event.target.selectedIndex)" >
             <option value="">Select Customer Address</option>
-            <option *ngFor="let address of customerAddressList; let i = index" [value]="address.id">
+            <option *ngFor="let address of customerAddressList | async; let i = index" [value]="address.id">
               {{address.addressLine1}}
             </option>
           </select>
