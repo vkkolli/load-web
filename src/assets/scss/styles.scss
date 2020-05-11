@@ -38,7 +38,7 @@ $loadboard-poc-theme: mat-light-theme($loadboard-poc-primary, $loadboard-poc-acc
 
 
 body {
-  background-color: $tm-gy;
+  background-color: $tm-gy !important;
 }
 
 .header {
@@ -174,4 +174,16 @@ $tst-success: #1e7e34;
 // textarea::-ms-input-placeholder { /* Microsoft Edge */
 //   color: #adaeb0;
 // }
+
+
+// Ngxdatatable - Global Overrides
+.ngx-datatable.material .datatable-header {
+  height: 30px !important;
+}
+.ngx-datatable.material.single-selection .datatable-body-row.active, .ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active, .ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active, .ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
+  background-color: $tm-gy;
+}
+.ngx-datatable.material.single-selection .datatable-body-row.active:hover, .ngx-datatable.material.single-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
+  background-color: $tm-gy;
+}
 

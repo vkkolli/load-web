@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoadCarrierComponent implements OnInit {
 
   @Input() loadForm: FormGroup;
-  ColumnMode = ColumnMode;
+  ColumnMode = ColumnMode.force;
   carrier = new Array<Carrier>();
 
   columns = [
