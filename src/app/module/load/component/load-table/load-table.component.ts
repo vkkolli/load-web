@@ -95,41 +95,30 @@ export class LoadTableComponent implements OnInit {
   }
 
   updateDeliveryDate(event, cell, rowIndex) {
-    this.spinner.show();
+    
     this.deliveryDateEditing[rowIndex] = false;
     var val = event instanceof Date ? event : event.target.value;
     const format = 'yyyy-MM-dd, HH:mm:ss';
     const locale = 'en-US';
     const formattedDate = formatDate(val, format, locale);
-    var result = this.checkforValidation(this.rows[rowIndex].actualPickupDate, formattedDate);
-    if(result) {
-      this.rows[rowIndex].actualDeliveryDate = formattedDate;
-      const pickupDeliveryDates = new PickupDeliveryDates();
-      pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
-      pickupDeliveryDates.tripType='DESTINATION';
-      pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(', ')[0];
-      pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
-      this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
-        data => {
-          this.rows[rowIndex]=data;
-          this.rows = [...this.rows];
-          this.spinner.hide();
-        },
-        error => {
-          this.spinner.hide();
-          this.toastr.error('Delivery Confirmation Error ...');
-        }
-        );
-    } else {
-        this.toastr.error('Delivery date cannot be prior to Pickup date');
-    }
-  }
-
-  checkforValidation(pickup, delivery) : boolean{
-    if(delivery > pickup)
-       return true;
-    else 
-        return false;
+    this.spinner.show();
+    this.rows[rowIndex].actualDeliveryDate = formattedDate;
+    const pickupDeliveryDates = new PickupDeliveryDates();
+    pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+    pickupDeliveryDates.tripType='DESTINATION';
+    pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(', ')[0];
+    pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(', ')[1];
+    this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
+      data => {
+        this.rows[rowIndex]=data;
+        this.rows = [...this.rows];
+        this.spinner.hide();
+      },
+      error => {
+        this.spinner.hide();
+        this.toastr.error('Delivery Confirmation Error ...');
+      }
+    );
   }
 }
 

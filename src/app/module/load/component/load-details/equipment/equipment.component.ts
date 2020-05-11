@@ -18,9 +18,7 @@ export class EquipmentComponent implements OnInit {
   ColumnMode = ColumnMode;
 
   SelectionType = SelectionType;
-
-  public radioGroupForm: FormGroup;
-
+  
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
