@@ -105,7 +105,7 @@ export class LoadBoardComponent implements OnInit {
         return of([]);
       }
       return this.lookupService.fetchCityStateZip(searchText)
-      .pipe(map(list => list.length < 2 ? [] : (list.length > 10 ? list.splice(0, 10) : list)));
+      .pipe(map(list => list.length < 1 ? [] : (list.length > 10 ? list.splice(0, 10) : list)));
     })
   );
 
