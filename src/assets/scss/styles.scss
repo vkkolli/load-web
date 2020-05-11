@@ -38,7 +38,7 @@ $loadboard-poc-theme: mat-light-theme($loadboard-poc-primary, $loadboard-poc-acc
 
 
 body {
-  background-color: $tm-gy;
+  background-color: $tm-gy !important;
 }
 
 .header {
