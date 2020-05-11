@@ -46,7 +46,7 @@ export class TripComponent implements OnInit {
   get getMileage() { return this.loadForm.get('tripMileage').value; }
 
   get loadTrips() {
-    this.sortForm();
+    // this.sortForm();
     return this.formControls.loadTrips as FormArray;
   }
 
