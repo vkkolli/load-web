@@ -1,116 +1,121 @@
-<div class="ngx-datatable-container">
-<ngx-datatable #myTable class="material striped" style="height: 89vh;" [columns]="columns" [columnMode]="ColumnMode" headerHeight="30"
-  footerHeight="50" [limit]="10" [rowHeight]="50" [rowClass]="getRowClass" [scrollbarV]="true" [scrollbarH]="true"
-  [rows]="rows">
+<div class="ngx-datatable-container" *ngIf="showTable">
+  <ngx-datatable #myTable class="material striped" style="height: 85vh;" [columns]="columns" [columnMode]="ColumnMode"
+    headerHeight="30" footerHeight="50" [rowHeight]="50" [rowClass]="getRowClass" [scrollbarV]="true"
+    [scrollbarH]="false" [virtualization]="false" [externalPaging]="true" [count]="totalElements"
+    [offset]="pageNumber" [limit]="pageSize" (page)="setPage($event)" [rows]="data">
 
-  <!-- Row Detail Template -->
-  <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
-    <ng-template let-row="row" ngx-datatable-row-detail-template>
-      <div class="lbd-dtl-container">
-        <div class="lbd-dtl-row">
-          <div class="lbd-dtl-column">
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Expected Pickup Date</div>
-              <div class="lbd-dtl-data">{{row.pickupDate}}</div>
+    <!-- Row Detail Template -->
+    <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+      <ng-template let-row="row" ngx-datatable-row-detail-template>
+        <div class="lbd-dtl-container">
+          <div class="lbd-dtl-row">
+            <div class="lbd-dtl-column">
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Expected Pickup Date</div>
+                <div class="lbd-dtl-data">{{row.pickupDate}}</div>
+              </div>
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Expected Delivery Date</div>
+                <div class="lbd-dtl-data">{{row.deliveryDate}}</div>
+              </div>
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Equipment Length</div>
+                <div class="lbd-dtl-data">{{row.equipmentLength}}</div>
+              </div>
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Equipment Weight</div>
+                <div class="lbd-dtl-data">{{row.equipmentWeight}}</div>
+              </div>
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Commodity Name</div>
+                <div class="lbd-dtl-data">{{row.commodityName}}</div>
+              </div>
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Commodity Value</div>
+                <div class="lbd-dtl-data">{{row.commodityValue}}</div>
+              </div>
             </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Expected Delivery Date</div>
-              <div class="lbd-dtl-data">{{row.deliveryDate}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Equipment Length</div>
-              <div class="lbd-dtl-data">{{row.equipmentLength}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Equipment Weight</div>
-              <div class="lbd-dtl-data">{{row.equipmentWeight}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Commodity Name</div>
-              <div class="lbd-dtl-data">{{row.commodityName}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Commodity Value</div>
-              <div class="lbd-dtl-data">{{row.commodityValue}}</div>
-            </div>
-          </div>
-          <div class="lbd-dtl-column">
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Carrier Name</div>
-              <div class="lbd-dtl-data">{{row.carrierName}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Carrier Contact</div>
-              <div class="lbd-dtl-data">{{row.carrierContact}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Email Id</div>
-              <div class="lbd-dtl-data">{{row.carrierEmail}}</div>
-            </div>
-            <div class="lbd-dtl-item">
-              <div class="lbd-dtl-head">Phone</div>
-              <div class="lbd-dtl-data">{{row.carrierPhone}}</div>
+            <div class="lbd-dtl-column">
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Carrier Name</div>
+                <div class="lbd-dtl-data">{{row.carrierName}}</div>
+              </div>
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Carrier Contact</div>
+                <div class="lbd-dtl-data">{{row.carrierContact}}</div>
+              </div>
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Email Id</div>
+                <div class="lbd-dtl-data">{{row.carrierEmail}}</div>
+              </div>
+              <div class="lbd-dtl-item">
+                <div class="lbd-dtl-head">Phone</div>
+                <div class="lbd-dtl-data">{{row.carrierPhone}}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </ng-template>
-  </ngx-datatable-row-detail>
+      </ng-template>
+    </ngx-datatable-row-detail>
 
-  <!-- Column Templates -->
-  <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false"
-    [frozenLeft]="true">
-    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-      <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
-        title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
-      </a>
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="LoadId" [width]="70">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      <a [routerLink]="['/load/edit/', row.loadId]"> {{ row.loadId }} </a>
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column *ngFor="let column of columns" name="{{column.name}}" prop="{{column.prop}}"
-    width="{{column.width}}">
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Actual Pickup" [width]="140">
-    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.pickupDate">
-      <span title="Click to edit" (click)="pickupDateEditing[rowIndex] = true"
-        *ngIf="!row.actualPickupDate && !pickupDateEditing[rowIndex]">
-        <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmPickupEnable">Confirm Pickup</button>
-      </span>
-      <span *ngIf="row.actualPickupDate">
-        {{row.actualPickupDate}}
-      </span>
-      <mat-form-field *ngIf="pickupDateEditing[rowIndex]">
-        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose datetime"
-          (dateChange)="updatePickupDate($event, 'row.actualPickupDate', rowIndex)">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <ngx-mat-datetime-picker #picker [showSpinners]=false [showSeconds]=false [stepHour]="1" [stepMinute]="5"
-          [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" [disableMinute]=false [hideTime]=false>
-        </ngx-mat-datetime-picker>
-      </mat-form-field>
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Actual Delivery" [width]="140">
-    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.actualDeliveryDate">
-      <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true"
-        *ngIf="!row.actualDeliveryDate && !deliveryDateEditing[rowIndex]">
-        <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmDeliveryEnable">Confirm Delivery</button>
-      </span>
-      <span *ngIf="row.actualDeliveryDate">
-        {{row.actualDeliveryDate}}
-      </span>
-      <mat-form-field *ngIf="deliveryDateEditing[rowIndex]">
-        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose datetime"
-          (dateChange)="updateDeliveryDate($event, 'row.actualDeliveryDate', rowIndex)">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <ngx-mat-datetime-picker #picker [showSpinners]=false [showSeconds]=false [stepHour]="1" [stepMinute]="5"
-          [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" [disableMinute]=false [hideTime]=false>
-        </ngx-mat-datetime-picker>
-      </mat-form-field>
-    </ng-template>
-  </ngx-datatable-column>
-</ngx-datatable>
+    <!-- Column Templates -->
+    <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+      [canAutoResize]="false" [frozenLeft]="true">
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+        <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+          title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+        </a>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="LoadId" [width]="70">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <a [routerLink]="['/load/edit/', row.loadId]"> {{ row.loadId }} </a>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column *ngFor="let column of columns" name="{{column.name}}" prop="{{column.prop}}"
+      width="{{column.width}}" [flexGrow]="1">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Actual Pickup" [width]="140" [flexGrow]="1">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.pickupDate">
+        <span title="Click to edit" (click)="pickupDateEditing[rowIndex] = true"
+          *ngIf="!row.actualPickupDate && !pickupDateEditing[rowIndex]">
+          <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmPickupEnable">Confirm
+            Pickup</button>
+        </span>
+        <span *ngIf="row.actualPickupDate">
+          {{row.actualPickupDate}}
+        </span>
+        <mat-form-field *ngIf="pickupDateEditing[rowIndex]">
+          <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose datetime"
+            (dateChange)="updatePickupDate($event, 'row.actualPickupDate', rowIndex)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker [showSpinners]=false [showSeconds]=false [stepHour]="1" [stepMinute]="5"
+            [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" [disableMinute]=false
+            [hideTime]=false>
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Actual Delivery" [width]="160" [flexGrow]="1">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.actualDeliveryDate">
+        <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true"
+          *ngIf="!row.actualDeliveryDate && !deliveryDateEditing[rowIndex]">
+          <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmDeliveryEnable">Confirm
+            Delivery</button>
+        </span>
+        <span *ngIf="row.actualDeliveryDate">
+          {{row.actualDeliveryDate}}
+        </span>
+        <mat-form-field *ngIf="deliveryDateEditing[rowIndex]">
+          <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose datetime"
+            (dateChange)="updateDeliveryDate($event, 'row.actualDeliveryDate', rowIndex)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker [showSpinners]=false [showSeconds]=false [stepHour]="1" [stepMinute]="5"
+            [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" [disableMinute]=false
+            [hideTime]=false>
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
 </div>
