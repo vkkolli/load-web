@@ -5,7 +5,7 @@ import { LookupService } from '@app/module/load/service/lookup.service';
 import { Address } from '@app/shared/model/address';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, shareReplay, switchMap } from 'rxjs/operators';
 import { CustomerService } from '../shared/service/customer.service';
 
 
@@ -50,7 +50,7 @@ export class CustomerComponent implements OnInit {
   onChanges(): void {
     if(this.loadForm.get('customerAddress.emailId').invalid) {
       this.loadForm.get('customer.id').valueChanges.subscribe(customerId => {
-        this.customerAddressList = this.customerService.getCustomerAddress(customerId);
+        this.customerAddressList = this.customerService.getCustomerAddress(customerId).pipe(shareReplay());
       });
     }
   }
@@ -61,7 +61,7 @@ export class CustomerComponent implements OnInit {
     this.loadForm.get('customer.customerEmail').setValue(customer.item.customerEmail);
     this.loadForm.get('customer.active').setValue(customer.item.active);
     if (customer) {
-      this.customerAddressList = this.customerService.getCustomerAddress(customer.item.id);
+      this.customerAddressList = this.customerService.getCustomerAddress(customer.item.id).pipe(shareReplay());
     }
   }
 
@@ -70,9 +70,15 @@ export class CustomerComponent implements OnInit {
   get customerAddress() { return this.formControls.customerAddress as FormGroup; }
 
   populateContact (addressIndex) {
-    this.customerAddress.get('contactPerson').setValue(this.customerAddressList[addressIndex-1].contactPerson);
-    this.customerAddress.get('emailId').setValue(this.customerAddressList[addressIndex-1].emailId);
-    this.customerAddress.get('phoneNo').setValue(this.customerAddressList[addressIndex-1].phoneNo);
+    this.customerAddressList.subscribe(data => {
+      data.forEach(element => {
+        if (element.id == this.loadForm.get('customerAddress.id').value) {
+          this.customerAddress.get('contactPerson').setValue(element.contactPerson);
+          this.customerAddress.get('emailId').setValue(element.emailId);
+          this.customerAddress.get('phoneNo').setValue(element.phoneNo);
+        }
+      });
+    });
   }
 
 }

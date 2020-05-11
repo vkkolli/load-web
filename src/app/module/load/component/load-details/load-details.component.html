@@ -1,4 +1,4 @@
-<app-load-status *ngIf="loadForm.get('loadStatus.id').value > 0" [loadForm]="loadForm"></app-load-status>
+<app-load-status *ngIf="loadForm.get('loadStatus.id').value > 0 && loadForm.get('id').value > 0" [loadForm]="loadForm"></app-load-status>
 <form [formGroup]="loadForm" novalidate>
   <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
       <ngb-panel id="customer" [ngbCollapse]="false">
