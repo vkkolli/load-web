@@ -143,10 +143,11 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
     pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
     this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
-      (data) => {
-        this.rows[rowIndex] = data;
-        this.rows = [...this.rows];
+      (loaddata) => {
+        this.data[rowIndex] = loaddata;
+        this.data = [...this.data];
         this.spinner.hide();
+        this.toastr.success("Pickup Date Confirmed ...");
       },
       (error) => {
         this.spinner.hide();
@@ -169,15 +170,16 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
     pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
     this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
-      (data) => {
-        this.rows[rowIndex] = data;
-        this.rows = [...this.rows];
-        this.spinner.hide();
-      },
-      (error) => {
-        this.spinner.hide();
-        this.toastr.error("Delivery Confirmation Error ...");
-      }
-    );
-  }
+    (loaddata) => {
+      this.data[rowIndex] = loaddata;
+      this.data = [...this.data];
+      this.spinner.hide();
+      this.toastr.success("Delivery Date Confirmed ...");
+    },
+    (error) => {
+      this.spinner.hide();
+      this.toastr.error("Delivery Confirmation Error ...");
+    }
+  );
+}
 }
