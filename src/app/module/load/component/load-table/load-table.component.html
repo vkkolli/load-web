@@ -1,8 +1,8 @@
 <div class="ngx-datatable-container" *ngIf="showTable">
   <ngx-datatable #myTable class="material striped" style="height: 85vh;" [columns]="columns" [columnMode]="ColumnMode"
     headerHeight="30" footerHeight="50" [rowHeight]="50" [rowClass]="getRowClass" [scrollbarV]="true"
-    [scrollbarH]="false" [virtualization]="false" [externalPaging]="true" [count]="totalElements"
-    [offset]="pageNumber" [limit]="pageSize" (page)="setPage($event)" [rows]="data">
+    [scrollbarH]="false" [virtualization]="false" [externalPaging]="true" [count]="totalElements" [offset]="pageNumber"
+    [limit]="pageSize" (page)="setPage($event)" [rows]="data">
 
     <!-- Row Detail Template -->
     <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
@@ -67,15 +67,15 @@
         </a>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="LoadId" [width]="70">
+    <ngx-datatable-column name="LoadId" [minWidth]="70" [maxWidth]="70">
       <ng-template let-row="row" ngx-datatable-cell-template>
         <a [routerLink]="['/load/edit/', row.loadId]"> {{ row.loadId }} </a>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column *ngFor="let column of columns" name="{{column.name}}" prop="{{column.prop}}"
-      width="{{column.width}}" [flexGrow]="1">
+    <ngx-datatable-column *ngFor="let column of columns" [name]="column.name" [prop]="column.prop"
+      [width]="column.width"  [flexGrow]="1">
     </ngx-datatable-column>
-    <ngx-datatable-column name="Actual Pickup" [width]="140" [flexGrow]="1">
+    <ngx-datatable-column name="Actual Pickup" [minWidth]="140" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.pickupDate">
         <span title="Click to edit" (click)="pickupDateEditing[rowIndex] = true"
           *ngIf="!row.actualPickupDate && !pickupDateEditing[rowIndex]">
@@ -96,7 +96,7 @@
         </mat-form-field>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Actual Delivery" [width]="160" [flexGrow]="1">
+    <ngx-datatable-column name="Actual Delivery" [minWidth]="140" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.actualDeliveryDate">
         <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true"
           *ngIf="!row.actualDeliveryDate && !deliveryDateEditing[rowIndex]">

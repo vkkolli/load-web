@@ -47,10 +47,10 @@
 </fieldset>
 </div>
     <div class="row">
-      <div class="col-md-12"><b>Mileage:</b><span class="ml-2">{{loadForm.get('tripMileage').value}}</span></div>
+      <div class="col-md-12"><b>Mileage:</b><span class="ml-2">{{getMileage | mask:'separator.2':','}}</span></div>
     </div>
 
-<!-- <agm-map
+<!-- <agm-map {{suggestedSell$ | async | mask:'separator.2':','}}
   [latitude]="lat"
   [longitude]="lng"
   [zoom]="zoom"

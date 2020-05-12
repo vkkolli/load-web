@@ -1,14 +1,14 @@
-<app-load-status *ngIf="loadForm.get('loadStatus.id').value > 0" [loadForm]="loadForm"></app-load-status>
+<app-load-status *ngIf="loadForm.get('loadStatus.id').value > 0 && loadForm.get('id').value > 0" [loadForm]="loadForm"></app-load-status>
 <form [formGroup]="loadForm" novalidate>
   <ngb-accordion #acc="ngbAccordion" activeIds="{{activeIds}}">
-      <ngb-panel id="customer">
-          <ng-template ngbPanelTitle>
+      <ngb-panel id="customer" [ngbCollapse]="false">
+          <ng-template ngbPanelTitle >
               <div class="row justify-content-between text-dark accord-title">
                   <div class="d-flex text-white text-uppercase">Customer</div>
                   <div class="d-flex text-white"><i class="fa fa-chevron-down"></i></div>
               </div>
           </ng-template>
-          <ng-template ngbPanelContent ngbCollapse="disable">
+          <ng-template ngbPanelContent >
               <app-customer [loadForm]="loadForm"></app-customer>
           </ng-template>
       </ngb-panel>

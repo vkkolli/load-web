@@ -43,15 +43,18 @@ export class TripComponent implements OnInit {
 
   get formControls() { return this.loadForm.controls; }
 
+  get getMileage() { return this.loadForm.get('tripMileage').value; }
+
   get loadTrips() {
+    // this.sortForm();
     return this.formControls.loadTrips as FormArray;
   }
 
   sortForm () {
     let trips =  this.loadForm.controls.loadTrips.value;
-    console.log(trips)
-    trips.sort((a, b) => a.tripType < b.tripType)
-    this.loadForm.controls.loadTrips.patchValue(trips)
+    const tripsEnum = ["ORGIN", "DESTINATION"];
+    const orderedTrips = trips.sort((a, b) => tripsEnum.indexOf(a.tripType) - tripsEnum.indexOf(b.tripType));
+    this.loadForm.controls.loadTrips.patchValue(orderedTrips)
   }
 
   get tripEnum() { return Trip; }

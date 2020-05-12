@@ -29,6 +29,7 @@ export class CreateLoadComponent implements OnInit {
 
   load$: Observable<Load>;
   loadForm: FormGroup;
+  headerText: string;
 
   ngOnInit(): void {
 
@@ -41,9 +42,13 @@ export class CreateLoadComponent implements OnInit {
 
     if (this.router.url.includes('/load/edit/')) {
       this.routeSub = this.route.params.subscribe(params => {
-        this.getLoadById(params['id']);
+        let loadId = params['id'];
+        this.getLoadById(loadId);
         this.isEdit = true;
+        this.headerText = "Load# "+loadId;
       });
+    } else {
+      this.headerText = "Post Load";
     }
 
   }

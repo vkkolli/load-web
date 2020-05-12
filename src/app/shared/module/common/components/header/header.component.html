@@ -7,7 +7,7 @@
         </button>
         <a class="navbar-brand" href="#">{{headerText}}</a>
       </div>
-      <div class="nav-right row" *ngIf="headerText === 'Post Load'">
+      <div class="nav-right row" *ngIf="headerText !== 'Load Board'">
           <div class="col-auto px-2">
             <button class="btn btn-sm btn-danger px-3" routerLink="/load/">Cancel </button>
           </div>
