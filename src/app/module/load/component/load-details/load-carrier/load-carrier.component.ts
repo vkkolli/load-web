@@ -34,7 +34,8 @@ export class LoadCarrierComponent implements OnInit {
   constructor(injector: Injector, private carrierService: CarrierService) {
 
     this.spinner = injector.get(NgxSpinnerService);
-     }
+    this.toastr = injector.get(ToastrService);
+  }
 
 
   ngOnInit(): void {
@@ -56,6 +57,7 @@ export class LoadCarrierComponent implements OnInit {
         this.objectFormMapper(data);
         this.modifyFormObjects();
         this.spinner.hide();
+        this.toastr.success('Carrier has been unassigned!');
       },
       error => {
         this.spinner.hide();
