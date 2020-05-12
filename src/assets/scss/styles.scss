@@ -127,15 +127,11 @@ width: 5%;
 // --------------------
 // Toastr Swatches
 // --------------------
-$tst-error: #bd2130;
-$tst-success: #1e7e34;
-
 @import '~ngx-toastr/toastr-bs4-alert';
 
 .toast-container {
   z-index: 100000000000;
-  margin-right: 40%;
-  text-align: center;
+  margin-top: 0.75rem;
 }
 .toast-error {
   background-color: $tst-error;

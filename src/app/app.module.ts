@@ -23,7 +23,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule,
     AppRoutingModule,
     NgbModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({positionClass: 'toast-top-center'}),
     HttpClientModule
   ],
   providers: [],
