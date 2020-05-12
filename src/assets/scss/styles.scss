@@ -180,10 +180,25 @@ $tst-success: #1e7e34;
 .ngx-datatable.material .datatable-header {
   height: 30px !important;
 }
-.ngx-datatable.material.single-selection .datatable-body-row.active, .ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active, .ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active, .ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
+.ngx-datatable.material.single-selection .datatable-body-row.active, 
+.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group, 
+.ngx-datatable.material.multi-selection .datatable-body-row.active, 
+.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group, 
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active, 
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
   background-color: $tm-gy;
 }
-.ngx-datatable.material.single-selection .datatable-body-row.active:hover, .ngx-datatable.material.single-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
+.ngx-datatable.material.single-selection .datatable-body-row.active:hover, 
+.ngx-datatable.material.single-selection .datatable-body-row.active:hover .datatable-row-group, 
+.ngx-datatable.material.multi-selection .datatable-body-row.active:hover, 
+.ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group, 
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover, 
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
   background-color: $tm-gy;
+}
+
+.ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell, 
+.ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-group-cell {
+    // white-space: normal !important;
 }
 

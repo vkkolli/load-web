@@ -27,11 +27,11 @@
 }
 
 // Typeahead to match its parent width
-.accordion {
-  .card {
-    ngb-typeahead-window.dropdown-menu {
-      width: 100% !important;
-    }
+.card {
+  ngb-typeahead-window.dropdown-menu {
+    width: 100% !important;
+    height: 5rem;
+    overflow-y: scroll;
   }
 }
 

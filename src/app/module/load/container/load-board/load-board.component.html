@@ -46,17 +46,19 @@
               <h4 class="card-title mb-1">Trip</h4>
               <label for="originDst" class="mb-0">Origin:  <span>City/State/Zip</span></label>
               <div class="form-group mb-2">
-                <input type="text" id="originDst" class="form-control form-control-sm d-inline-block"
-                formControlName="originCsz" placeholder="Type to Search" [ngbTypeahead]="searchCityStateZip">
-
+                <div class="position-relative">
+                  <input type="text" id="originDst" class="form-control form-control-sm d-inline-block"
+                  formControlName="originCsz" placeholder="Type to Search" [ngbTypeahead]="searchCityStateZip">
+                </div>
                 <span class="ml-1 d-none">mi</span>
                 <mat-slider class="d-none"></mat-slider>
               </div>
               <label for="destinationDst" class="mb-0">Destination:  <span>City/State/Zip</span></label>
               <div class="form-group mb-0">
-                <input type="text" id="destinationDst" class="form-control form-control-sm d-inline-block"
-                formControlName="destinationCsz" placeholder="Type to Search" [ngbTypeahead]="searchCityStateZip">
-
+                <div class="position-relative">
+                  <input type="text" id="destinationDst" class="form-control form-control-sm d-inline-block"
+                  formControlName="destinationCsz" placeholder="Type to Search" [ngbTypeahead]="searchCityStateZip">
+                </div>
                 <span class="ml-1 d-none">mi</span>
                 <mat-slider class="d-none"></mat-slider>
               </div>
@@ -67,10 +69,11 @@
               <h4 class="card-title mb-1">Customer</h4>
               <div class="form-group mb-0">
                 <label for="custDetails" class="mb-0">Enter Customer Details</label>
-                <input type="text" id="custDetails" class="form-control form-control-sm" formControlName="customerObj"
-                  [ngbTypeahead]="searchCustomer" [inputFormatter]="formatter"
-                  [resultFormatter]="formatter" (selectItem)="selectedCustomer($event)" placeholder="Customer Name">
-
+                <div class="position-relative">
+                  <input type="text" id="custDetails" class="form-control form-control-sm" formControlName="customerObj"
+                    [ngbTypeahead]="searchCustomer" [inputFormatter]="formatter"
+                    [resultFormatter]="formatter" (selectItem)="selectedCustomer($event)" placeholder="Customer Name">
+                </div>
               </div>
             </div>
           </div>
