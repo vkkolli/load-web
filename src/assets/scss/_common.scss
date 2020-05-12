@@ -116,7 +116,12 @@
   }
 }
 
-// Mateials - Slider
+// Materials - Slider
 .mat-slider-horizontal {
   width: 100%;
+}
+
+// Materials - Datepicker
+.cdk-overlay-container {
+  z-index: 10300000001 !important;
 }
