@@ -30,7 +30,7 @@
 .card {
   ngb-typeahead-window.dropdown-menu {
     width: 100% !important;
-    height: 5rem;
+    max-height: 9.5rem;
     overflow-y: scroll;
   }
 }
@@ -94,7 +94,7 @@
         overflow: hidden;
       }
     }
-  }
+  }  
 
   // Angulr-Material theme overides
   &.material {
@@ -124,4 +124,36 @@
 // Materials - Datepicker
 .cdk-overlay-container {
   z-index: 10300000001 !important;
+}
+
+.mat-calendar-header {
+  padding-top: 0 !important;
+  .mat-calendar-controls {
+    margin-bottom: 0 !important;
+  }
+}
+.mat-datepicker-content {
+  .mat-calendar {
+    width: 200px !important;
+  }
+  .time-container.disable-seconds {
+    .ngx-mat-timepicker {
+      .table {
+        margin-left: 0 !important;
+        th, td {
+          padding: 0 !important;
+        }
+      }
+    }
+  }
+  .actions {
+    padding: 1px 15px 5px !important;
+    .mat-stroked-button {
+      padding: 0 8px !important;
+      line-height: 22px !important;
+    }
+  }
+  .mat-form-field-infix {
+    border-top: none !important;
+  }
 }

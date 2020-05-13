@@ -195,6 +195,7 @@ width: 5%;
 
 .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell, 
 .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-group-cell {
-    // white-space: normal !important;
+  white-space: normal !important;
+  line-height: 1.3;
 }
 
