@@ -71,7 +71,7 @@
           font-size: 0.67rem;
 
           a {
-            color: $tm-vt !important;
+            color: $thm-one !important;
             text-decoration: none;
 
             &::before {
@@ -88,7 +88,7 @@
     top: -1px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     .datatable-footer-inner {
-      background-color: lighten($tm-vt, $amount: 60%);
+      background-color: lighten($thm-one, $amount: 60%);
       @include media-breakpoint-up(lg) { 
         height: 35px !important;        
         overflow: hidden;
@@ -99,17 +99,17 @@
   // Angulr-Material theme overides
   &.material {
     .datatable-header {
-      background-color: lighten($tm-vt, 10%);
+      background-color: lighten($thm-one, 10%);
       .datatable-header-cell {
         padding: 0.3125rem 1.2rem;
-        background-color: lighten($tm-vt, 10%);
+        background-color: lighten($thm-one, 10%);
         color: $white;
       }
     }
 
     .datatable-body {
       .datatable-row-detail {
-        background-color: lighten($tm-vt, 60%);
+        background-color: lighten($thm-one, 60%);
         color: $white;
       }
     }
