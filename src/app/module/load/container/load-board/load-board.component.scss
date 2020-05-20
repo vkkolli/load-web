@@ -1,7 +1,7 @@
 @import '../../../../../assets/scss/skin';
 
 .quick-search {
-    background-color: darken($tm-vt, 12%);
+    background-color: darken($thm-one, 12%);
     // height: 95vh;
     
     h4 {
@@ -9,12 +9,12 @@
     }
 
     .card {
-        background-color: lighten($tm-vt, 60%);
+        background-color: lighten($thm-one, 60%);
         margin-bottom: 1rem;
 
         h4 {
-            color: $tm-vt;
-            border-bottom: 1px solid $tm-vt;
+            color: $thm-one;
+            border-bottom: 1px solid $thm-one;
             font-weight: bold;
         }
     }
@@ -24,9 +24,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-color: darken($tm-vt, 12%);
+    background-color: darken($thm-one, 12%);
     color: $white;
-    border: 1px solid darken($tm-vt, 12%);
+    border: 1px solid darken($thm-one, 12%);
     padding: 0.5rem;
     border-radius: 4px 0 0 4px;
     outline: none;

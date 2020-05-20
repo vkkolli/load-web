@@ -33,25 +33,14 @@ $loadboard-poc-theme: mat-light-theme($loadboard-poc-primary, $loadboard-poc-acc
 
 @import 'common';
 
-@import 'skin';
-
-
-
-body {
-  background-color: $tm-gy !important;
-}
-
 .header {
   position: fixed;
   z-index: 10300000000;
   left: 0;
   right: 0;
   top: 0;
-  // background-color: dimgrey;
-  background-color: darken($tm-vt, 3%);
+  background-color: darken($thm-one, 3%);
   color: aliceblue;
-  // padding: 18px;
-  // border-bottom: 3px solid darkgray;
   border-bottom: 3px solid $tm-or;
 }
 

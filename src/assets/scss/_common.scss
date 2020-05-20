@@ -1,4 +1,4 @@
-@import '../scss/skin';
+// @import '../scss/skin';
 
 // .ng-invalid:not(form) {
 //   border-color: #dc3545;
@@ -71,7 +71,7 @@
           font-size: 0.67rem;
 
           a {
-            color: $tm-vt !important;
+            color: $thm-one !important;
             text-decoration: none;
 
             &::before {
@@ -88,7 +88,10 @@
     top: -1px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     .datatable-footer-inner {
-      background-color: lighten($tm-vt, $amount: 60%);
+      // background-color: lighten($thm-one, $amount: 60%);
+      background-color: $thm-ngxfoot;
+      color: $white;
+      border-radius: 4px 4px 0 0;
       @include media-breakpoint-up(lg) { 
         height: 35px !important;        
         overflow: hidden;
@@ -99,18 +102,36 @@
   // Angulr-Material theme overides
   &.material {
     .datatable-header {
-      background-color: lighten($tm-vt, 10%);
+      background-color: lighten($thm-one, 10%);
       .datatable-header-cell {
         padding: 0.3125rem 1.2rem;
-        background-color: lighten($tm-vt, 10%);
+        background-color: lighten($thm-one, 10%);
         color: $white;
       }
     }
 
     .datatable-body {
       .datatable-row-detail {
-        background-color: lighten($tm-vt, 60%);
+        background-color: lighten($thm-one, 60%);
         color: $white;
+      }
+    }
+
+    .datatable-footer {
+      .datatable-pager {
+        .pager {
+          li {
+            a {
+              color: $white;
+              &:hover {
+                color: darken($color: $white, $amount: 25%);
+              }
+            }
+            &.disabled a {
+              color: darken($color: $white, $amount: 55%) !important;
+            }
+          }
+        }
       }
     }
   }
@@ -156,4 +177,11 @@
   .mat-form-field-infix {
     border-top: none !important;
   }
+}
+
+
+// Ngx-Table New UI
+.ngx-datatable-container {
+  position: relative;
+  z-index: 0;
 }

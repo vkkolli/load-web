@@ -26,7 +26,7 @@
             margin-right: 0.3125rem;
             &::before {
                 content: '.';
-                border-bottom: 2px solid $tm-vt;
+                border-bottom: 2px solid $thm-one;
                 position: absolute;
                 z-index: -1;
                 width: 96%;
@@ -52,7 +52,7 @@
                 }
             }
             .progress-index {
-                background-color: $tm-vt;
+                background-color: $thm-one;
                 color: $white;
                 border: 2px solid $white;
                 width: 2rem;
@@ -68,8 +68,8 @@
                 &.active {
                     font-weight: bold;
                     background-color: $tm-or;
-                    color: $tm-vt;
-                    border-color: $tm-vt;
+                    color: $thm-one;
+                    border-color: $thm-one;
                 }
             }
         }

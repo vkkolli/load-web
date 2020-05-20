@@ -40,7 +40,7 @@
 }
 
 .is-header-row {
-    background-color: lighten($tm-vt, 50%);
+    background-color: lighten($thm-one, 50%);
 }
 
 // Custom Expand Column
@@ -59,11 +59,11 @@
             .lbd-dtl-head {
                 font-weight: bold;
                 letter-spacing: 1px;
-                color: $tm-vt;
+                color: $thm-one;
             }
             .lbd-dtl-data {
                 letter-spacing: 1px;
-                color: $tm-vt;
+                color: $thm-one;
             }
         }
     }
