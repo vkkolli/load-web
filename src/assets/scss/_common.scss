@@ -145,6 +145,7 @@
     .datatable-header {
       // background-color: lighten($thm-one, 10%);
       background-color: $thm-ngx-thead;
+      border-left: 3px solid transparent;
       .datatable-header-cell {
         padding: 0.3125rem 1.2rem;
         // background-color: lighten($thm-one, 10%);

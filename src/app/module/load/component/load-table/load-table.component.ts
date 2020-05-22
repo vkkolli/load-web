@@ -128,6 +128,20 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     this.isFilterFlyout = !this.isFilterFlyout;
   }
 
+  getStatusClass(row){
+    var classList='';
+    if(row.loadStatus == 'Posted'){
+      classList = 'load-pickedup'; 
+    }else if (row.loadStatus == 'Delivered'){
+      classList = 'load-delivered';
+    }else if (row.loadStatus == 'In Transit'){
+      classList = 'load-intransit';
+    }else if(row.loadStatus == 'Cancelled'){
+      classList = 'load-cancelled';
+    }
+    return classList;
+  }
+
   getRowClass(row) {
     return {
       // 'is-header-row': row.age % 10 === 0

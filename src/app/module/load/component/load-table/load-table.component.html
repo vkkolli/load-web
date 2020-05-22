@@ -1,6 +1,6 @@
 <div class="ngx-datatable-container" *ngIf="showTable">
   <ngx-datatable #myTable class="material striped" style="height: 85vh;" [columns]="columns" [columnMode]="ColumnMode"
-    headerHeight="30" footerHeight="50" [rowHeight]="50" [rowClass]="getRowClass" [scrollbarV]="true"
+    headerHeight="30" footerHeight="50" [rowHeight]="50" [rowClass]="getStatusClass" [scrollbarV]="true"
     [scrollbarH]="false" [virtualization]="false" [externalPaging]="true" [count]="totalElements" [offset]="pageNumber"
     [limit]="pageSize" (page)="setPage($event)" [rows]="data">
     <!-- Row Template -->

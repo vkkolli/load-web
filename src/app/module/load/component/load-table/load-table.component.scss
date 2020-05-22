@@ -185,3 +185,37 @@
         flex: 1 1 60%;
     }
 }
+
+.ngx-datatable .datatable-body .datatable-row-wrapper {
+    // border-left: 3px solid $tm-rd;
+}
+
+.ngx-datatable {
+    &.material {
+        .datatable-header {
+          border-left: 6px solid transparent;
+        }
+    }
+}
+
+
+.ngx-datatable {
+    .datatable-body {
+        .datatable-body-row {
+            border-left-width: 6px;
+            border-left-style: solid;
+            &.load-pickedup {
+                border-color: $ld-pickedup;
+            }
+            &.load-delivered {
+                border-color: $ld-delivered;
+            }
+            &.load-intransit {
+                border-color: $ld-intransit;
+            }
+            &.load-cancelled {
+                border-color: $ld-cancelled;
+            }
+        }
+    }
+}
