@@ -34,6 +34,8 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild("picker") picker: any;
 
+  public isFilterFlyout = true;
+
   protected spinner: NgxSpinnerService;
 
   public disabled = false;
@@ -120,6 +122,10 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
 
   onDetailToggle(event) {
     console.log("Detail Toggled", event);
+  }
+
+  filterFlyout() {
+    this.isFilterFlyout = !this.isFilterFlyout;
   }
 
   getRowClass(row) {

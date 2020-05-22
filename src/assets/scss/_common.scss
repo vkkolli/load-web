@@ -26,6 +26,47 @@
   line-height: 0.5 !important;
 }
 
+.d-fx-10 {
+  display: flex;
+  flex: 1 1 10%;
+}
+.d-fx-20 {
+  display: flex;
+  flex: 1 1 20%;
+}
+.d-fx-30 {
+  display: flex;
+  flex: 1 1 30%;
+}
+.d-fx-40 {
+  display: flex;
+  flex: 1 1 40%;
+}
+.d-fx-50 {
+  display: flex;
+  flex: 1 1 50%;
+}
+.d-fx-60 {
+  display: flex;
+  flex: 1 1 60%;
+}
+.d-fx-70 {
+  display: flex;
+  flex: 1 1 70%;
+}
+.d-fx-80 {
+  display: flex;
+  flex: 1 1 80%;
+}
+.d-fx-90 {
+  display: flex;
+  flex: 1 1 90%;
+}
+.d-fx-100 {
+  display: flex;
+  flex: 1 1 100%;
+}
+
 // Typeahead to match its parent width
 .card {
   ngb-typeahead-window.dropdown-menu {
@@ -55,14 +96,14 @@
     position: absolute;
     top: 50px;
     @include media-breakpoint-up(lg) { 
-      top: 35px !important;
+      // top: 35px !important;
     }
   }
 
   .datatable-body {
     margin-top: 80px;
     @include media-breakpoint-up(lg) { 
-      margin-top: 65px !important;
+      // margin-top: 65px !important;
     }
     .datatable-body-row {
       .datatable-body-cell {
@@ -93,7 +134,7 @@
       color: $white;
       border-radius: 4px 4px 0 0;
       @include media-breakpoint-up(lg) { 
-        height: 35px !important;        
+        // height: 35px !important;        
         overflow: hidden;
       }
     }
@@ -102,10 +143,12 @@
   // Angulr-Material theme overides
   &.material {
     .datatable-header {
-      background-color: lighten($thm-one, 10%);
+      // background-color: lighten($thm-one, 10%);
+      background-color: $thm-ngx-thead;
       .datatable-header-cell {
         padding: 0.3125rem 1.2rem;
-        background-color: lighten($thm-one, 10%);
+        // background-color: lighten($thm-one, 10%);
+        background-color: $thm-ngx-thead;
         color: $white;
       }
     }

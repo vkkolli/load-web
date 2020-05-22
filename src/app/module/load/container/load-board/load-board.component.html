@@ -4,15 +4,22 @@
 <main class="main-body">
   <div class="container-fluid my-2">
     <section>
+      <!-- // Placeholder for Ngx-table -->
+      <div class="row">
+        <div class="col-12">
+          Placeholder for Ngx-Table - Place the fullscreen table here once completely developed...
+        </div>
+      </div>
+      <!-- // Placeholder for Ngx-table -->
       <div class="row">
         <div class="mt-1" [ngClass]="quickSearchState ?'col-3 col-sm-8 col-md-9 col-lg-10':'col-12 col-sm-12 col-md-12 col-lg-12'">
           <app-load-table [rows]="loads" [columns]="columns"></app-load-table>
-          <button type="button" class="btn-quicksearch" (click)="quickSearch()">
+          <button type="button" class="btn-quicksearch" (click)="quickSearch()" style="display: none;">
             <i class="fa" [ngClass]="quickSearchState ?'fa-chevron-right':'fa-chevron-left'"></i>
           </button>
         </div>
         <div class="mt-1 quick-search" [formGroup]="searchForm"
-        [ngClass]="quickSearchState ?'col-9 col-sm-4 col-md-3 col-lg-2':'d-none'">
+        [ngClass]="quickSearchState ?'col-9 col-sm-4 col-md-3 col-lg-2':'d-none'" style="display: none;">
           <h4 class="my-2">Filter Results</h4>
           <div class="card mb-1">
             <div class="card-body p-1">

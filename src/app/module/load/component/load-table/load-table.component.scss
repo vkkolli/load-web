@@ -68,3 +68,120 @@
         }
     }
 }
+
+// Temp Shift of Pagecounts in ngxtable
+// .ngx-datatable.material .datatable-footer .page-count {
+//     margin-left: 150px;
+// }
+
+// New Design POC
+// Ngx Table
+//======================================
+.filter-results {
+    position: relative;
+    flex: 1 1 10%;
+    .filter-label {
+        display: none;
+        @include media-breakpoint-up(sm) {
+            display: inline-flex;
+        }
+    }    
+    @include media-breakpoint-up(lg) { 
+        flex: 1 1 10%;
+    }    
+    padding: 15px;
+    border-top-left-radius: 4px;
+    border-right: 1px solid lighten($color: $thm-ngxfoot, $amount: 10%);    
+    &.active {
+        background-color: $thm-one;
+        border-right: 1px solid $thm-ngx-highlights;
+        i {
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+        }
+    }
+    i {        
+        color: $thm-ngx-highlights;
+        font-size: 16px;
+        @include media-breakpoint-up(sm) { 
+            margin-left: 10px;
+        }
+    }
+    .filter-flyout {
+        position: fixed;        
+        z-index: 1080;
+        width: 226px;
+        height: 100%;
+        top: 50px;
+        left: 0;
+        padding: 15px;
+        background-color: $thm-ngxfoot;
+        border-top: 1px solid $thm-ngx-highlights;
+        .fr-search {
+            height: 90%;
+            overflow-y: scroll;
+            .fr-searchpanel {
+                border-bottom: 1px solid darken($color: $white, $amount: 20%);
+                color: darken($color: $white, $amount: 20%);
+                margin-top: 1rem;
+                padding-bottom: 1rem;
+                &:first-child {
+                    margin-top: 0;
+                }
+                &:last-child {
+                    border-bottom: 0;
+                }
+                p {
+                    text-transform: uppercase;
+                    margin-bottom: 0.5rem;
+                    // font-weight: bold;
+                    color: $white;
+                }
+                label {
+                    margin-bottom: 0.2rem;
+                }
+                input, select {
+                    width: 100%;
+                    border: 1px solid darken($color: $white, $amount: 20%);
+                    color: $white;
+                    border-radius: 4px;
+                    padding: 0 3px;
+                    background-color: transparent; 
+                    height: 24px;
+                    line-height: 24px;
+                    &::placeholder {
+                        color: darken($color: $white, $amount: 30%);
+                        opacity: 0.7;
+                    }                                       
+                }
+                select {
+                    option {
+                        color: $black;
+                    }                               
+                }
+            }
+        }
+    }
+}
+.page-counter {
+    text-align: right;
+    flex: 1 1 12%;
+    @include media-breakpoint-up(lg) { 
+        display: block;
+        flex: 1 1 30%;
+    }
+    .row-counter {
+        display: none;
+        @include media-breakpoint-up(sm) {
+            display: inline-flex;
+            margin-left: 10px;
+        }
+    }
+}
+.paginator {
+    flex: 1 1 78%;
+    text-align: right;
+    @include media-breakpoint-up(lg) { 
+        flex: 1 1 60%;
+    }
+}
