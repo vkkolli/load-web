@@ -11,7 +11,7 @@ import {
   OnDestroy,
   ChangeDetectorRef,
 } from "@angular/core";
-import { ColumnMode } from "@swimlane/ngx-datatable";
+import { ColumnMode, SelectionType } from "@swimlane/ngx-datatable";
 import { ThemePalette } from "@angular/material/core";
 import { formatDate } from "@angular/common";
 import { LoadBoardService } from "@app/shared/service/load-board.service";
@@ -21,13 +21,14 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { LoadBoard } from "@app/shared/model/load.model";
 import { fromEvent } from "rxjs";
 import { debounceTime, takeWhile } from "rxjs/operators";
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: "app-load-table",
   templateUrl: "./load-table.component.html",
   styleUrls: ["./load-table.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild("myTable") table: any;
@@ -54,6 +55,24 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   isAlive = true;
   tableWidth = 1340;
   showTable = true;
+  selected = [];
+
+  timeCtrl = new FormControl('', (control: FormControl) => {
+    const value = control.value;
+
+    if (!value) {
+      return null;
+    }
+
+    if (value.hour < 12) {
+      return {tooEarly: true};
+    }
+    if (value.hour > 13) {
+      return {tooLate: true};
+    }
+
+    return null;
+  });
 
   @Input() rows: LoadBoard[];
   @Input() columns;
@@ -66,11 +85,14 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   deliveryDateEditing = {};
 
   public isPickupButtonVisible: boolean = true;
-
+  
   ColumnMode =
     window.innerWidth < this.tableWidth
       ? ColumnMode.standard
       : ColumnMode.force;
+
+  SelectionType = SelectionType;
+  
   constructor(
     injector: Injector,
     private loadBoardService: LoadBoardService,
@@ -147,6 +169,20 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
       // 'is-header-row': row.age % 10 === 0
       // 'is-header-row': row.loadId === 30000003
     };
+  }
+
+  onSelect({ selected }) {
+    console.log('Select Event', selected, this.selected);
+  }
+
+  isBarSelected = false;
+
+  onActivate(event) {
+    // console.log('Activate Event', event);
+    if(event.type == 'click') {
+    this.isBarSelected = true;
+    console.log(this.isBarSelected);
+    }
   }
 
   updatePickupDate(event, cell, rowIndex) {

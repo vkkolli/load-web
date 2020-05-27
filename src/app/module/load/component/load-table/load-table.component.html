@@ -2,7 +2,7 @@
   <ngx-datatable #myTable class="material striped" style="height: 85vh;" [columns]="columns" [columnMode]="ColumnMode"
     headerHeight="30" footerHeight="50" [rowHeight]="50" [rowClass]="getStatusClass" [scrollbarV]="true"
     [scrollbarH]="false" [virtualization]="false" [externalPaging]="true" [count]="totalElements" [offset]="pageNumber"
-    [limit]="pageSize" (page)="setPage($event)" [rows]="data">
+    [limit]="pageSize" [selected]="selected" [selectionType]="SelectionType.single" (activate)="onActivate($event)" (select)="onSelect($event)" (page)="setPage($event)" [rows]="data">
     <!-- Row Template -->
     <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
       <ng-template let-row="row" ngx-datatable-row-detail-template>
@@ -58,7 +58,109 @@
     </ngx-datatable-row-detail>
     <!-- Col Template -->
     <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
-      [canAutoResize]="false" [frozenLeft]="true">
+    [canAutoResize]="false" [frozenLeft]="false">
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>      
+        <div class="status-load" ngbDropdown> 
+          <a href="javascript:void(0)" ngbDropdownToggle>
+            <i class="fa fa-list-ul"></i>          
+          </a>
+          <ul ngbDropdownMenu>
+            <li ngbDropdown>
+              <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle>
+                <i class="fa fa-cart-arrow-down"></i>
+                Confirmed Pickup
+                <ul class="substatus-load pt-0" ngbDropdownMenu>
+                  <li>
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="d-fx-50">
+                        <div class="px-1">
+                          <!-- item 1 -->
+                          <div class="form-inline-lbd">
+                            <div class="form-group-lbd">
+                              <div class="input-group-lbd">
+                                <div class="prepend-lbd">
+                                  <button class="btn-lbd" (click)="d.toggle()" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                  </button>
+                                </div>
+                                <input class="form-control-lbd" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-fx-50">
+                        <div class="px-1">
+                          <!-- item 2 -->
+                          <div class="form-inline-lbd">
+                            <div class="form-group-lbd">
+                              <div class="input-group-lbd align-items-center">
+                                <div class="prepend-lbd">
+                                  <button class="btn-lbd" type="button">
+                                    <i class="fa fa-clock-o"></i>
+                                  </button>
+                                </div>
+                                <div id="ngb-timectrl">
+                                  <ngb-timepicker [formControl]="timeCtrl" [spinners]=true></ngb-timepicker>
+                                </div>                                                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div id="btn-xsm" class="d-flex mb-2">
+                      <div class="d-fx-50 mr-1">
+                        <button class="btn btn-block btn-sm btn-dark">OK</button>
+                      </div>
+                      <div class="d-fx-50 ml-1">
+                        <button class="btn btn-block btn-sm btn-light">Cancel</button>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </a>
+            </li>
+            <li ngbDropdown>
+              <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle>
+              <i class="fa fa-truck"></i>
+              Confirmed Delivery
+              <ul class="substatus-load" ngbDropdownMenu>
+                <li>
+                  delivery items here...
+                </li>
+              </ul>
+            </a>              
+            </li>
+            <li ngbDropdown>
+              <a class="cnf-canc" href="javascript:void(0)" ngbDropdownToggle>
+                <i class="fa fa-times-circle-o"></i>
+                Cancel Load
+                <ul class="substatus-load" ngbDropdownMenu>
+                  <li>
+                    cancel items here...
+                  </li>
+                </ul>
+              </a>
+            </li>
+          </ul>
+          <div id="datebox">
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                header
+              </div>
+              <div class="modal-body">
+                body
+              </div>
+            </ng-template>
+          </div>
+        </div> 
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+      [canAutoResize]="false" [frozenLeft]="false">
       <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
         <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
           title="Expand/Collapse Row" (click)="toggleExpandRow(row)">

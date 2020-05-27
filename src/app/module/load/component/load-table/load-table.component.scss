@@ -82,6 +82,7 @@
     flex: 1 1 10%;
     .filter-label {
         display: none;
+        cursor: pointer;
         @include media-breakpoint-up(sm) {
             display: inline-flex;
         }
@@ -103,6 +104,7 @@
     i {        
         color: $thm-ngx-highlights;
         font-size: 16px;
+        cursor: pointer;
         @include media-breakpoint-up(sm) { 
             margin-left: 10px;
         }
@@ -185,6 +187,82 @@
         flex: 1 1 60%;
     }
 }
+.status-load {
+    position: absolute;
+    .dropdown-toggle::after {
+        border: 0 !important;
+    }
+    ul {
+        -webkit-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.16);
+        -moz-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.16);
+        box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.16);
+        padding: 0.75rem;
+        font-size: 0.75rem;
+        li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            a {
+                position: relative;
+                display: block;
+                padding: 0.3rem;
+                &:hover {
+                    background-color: darken($color: $white, $amount: 10%);
+                }
+                i {
+                    padding-right: 0.5rem;
+                }
+            }
+        }
+        
+    }
+}
+ 
+.form-inline-lbd {
+    .form-group-lbd {
+        .input-group-lbd {
+            display: flex;
+            .prepend-lbd {
+                .btn-lbd {
+                    background-color: $white;
+                    border: 1px solid darken($color: $white, $amount: 15%);
+                    border-radius: 3px 0 0 3px;
+                    padding: 0.3rem;
+                    margin-right: -1px;
+                    i {
+                        color: $ld-pickedup;
+                    }
+                }
+            }
+            .form-control-lbd {
+                border: 1px solid darken($color: $white, $amount: 15%);
+                border-radius: 0 3px 3px 0;
+                padding: 0.3rem;
+            }
+        }
+    }
+}
+
+#ngb-timectrl {
+    .form-control {
+        padding: 0.3rem;
+        font-size: .75rem;
+        height: calc(1.0em + 0.75rem + 2px);
+        border-radius: 0;
+    }
+    .chevron {
+        font-size: 0.75rem;
+    }
+}
+
+#btn-xsm {
+    .btn {
+        padding: 0.2rem;
+        font-size: 0.75rem;
+    }
+}
 
 .ngx-datatable .datatable-body .datatable-row-wrapper {
     // border-left: 3px solid $tm-rd;
@@ -216,6 +294,46 @@
             &.load-cancelled {
                 border-color: $ld-cancelled;
             }
+            .datatable-body-cell {
+                .datatable-body-cell-label {
+                    a {
+                        &.cnf-pkup {
+                            color: $ld-pickedup !important;
+                        }
+                        &.cnf-dlvd {
+                            color: $ld-delivered !important;
+                        }
+                        &.cnf-canc {
+                            color: $ld-cancelled !important;
+                        }                        
+                    }
+
+                    .substatus-load {
+                        left: 45% !important;
+                        @include media-breakpoint-up(sm) {
+                            left: 115% !important;
+                            top: -28px !important;
+                            border-color: $white;
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                right: 100%;
+                                top: 10px;
+                                width: 0;
+                                height: 0;
+                                border-top: 10px solid transparent;
+                                border-right: 10px solid $white;
+                                border-bottom: 10px solid transparent;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
+
+
+
+
