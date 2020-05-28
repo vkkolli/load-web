@@ -156,7 +156,7 @@
 
     .datatable-body {
       .datatable-row-detail {
-        background-color: lighten($thm-one, 60%);
+        background-color: $thm-ngxfoot;
         color: $white;
       }
     }
