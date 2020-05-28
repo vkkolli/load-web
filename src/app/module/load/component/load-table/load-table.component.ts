@@ -63,14 +63,12 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     if (!value) {
       return null;
     }
-
-    if (value.hour < 12) {
-      return {tooEarly: true};
-    }
-    if (value.hour > 13) {
-      return {tooLate: true};
-    }
-
+    // if (value.hour < 12) {
+    //   return {tooEarly: true};
+    // }
+    // if (value.hour > 13) {
+    //   return {tooLate: true};
+    // }
     return null;
   });
 
@@ -157,8 +155,10 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     }else if (row.loadStatus == 'Delivered'){
       classList = 'load-delivered';
     }else if (row.loadStatus == 'In Transit'){
-      classList = 'load-intransit';
-    }else if(row.loadStatus == 'Cancelled'){
+      classList = 'load-intransit';    
+    }else if (row.loadStatus == 'Carrier Assigned/Pending Pickup'){
+      classList = 'load-assigned';
+    }else if (row.loadStatus == 'Cancelled'){
       classList = 'load-cancelled';
     }
     return classList;

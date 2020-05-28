@@ -29,7 +29,7 @@
             ],
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/assets/scss/styles.scss"
             ],
             "scripts": []
@@ -96,7 +96,7 @@
             ],
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
             "scripts": []

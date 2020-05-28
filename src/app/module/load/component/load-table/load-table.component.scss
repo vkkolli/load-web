@@ -170,7 +170,7 @@
     flex: 1 1 12%;
     @include media-breakpoint-up(lg) { 
         display: block;
-        flex: 1 1 30%;
+        flex: 1 1 55%;
     }
     .row-counter {
         display: none;
@@ -180,11 +180,42 @@
         }
     }
 }
+.row-limit {
+    text-align: right;
+    flex: 1 1 6%;
+    align-items: center;
+    display: none;
+    @include media-breakpoint-up(lg) { 
+        flex: 1 1 10%;
+        justify-content: flex-end;
+        display: flex;
+    }
+    span {
+        margin-right: 0.5rem;
+    }
+    select {
+        // width: 100%;
+        border: 1px solid darken($color: $white, $amount: 20%);
+        color: $white;
+        border-radius: 4px;
+        padding: 0 3px;
+        background-color: transparent; 
+        height: 24px;
+        line-height: 24px;
+        &::placeholder {
+            color: darken($color: $white, $amount: 30%);
+            opacity: 0.7;
+        }  
+        option {
+            color: $black;
+        } 
+    }
+}
 .paginator {
     flex: 1 1 78%;
     text-align: right;
     @include media-breakpoint-up(lg) { 
-        flex: 1 1 60%;
+        flex: 1 1 25%;
     }
 }
 .status-load {
@@ -290,6 +321,9 @@
             }
             &.load-intransit {
                 border-color: $ld-intransit;
+            }
+            &.load-assigned {
+                border-color: $ld-assigned;
             }
             &.load-cancelled {
                 border-color: $ld-cancelled;

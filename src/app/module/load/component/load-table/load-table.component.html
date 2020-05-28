@@ -146,16 +146,6 @@
               </a>
             </li>
           </ul>
-          <div id="datebox">
-            <ng-template #content let-modal>
-              <div class="modal-header">
-                header
-              </div>
-              <div class="modal-body">
-                body
-              </div>
-            </ng-template>
-          </div>
         </div> 
       </ng-template>
     </ngx-datatable-column>
@@ -235,36 +225,42 @@
               <div class="fr-search pr-1">
                 <div class="fr-searchpanel">
                   <p>Age</p>
-                  <div class="d-flex">
+                  <div class="d-flex align-items-center">
                     <div class="d-fx-30">                      
                       <input type="text" placeholder="50">
                       <span class="ml-1">hr</span>
                     </div>
                     <div class="d-fx-70">
-                      <div class="px-2">slider</div>
+                      <div class="px-2">
+                        <mat-slider></mat-slider>
+                      </div>
                     </div>
                   </div>
                 </div>  
                 <div class="fr-searchpanel">
                   <p>Trip</p>
                   <label>Origin:</label>
-                  <div class="d-flex mb-2">
+                  <div class="d-flex mb-2 align-items-center">
                     <div class="d-fx-30">                      
                       <input type="text" placeholder="25">
                       <span class="ml-1">mi</span>
                     </div>
                     <div class="d-fx-70">
-                      <div class="px-2">slider</div>
+                      <div class="px-2">
+                        <mat-slider></mat-slider>
+                      </div>
                     </div>
                   </div>
                   <label>Destination:</label>
-                  <div class="d-flex">
+                  <div class="d-flex align-items-center">
                     <div class="d-fx-30">                      
                       <input type="text" placeholder="125">
                       <span class="ml-1">mi</span>
                     </div>
                     <div class="d-fx-70">
-                      <div class="px-2">slider</div>
+                      <div class="px-2">
+                        <mat-slider></mat-slider>
+                      </div>
                     </div>
                   </div>
                 </div>    
@@ -346,6 +342,17 @@
           <div class="page-counter">
             <!-- Rows: {{ rowCount }} | PageSize: {{ pageSize }} | Offset: {{offset}}  -->
             {{ rowCount }}<span class="row-counter">Total Results</span>
+          </div>
+          <div class="row-limit">
+            <span>Show :</span>
+            <select>
+              <option>10</option>
+              <option>20</option>
+              <option>40</option>
+              <option>60</option>
+              <option>80</option>
+              <option>100</option>
+            </select>
           </div>
           <div class="paginator">
             <datatable-pager
