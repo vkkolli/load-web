@@ -229,7 +229,7 @@
             </div>
             <div class="filter-flyout pr-0" [ngbCollapse]="isFilterFlyout">
               <div class="fr-search pr-1">
-                <div class="fr-searchpanel">
+                <div class="fr-searchpanel d-none">
                   <p>Age</p>
                   <div class="d-flex align-items-center">
                     <div class="d-fx-30">                      
@@ -244,63 +244,99 @@
                   </div>
                 </div>  
                 <div class="fr-searchpanel">
+                  <p>Load</p>
+                  <label>Enter LoadID:</label>
+                  <div class="d-flex">
+                    <div class="d-fx-100">                      
+                      <input type="text" placeholder="Load Id">
+                    </div>
+                  </div>
+                </div>
+                <div class="fr-searchpanel">
                   <p>Trip</p>
-                  <label>Origin:</label>
-                  <div class="d-flex mb-2 align-items-center">
-                    <div class="d-fx-30">                      
-                      <input type="text" placeholder="25">
-                      <span class="ml-1">mi</span>
-                    </div>
-                    <div class="d-fx-70">
-                      <div class="px-2">
-                        <mat-slider></mat-slider>
-                      </div>
+                  <label>Origin: City/State/Zip</label>
+                  <div class="d-flex">
+                    <div class="d-fx-100">                      
+                      <input type="text" placeholder="Enter to Search">
                     </div>
                   </div>
-                  <label>Destination:</label>
-                  <div class="d-flex align-items-center">
-                    <div class="d-fx-30">                      
-                      <input type="text" placeholder="125">
-                      <span class="ml-1">mi</span>
-                    </div>
-                    <div class="d-fx-70">
-                      <div class="px-2">
-                        <mat-slider></mat-slider>
+                  <div class="just-wrapper"> <!-- Justwrapper starts-->
+                    <div class="d-flex mb-2 align-items-center">
+                      <div class="d-fx-30">                      
+                        <input type="text" placeholder="25">
+                        <span class="ml-1">mi</span>
+                      </div>
+                      <div class="d-fx-70">
+                        <div class="px-2">
+                          <mat-slider></mat-slider>
+                        </div>
                       </div>
                     </div>
+                  </div> <!-- Justwrapper ends-->
+                  <label class="mt-2">Destination: City/State/Zip</label>
+                  <div class="d-flex">
+                    <div class="d-fx-100">                      
+                      <input type="text" placeholder="Enter to Search">
+                    </div>
                   </div>
+                  <div class="just-wrapper"> <!-- Justwrapper starts-->
+                    <div class="d-flex align-items-center">
+                      <div class="d-fx-30">                      
+                        <input type="text" placeholder="125">
+                        <span class="ml-1">mi</span>
+                      </div>
+                      <div class="d-fx-70">
+                        <div class="px-2">
+                          <mat-slider></mat-slider>
+                        </div>
+                      </div>
+                    </div>
+                  </div> <!-- Justwrapper ends-->
                 </div>    
                 <div class="fr-searchpanel">
                   <p>Equipment</p>
-                  <label>Length:</label>
+                  <div class="just-wrapper"> <!-- Justwrapper starts-->
+                    <label>Length:</label>
+                    <div class="d-flex mb-2">                                        
+                      <div class="d-fx-70">
+                        <div class="px-1">Over</div>
+                      </div>
+                      <div class="d-fx-30">                      
+                        <input type="text" placeholder="25">
+                        <span class="ml-1">ft</span>
+                      </div>
+                    </div>
+                    <label>Weight:</label>
+                    <div class="d-flex">                    
+                      <div class="d-fx-70">
+                        <div class="px-1">Over</div>
+                      </div>
+                      <div class="d-fx-30">                      
+                        <input type="text" placeholder="125">
+                        <span class="ml-1">lb</span>
+                      </div>
+                    </div>
+                    <label for="">Full/Partial:</label>
+                    <div class="mb-2">
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">2</option>
+                      </select>
+                    </div>  
+                  </div>    <!-- Justwrapper ends-->            
                   <div class="d-flex mb-2">                                        
-                    <div class="d-fx-70">
-                      <div class="px-1">Over</div>
+                    <div class="d-fx-30">
+                      <div class="px-1">Type:</div>
                     </div>
-                    <div class="d-fx-30">                      
-                      <input type="text" placeholder="25">
-                      <span class="ml-1">ft</span>
+                    <div class="d-fx-70">                      
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">2</option>
+                      </select>
                     </div>
-                  </div>
-                  <label>Weight:</label>
-                  <div class="d-flex">                    
-                    <div class="d-fx-70">
-                      <div class="px-1">Over</div>
-                    </div>
-                    <div class="d-fx-30">                      
-                      <input type="text" placeholder="125">
-                      <span class="ml-1">lb</span>
-                    </div>
-                  </div>
-                  <label for="">Full/Partial:</label>
-                  <div>
-                    <select name="" id="">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                    </select>
                   </div>
                 </div>     
-                <div class="fr-searchpanel">
+                <div class="fr-searchpanel d-none">
                   <p>Availability</p>
                   <div class="d-flex mb-2">                                        
                     <div class="d-fx-50">
@@ -310,8 +346,17 @@
                       <input type="text" placeholder="04/16/2020">
                     </div>
                   </div>
-                </div>    
+                </div>     
                 <div class="fr-searchpanel">
+                  <p>Customer</p>
+                  <label>Enter Customer Details:</label>
+                  <div class="d-flex">
+                    <div class="d-fx-100">                      
+                      <input type="text" placeholder="Customer Name">
+                    </div>
+                  </div>
+                </div>
+                <div class="fr-searchpanel d-none">
                   <p>Company</p>
                   <label for="">Home State:</label>
                   <div class="mb-2">
@@ -341,7 +386,10 @@
                       <input type="text" placeholder="">
                     </div>
                   </div>
-                </div>              
+                </div>  
+                <div class="text-right my-2">
+                  <button type="button" class="btn btn-sm btn-info">Search</button>
+                </div>            
               </div>
             </div>
           </div>

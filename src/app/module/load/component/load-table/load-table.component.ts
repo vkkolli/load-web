@@ -21,7 +21,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { LoadBoard } from "@app/shared/model/load.model";
 import { fromEvent } from "rxjs";
 import { debounceTime, takeWhile } from "rxjs/operators";
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-load-table",
@@ -56,6 +56,8 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   tableWidth = 1340;
   showTable = true;
   selected = [];
+
+  searchForm: FormGroup;
 
   timeCtrl = new FormControl('', (control: FormControl) => {
     const value = control.value;
@@ -95,7 +97,8 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     injector: Injector,
     private loadBoardService: LoadBoardService,
     private toastr: ToastrService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private fb: FormBuilder,
   ) {
     this.spinner = injector.get(NgxSpinnerService);
     this.windowResizeEvent.subscribe((event) => {
