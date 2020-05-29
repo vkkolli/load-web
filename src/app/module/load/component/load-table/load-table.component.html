@@ -72,7 +72,8 @@
           </a>
           <ul ngbDropdownMenu>
             <li ngbDropdown>
-              <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle>
+              <div *ngIf="row.isConfirmPickupEnable">
+              <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle   >
                 <i class="fa fa-cart-arrow-down"></i>
                 Confirmed Pickup
                 <ul class="substatus-load pt-0" ngbDropdownMenu>
@@ -128,17 +129,31 @@
                   </li>
                 </ul>
               </a>
+            </div>
+            <div *ngIf="!row.isConfirmPickupEnable">
+              <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle class="disabled">
+                <i class="fa fa-cart-arrow-down"></i>Confirmed Pickup
+              </a>
+            </div>
             </li>
             <li ngbDropdown>
-              <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle>
-              <i class="fa fa-truck"></i>
-              Confirmed Delivery
-              <ul class="substatus-load" ngbDropdownMenu>
-                <li>
-                  delivery items here...
-                </li>
-              </ul>
-            </a>              
+              <div *ngIf="row.isConfirmDeliveryEnable">
+                <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle>
+                <i class="fa fa-truck"></i>
+                Confirmed Delivery
+                <ul class="substatus-load" ngbDropdownMenu>
+                  <li>
+                    delivery items here...
+                  </li>
+                </ul>
+                </a>
+              </div>
+              <div *ngIf="!row.isConfirmDeliveryEnable">
+                <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle class="disabled">
+                  <i class="fa fa-truck"></i>
+                  Confirmed Delivery
+                </a>
+              </div>              
             </li>
             <li ngbDropdown>
               <a class="cnf-canc" href="javascript:void(0)" ngbDropdownToggle>
