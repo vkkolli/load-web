@@ -22,6 +22,7 @@ import { LoadBoard } from "@app/shared/model/load.model";
 import { fromEvent } from "rxjs";
 import { debounceTime, takeWhile } from "rxjs/operators";
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: "app-load-table",
@@ -56,10 +57,16 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   tableWidth = 1340;
   showTable = true;
   selected = [];
+  dateString = "";
+  timeString = "";
 
   searchForm: FormGroup;
+  dateForm = new FormGroup({
+    timeCtrl: new FormControl(new Date().getTime()),
+    dateCtrl: new FormControl(this.ngbCalendar.getToday()),
+  });
 
-  timeCtrl = new FormControl('', (control: FormControl) => {
+  /*timeCtrl = new FormControl('', (control: FormControl) => {
     const value = control.value;
 
     if (!value) {
@@ -72,7 +79,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     //   return {tooLate: true};
     // }
     return null;
-  });
+  });*/
 
   @Input() rows: LoadBoard[];
   @Input() columns;
@@ -99,6 +106,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     private toastr: ToastrService,
     private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
+    private ngbCalendar: NgbCalendar,
   ) {
     this.spinner = injector.get(NgxSpinnerService);
     this.windowResizeEvent.subscribe((event) => {
@@ -188,7 +196,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  updatePickupDate(event, cell, rowIndex) {
+  /*updatePickupDate(event, cell, rowIndex) {
     this.spinner.show();
     this.pickupDateEditing[rowIndex] = false;
     var val = event instanceof Date ? event : event.target.value;
@@ -240,5 +248,80 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
       this.toastr.error("Delivery Confirmation Error ...");
     }
   );
+}*/
+updatePickupDate(cell, rowIndex) {
+  this.spinner.show();
+  this.pickupDateEditing[rowIndex] = false;
+  var date = this.dateForm.get('dateCtrl').value;
+  if (date) {
+    this.dateString = (date.month + '/' + date.day + '/' + date.year);
+  }
+  var time = this.dateForm.get('timeCtrl').value;
+  if (time) {
+    this.timeString = (time.hour + ':' + time.minute + ':' + time.second);
+  }
+  var val = this.dateString +' '+ this.timeString;
+  const format = "yyyy-MM-dd, HH:mm:ss";
+  const locale = "en-US";
+  const formattedDate = formatDate(val, format, locale);
+  this.rows[rowIndex].actualPickupDate = formattedDate;
+  const pickupDeliveryDates = new PickupDeliveryDates();
+  pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+  pickupDeliveryDates.tripType = "ORGIN";
+  pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
+  pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
+  this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
+    (loaddata) => {
+      this.data[rowIndex] = loaddata;
+      this.data = [...this.data];
+      this.spinner.hide();
+      this.toastr.success("Pickup Date Confirmed ...");
+    },
+    (error) => {
+      this.spinner.hide();
+      this.toastr.error("Pickup Confirmation Error ...");
+    }
+  );
 }
+
+updateDeliveryDate(cell, rowIndex) {
+  this.deliveryDateEditing[rowIndex] = false;
+  var date = this.dateForm.get('dateCtrl').value;
+    if (date) {
+      this.dateString = (date.month + '/' + date.day + '/' + date.year);
+    }
+    var time = this.dateForm.get('timeCtrl').value;
+    if (time) {
+      this.timeString = (time.hour + ':' + time.minute + ':' + time.second);
+    }
+  var val = this.dateString +' '+ this.timeString;
+  const format = "yyyy-MM-dd, HH:mm:ss";
+  const locale = "en-US";
+  const formattedDate = formatDate(val, format, locale);
+  console.log('formattedDate formattedDate '+formattedDate);
+  this.spinner.show();
+  this.rows[rowIndex].actualDeliveryDate = formattedDate;
+  const pickupDeliveryDates = new PickupDeliveryDates();
+  pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+  pickupDeliveryDates.tripType = "DESTINATION";
+  pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
+  pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
+  this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
+  (loaddata) => {
+    this.data[rowIndex] = loaddata;
+    this.data = [...this.data];
+    this.spinner.hide();
+    this.toastr.success("Delivery Date Confirmed ...");
+  },
+  (error) => {
+    this.spinner.hide();
+    this.toastr.error("Delivery Confirmation Error ...");
+  }
+);
+}
+
+onClickOK(dp : String){
+  alert('Clicked ok' + dp);
+}
+
 }

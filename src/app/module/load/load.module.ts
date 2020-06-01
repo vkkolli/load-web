@@ -68,7 +68,7 @@ import { LoadBoardComponent } from "./container/load-board/load-board.component"
 import { LoadComponent } from "./container/load/load.component";
 import { LoadRoutingModule } from "./load-routing.module";
 import { CarrierService } from './service/carrier.service';
-
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -147,6 +147,7 @@ import { CarrierService } from './service/carrier.service';
     NgxMatNativeDateModule,
     PortalModule,
     ScrollingModule,
+    FormsModule,
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en

@@ -65,95 +65,151 @@
     <!-- Col Template -->
     <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
     [canAutoResize]="false" [frozenLeft]="false">
-      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>      
+      <ng-template let-row="row" let-rowIndex="rowIndex" let-expanded="expanded" ngx-datatable-cell-template>      
         <div class="status-load" ngbDropdown> 
           <a href="javascript:void(0)" ngbDropdownToggle>
             <i class="fa fa-list-ul"></i>          
           </a>
           <ul ngbDropdownMenu>
             <li ngbDropdown>
-              <div *ngIf="row.isConfirmPickupEnable">
+              <div *ngIf="row.actualPickupDate">
+                <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle class="disabled">
+                  <i class="fa fa-cart-arrow-down"></i>Confirmed Pickup
+                </a>
+              </div>
+              <div *ngIf="!row.actualPickupDate">
               <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle   >
                 <i class="fa fa-cart-arrow-down"></i>
                 Confirmed Pickup
                 <ul class="substatus-load pt-0" ngbDropdownMenu>
-                  <li>
-                    <div class="d-flex align-items-center mb-2">
-                      <div class="d-fx-50">
-                        <div class="px-1">
-                          <!-- item 1 -->
-                          <div class="form-inline-lbd">
-                            <div class="form-group-lbd">
-                              <div class="input-group-lbd">
-                                <div class="prepend-lbd">
-                                  <button class="btn-lbd" (click)="d.toggle()" type="button">
-                                    <i class="fa fa-calendar"></i>
-                                  </button>
+                  <form [formGroup] = "dateForm" >
+                    <li>
+                      <div class="d-flex align-items-center mb-2">
+                        <div class="d-fx-50">
+                          <div class="px-1">
+                            <!-- item 1 -->
+                            <div class="form-inline-lbd">
+                              <div class="form-group-lbd">
+                                <div class="input-group-lbd">
+                                  <div class="prepend-lbd">
+                                    <button class="btn-lbd" (click)="d.toggle()" type="button">
+                                      <i class="fa fa-calendar"></i>
+                                    </button>
+                                  </div>
+                                  <input type="text" class="form-control-lbd" formControlName="dateCtrl" 
+                                  placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">                                
                                 </div>
-                                <input class="form-control-lbd" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-fx-50">
+                          <div class="px-1">
+                            <!-- item 2 -->
+                            <div class="form-inline-lbd">
+                              <div class="form-group-lbd">
+                                <div class="input-group-lbd align-items-center">
+                                  <div class="prepend-lbd">
+                                    <button class="btn-lbd" type="button">
+                                      <i class="fa fa-clock-o"></i>
+                                    </button>
+                                  </div>
+                                  <div id="ngb-timectrl">
+                                    <ngb-timepicker formControlName="timeCtrl" [spinners]=true [seconds]=true></ngb-timepicker>
+                                  </div>                                                                
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="d-fx-50">
-                        <div class="px-1">
-                          <!-- item 2 -->
-                          <div class="form-inline-lbd">
-                            <div class="form-group-lbd">
-                              <div class="input-group-lbd align-items-center">
-                                <div class="prepend-lbd">
-                                  <button class="btn-lbd" type="button">
-                                    <i class="fa fa-clock-o"></i>
-                                  </button>
-                                </div>
-                                <div id="ngb-timectrl">
-                                  <ngb-timepicker [formControl]="timeCtrl" [spinners]=true></ngb-timepicker>
-                                </div>                                                                
-                              </div>
-                            </div>
-                          </div>
+                    </li>
+                    <li>
+                      <div id="btn-xsm" class="d-flex mb-2">
+                        <div class="d-fx-50 mr-1">
+                          <button type="submit" (click)="updatePickupDate('row.actualPickupDate', rowIndex)" 
+                          class="btn btn-block btn-sm btn-dark" ngbDropdownToggle>OK</button>
+                        </div>
+                        <div class="d-fx-50 ml-1">
+                          <button class="btn btn-block btn-sm btn-light" ngbDropdownToggle>Cancel</button>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div id="btn-xsm" class="d-flex mb-2">
-                      <div class="d-fx-50 mr-1">
-                        <button class="btn btn-block btn-sm btn-dark">OK</button>
-                      </div>
-                      <div class="d-fx-50 ml-1">
-                        <button class="btn btn-block btn-sm btn-light" ngbDropdownToggle>Cancel</button>
-                      </div>
-                    </div>
-                  </li>
+                    </li>
+                  </form>
                 </ul>
               </a>
             </div>
-            <div *ngIf="!row.isConfirmPickupEnable">
-              <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle class="disabled">
-                <i class="fa fa-cart-arrow-down"></i>Confirmed Pickup
-              </a>
-            </div>
+            
             </li>
             <li ngbDropdown>
-              <div *ngIf="row.isConfirmDeliveryEnable">
-                <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle>
-                <i class="fa fa-truck"></i>
-                Confirmed Delivery
-                <ul class="substatus-load" ngbDropdownMenu>
-                  <li>
-                    delivery items here...
-                  </li>
-                </ul>
-                </a>
-              </div>
-              <div *ngIf="!row.isConfirmDeliveryEnable">
+              <div *ngIf = "(row.actualPickupDate && row.actualDeliveryDate)">
                 <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle class="disabled">
                   <i class="fa fa-truck"></i>
                   Confirmed Delivery
                 </a>
-              </div>              
+              </div> 
+              <div *ngIf = "!(row.actualPickupDate && row.actualDeliveryDate)">
+                <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle>
+                <i class="fa fa-truck"></i>
+                Confirmed Delivery
+                <ul class="substatus-load" ngbDropdownMenu>
+                  <form [formGroup] = "dateForm" >
+                    <li>
+                      <div class="d-flex align-items-center mb-2">
+                        <div class="d-fx-50">
+                          <div class="px-1">
+                            <!-- item 1 -->
+                            <div class="form-inline-lbd">
+                              <div class="form-group-lbd">
+                                <div class="input-group-lbd">
+                                  <div class="prepend-lbd">
+                                    <button class="btn-lbd" (click)="d.toggle()" type="button">
+                                      <i class="fa fa-calendar"></i>
+                                    </button>
+                                  </div>
+                                  <input type="text" class="form-control-lbd" formControlName="dateCtrl" 
+                                  placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">                                
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-fx-50">
+                          <div class="px-1">
+                            <!-- item 2 -->
+                            <div class="form-inline-lbd">
+                              <div class="form-group-lbd">
+                                <div class="input-group-lbd align-items-center">
+                                  <div class="prepend-lbd">
+                                    <button class="btn-lbd" type="button">
+                                      <i class="fa fa-clock-o"></i>
+                                    </button>
+                                  </div>
+                                  <div id="ngb-timectrl">
+                                    <ngb-timepicker formControlName="timeCtrl" [spinners]=true [seconds]=true></ngb-timepicker>
+                                  </div>                                                                
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div id="btn-xsm" class="d-flex mb-2">
+                        <div class="d-fx-50 mr-1">
+                          <button type="submit" (click)="updateDeliveryDate('row.actualPickupDate', rowIndex)" 
+                          class="btn btn-block btn-sm btn-dark" ngbDropdownToggle>OK</button>
+                        </div>
+                        <div class="d-fx-50 ml-1">
+                          <button class="btn btn-block btn-sm btn-light" ngbDropdownToggle>Cancel</button>
+                        </div>
+                      </div>
+                    </li>
+                  </form>
+                </ul>
+                </a>
+              </div>             
             </li>
             <li ngbDropdown>
               <a class="cnf-canc" href="javascript:void(0)" ngbDropdownToggle>
@@ -188,15 +244,17 @@
     </ngx-datatable-column>
     <ngx-datatable-column name="Actual Pickup" [minWidth]="140" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.pickupDate">
-        <span title="Click to edit" (click)="pickupDateEditing[rowIndex] = true"
+        <!-- <span title="Click to edit" (click)="pickupDateEditing[rowIndex] = true"
           *ngIf="!row.actualPickupDate && !pickupDateEditing[rowIndex]">
           <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmPickupEnable">Confirm
             Pickup</button>
-        </span>
-        <span *ngIf="row.actualPickupDate">
+        </span> -->
+        <span *ngIf="row.actualPickupDate; else defaultValue">
           {{row.actualPickupDate}}
         </span>
-        <mat-form-field *ngIf="pickupDateEditing[rowIndex]">
+        <ng-template #defaultValue> 
+        </ng-template>
+        <!-- <mat-form-field *ngIf="pickupDateEditing[rowIndex]">
           <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose datetime"
             (dateChange)="updatePickupDate($event, 'row.actualPickupDate', rowIndex)">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -204,20 +262,22 @@
             [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" [disableMinute]=false
             [hideTime]=false>
           </ngx-mat-datetime-picker>
-        </mat-form-field>
+        </mat-form-field> -->
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Actual Delivery" [minWidth]="140" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.actualDeliveryDate">
-        <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true"
+        <!-- <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true"
           *ngIf="!row.actualDeliveryDate && !deliveryDateEditing[rowIndex]">
           <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmDeliveryEnable">Confirm
             Delivery</button>
-        </span>
-        <span *ngIf="row.actualDeliveryDate">
+        </span> -->
+        <span *ngIf="row.actualDeliveryDate; else defaultValue">
           {{row.actualDeliveryDate}}
         </span>
-        <mat-form-field *ngIf="deliveryDateEditing[rowIndex]">
+        <ng-template  #defaultValue>  
+        </ng-template>
+        <!-- <mat-form-field *ngIf="deliveryDateEditing[rowIndex]">
           <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose datetime"
             (dateChange)="updateDeliveryDate($event, 'row.actualDeliveryDate', rowIndex)">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -225,7 +285,7 @@
             [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" [disableMinute]=false
             [hideTime]=false>
           </ngx-mat-datetime-picker>
-        </mat-form-field>
+        </mat-form-field> -->
       </ng-template>
     </ngx-datatable-column>
     <!-- Footer Template -->
