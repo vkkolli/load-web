@@ -22,7 +22,7 @@ export class LoadBoardService {
     
     getLoads(startPageNumber: string, endPageNumber: string): Observable<LoadBoard[]> {
       
-      return this.http.get<LoadBoard[]>(this._loadBoardUrl, {params: {startPageNumber: startPageNumber, endPageNumber: endPageNumber}});
+      return this.http.get<LoadBoard[]>(this._loadBoardUrl, {params: {pageNumber: startPageNumber, recordsPerPage: endPageNumber}});
   }
 
   getLoadSearch(searchLoad : LoadBoardParameters): Observable<LoadBoard[]> {
