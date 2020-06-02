@@ -19,12 +19,10 @@ export class LoadBoardService {
     constructor(private http: HttpClient, private repo: RepositoryService ) {
 
     }
-
-    getLoads(): Observable<LoadBoard[]> {
-      if (this.loads) {
-          return of(this.loads);
-      }
-      return this.http.get<LoadBoard[]>(this._loadBoardUrl);
+    
+    getLoads(startPageNumber: string, endPageNumber: string): Observable<LoadBoard[]> {
+      
+      return this.http.get<LoadBoard[]>(this._loadBoardUrl, {params: {startPageNumber: startPageNumber, endPageNumber: endPageNumber}});
   }
 
   getLoadSearch(searchLoad : LoadBoardParameters): Observable<LoadBoard[]> {

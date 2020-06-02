@@ -98,12 +98,13 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   setPage(page) {
-    const offsetStart = page.offset * this.pageSize;
+    
+    const offsetStart = page.offset+1;
     let offsetEnd = offsetStart + this.pageSize;
-    if (offsetEnd >= this.totalElements) {
-      offsetEnd = this.totalElements - 1;
-    }
-    this.data = this.rows?.slice(offsetStart, offsetEnd) ?? [];
+    
+    this.loadBoardService.getLoads(offsetStart, offsetEnd).subscribe(data =>{
+      this.data = data;
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {
