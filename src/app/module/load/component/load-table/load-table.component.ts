@@ -132,6 +132,11 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
       }
     );
   }
+
+  quickSearch() {
+    this.quickSearchState = !this.quickSearchState;
+  }
+
   ngOnDestroy() {
     this.isAlive = false;
   }
@@ -339,7 +344,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     this.loadBoardService.getLoadSearch(this.searchForm.value).subscribe(
       (data) => {
         this.loads = data;
-        // this.quickSearch();
+        this.quickSearch();
         this.spinner.hide();
         if (data.length == 0) {
           this.toastr.info("No Loads found in such criteria");
