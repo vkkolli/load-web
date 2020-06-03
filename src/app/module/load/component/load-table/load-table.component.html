@@ -474,7 +474,7 @@
           </div>
           <div class="row-limit">
             <span>Show :</span>
-            <select>
+            <select [(ngModel)]="PageResultsCount" (change)="getResults($event)">
               <option>10</option>
               <option>20</option>
               <option>40</option>

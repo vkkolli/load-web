@@ -59,6 +59,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   selected = [];
   dateString = "";
   timeString = "";
+  PageResultsCount = "10";
 
   searchForm: FormGroup;
   dateForm = new FormGroup({
@@ -131,18 +132,23 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   setPage(page) {
-    
-    const offsetStart = page.offset+1;
-    let offsetEnd = ""+this.pageSize;
-    
-    this.loadBoardService.getLoads(offsetStart, offsetEnd).subscribe(data =>{
+
+    if (page.offset != undefined) {
+      this.pageNumber = page.offset + 1;
+    }
+    this.loadBoardService.getLoads("" + this.pageNumber, this.PageResultsCount).subscribe(data => {
       this.data = data;
     })
   }
 
+  getResults(page) {
+    this.setPage(page);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.rows && changes.rows.currentValue) {
-      this.totalElements = this.rows?.length ?? 0;
+
+      this.totalElements = this.rows[0].totalRecords;
       this.data = this.rows?.slice(0, this.pageSize) ?? [];
     }
   }
