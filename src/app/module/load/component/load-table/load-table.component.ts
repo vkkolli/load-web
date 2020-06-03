@@ -11,18 +11,20 @@ import {
   OnDestroy,
   ChangeDetectorRef,
 } from "@angular/core";
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadBoard } from "@app/shared/model/load.model";
+import { LoadBoardParameters } from "@app/shared/model/params/load-board-parameters";
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from "ngx-toastr";
+import { LoadBoardService } from "@app/shared/service/load-board.service";
 import { ColumnMode, SelectionType } from "@swimlane/ngx-datatable";
 import { ThemePalette } from "@angular/material/core";
 import { formatDate } from "@angular/common";
-import { LoadBoardService } from "@app/shared/service/load-board.service";
 import { PickupDeliveryDates } from "@app/shared/model/pickup-delivery-dates";
-import { ToastrService } from "ngx-toastr";
-import { NgxSpinnerService } from "ngx-spinner";
-import { LoadBoard } from "@app/shared/model/load.model";
-import { fromEvent } from "rxjs";
-import { debounceTime, takeWhile } from "rxjs/operators";
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { fromEvent, Observable, of } from "rxjs";
+import { debounceTime, distinctUntilChanged, map, switchMap, takeWhile } from "rxjs/operators";
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { LookupService } from "@app/module/load/service/lookup.service";
 
 @Component({
   selector: "app-load-table",
@@ -32,12 +34,17 @@ import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
+  loads: LoadBoard[];
+  loadSearch: LoadBoardParameters;
+
   @ViewChild("myTable") table: any;
 
   @ViewChild("picker") picker: any;
 
   public isFilterFlyout = true;
-
+  errorMessage: string;
+  public quickSearchState: boolean = false;
+  searchForm: FormGroup;
   protected spinner: NgxSpinnerService;
 
   public disabled = false;
@@ -60,26 +67,12 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   dateString = "";
   timeString = "";
 
-  searchForm: FormGroup;
   dateForm = new FormGroup({
     timeCtrl: new FormControl(new Date().getTime()),
     dateCtrl: new FormControl(this.ngbCalendar.getToday()),
   });
 
-  /*timeCtrl = new FormControl('', (control: FormControl) => {
-    const value = control.value;
-
-    if (!value) {
-      return null;
-    }
-    // if (value.hour < 12) {
-    //   return {tooEarly: true};
-    // }
-    // if (value.hour > 13) {
-    //   return {tooLate: true};
-    // }
-    return null;
-  });*/
+  
 
   @Input() rows: LoadBoard[];
   @Input() columns;
@@ -92,20 +85,21 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   deliveryDateEditing = {};
 
   public isPickupButtonVisible: boolean = true;
-  
+
   ColumnMode =
     window.innerWidth < this.tableWidth
       ? ColumnMode.standard
       : ColumnMode.force;
 
   SelectionType = SelectionType;
-  
+
   constructor(
     injector: Injector,
     private loadBoardService: LoadBoardService,
     private toastr: ToastrService,
     private changeDetectorRef: ChangeDetectorRef,
     private fb: FormBuilder,
+    private lookupService: LookupService,
     private ngbCalendar: NgbCalendar,
   ) {
     this.spinner = injector.get(NgxSpinnerService);
@@ -114,7 +108,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
         window.innerWidth < this.tableWidth
           ? ColumnMode.standard
           : ColumnMode.force;
-          this.showTable = false;
+      this.showTable = false;
       this.changeDetectorRef.detectChanges();
       setTimeout(() => {
         this.showTable = true;
@@ -125,7 +119,19 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { 
+    this.createSerchForm();
+    this.loadBoardService.getLoads().subscribe(
+      (loads: LoadBoard[]) => {
+        this.loads = loads;
+        this.spinner.hide();
+      },
+      (error: any) => {
+        this.errorMessage = <any>error;
+        this.spinner.hide();
+      }
+    );
+  }
   ngOnDestroy() {
     this.isAlive = false;
   }
@@ -159,17 +165,17 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     this.isFilterFlyout = !this.isFilterFlyout;
   }
 
-  getStatusClass(row){
-    var classList='';
-    if(row.loadStatus == 'Posted'){
-      classList = 'load-pickedup'; 
-    }else if (row.loadStatus == 'Delivered'){
+  getStatusClass(row) {
+    var classList = '';
+    if (row.loadStatus == 'Posted') {
+      classList = 'load-pickedup';
+    } else if (row.loadStatus == 'Delivered') {
       classList = 'load-delivered';
-    }else if (row.loadStatus == 'In Transit'){
-      classList = 'load-intransit';    
-    }else if (row.loadStatus == 'Carrier Assigned/Pending Pickup'){
+    } else if (row.loadStatus == 'In Transit') {
+      classList = 'load-intransit';
+    } else if (row.loadStatus == 'Carrier Assigned/Pending Pickup') {
       classList = 'load-assigned';
-    }else if (row.loadStatus == 'Cancelled'){
+    } else if (row.loadStatus == 'Cancelled') {
       classList = 'load-cancelled';
     }
     return classList;
@@ -190,9 +196,9 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
 
   onActivate(event) {
     // console.log('Activate Event', event);
-    if(event.type == 'click') {
-    this.isBarSelected = true;
-    console.log(this.isBarSelected);
+    if (event.type == 'click') {
+      this.isBarSelected = true;
+      console.log(this.isBarSelected);
     }
   }
 
@@ -249,44 +255,10 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     }
   );
 }*/
-updatePickupDate(cell, rowIndex) {
-  this.spinner.show();
-  this.pickupDateEditing[rowIndex] = false;
-  var date = this.dateForm.get('dateCtrl').value;
-  if (date) {
-    this.dateString = (date.month + '/' + date.day + '/' + date.year);
-  }
-  var time = this.dateForm.get('timeCtrl').value;
-  if (time) {
-    this.timeString = (time.hour + ':' + time.minute + ':' + time.second);
-  }
-  var val = this.dateString +' '+ this.timeString;
-  const format = "yyyy-MM-dd, HH:mm:ss";
-  const locale = "en-US";
-  const formattedDate = formatDate(val, format, locale);
-  this.rows[rowIndex].actualPickupDate = formattedDate;
-  const pickupDeliveryDates = new PickupDeliveryDates();
-  pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
-  pickupDeliveryDates.tripType = "ORGIN";
-  pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
-  pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
-  this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
-    (loaddata) => {
-      this.data[rowIndex] = loaddata;
-      this.data = [...this.data];
-      this.spinner.hide();
-      this.toastr.success("Pickup Date Confirmed ...");
-    },
-    (error) => {
-      this.spinner.hide();
-      this.toastr.error("Pickup Confirmation Error ...");
-    }
-  );
-}
-
-updateDeliveryDate(cell, rowIndex) {
-  this.deliveryDateEditing[rowIndex] = false;
-  var date = this.dateForm.get('dateCtrl').value;
+  updatePickupDate(cell, rowIndex) {
+    this.spinner.show();
+    this.pickupDateEditing[rowIndex] = false;
+    var date = this.dateForm.get('dateCtrl').value;
     if (date) {
       this.dateString = (date.month + '/' + date.day + '/' + date.year);
     }
@@ -294,34 +266,156 @@ updateDeliveryDate(cell, rowIndex) {
     if (time) {
       this.timeString = (time.hour + ':' + time.minute + ':' + time.second);
     }
-  var val = this.dateString +' '+ this.timeString;
-  const format = "yyyy-MM-dd, HH:mm:ss";
-  const locale = "en-US";
-  const formattedDate = formatDate(val, format, locale);
-  console.log('formattedDate formattedDate '+formattedDate);
-  this.spinner.show();
-  this.rows[rowIndex].actualDeliveryDate = formattedDate;
-  const pickupDeliveryDates = new PickupDeliveryDates();
-  pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
-  pickupDeliveryDates.tripType = "DESTINATION";
-  pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
-  pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
-  this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
-  (loaddata) => {
-    this.data[rowIndex] = loaddata;
-    this.data = [...this.data];
-    this.spinner.hide();
-    this.toastr.success("Delivery Date Confirmed ...");
-  },
-  (error) => {
-    this.spinner.hide();
-    this.toastr.error("Delivery Confirmation Error ...");
+    var val = this.dateString + ' ' + this.timeString;
+    const format = "yyyy-MM-dd, HH:mm:ss";
+    const locale = "en-US";
+    const formattedDate = formatDate(val, format, locale);
+    this.rows[rowIndex].actualPickupDate = formattedDate;
+    const pickupDeliveryDates = new PickupDeliveryDates();
+    pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+    pickupDeliveryDates.tripType = "ORGIN";
+    pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
+    pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
+    this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
+      (loaddata) => {
+        this.data[rowIndex] = loaddata;
+        this.data = [...this.data];
+        this.spinner.hide();
+        this.toastr.success("Pickup Date Confirmed ...");
+      },
+      (error) => {
+        this.spinner.hide();
+        this.toastr.error("Pickup Confirmation Error ...");
+      }
+    );
   }
-);
-}
 
-onClickOK(dp : String){
-  alert('Clicked ok' + dp);
-}
+  updateDeliveryDate(cell, rowIndex) {
+    this.deliveryDateEditing[rowIndex] = false;
+    var date = this.dateForm.get('dateCtrl').value;
+    if (date) {
+      this.dateString = (date.month + '/' + date.day + '/' + date.year);
+    }
+    var time = this.dateForm.get('timeCtrl').value;
+    if (time) {
+      this.timeString = (time.hour + ':' + time.minute + ':' + time.second);
+    }
+    var val = this.dateString + ' ' + this.timeString;
+    const format = "yyyy-MM-dd, HH:mm:ss";
+    const locale = "en-US";
+    const formattedDate = formatDate(val, format, locale);
+    console.log('formattedDate formattedDate ' + formattedDate);
+    this.spinner.show();
+    this.rows[rowIndex].actualDeliveryDate = formattedDate;
+    const pickupDeliveryDates = new PickupDeliveryDates();
+    pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+    pickupDeliveryDates.tripType = "DESTINATION";
+    pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
+    pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
+    this.loadBoardService.setPickupDeliveryDate(pickupDeliveryDates).subscribe(
+      (loaddata) => {
+        this.data[rowIndex] = loaddata;
+        this.data = [...this.data];
+        this.spinner.hide();
+        this.toastr.success("Delivery Date Confirmed ...");
+      },
+      (error) => {
+        this.spinner.hide();
+        this.toastr.error("Delivery Confirmation Error ...");
+      }
+    );
+  }
+
+  onClickOK(dp: String) {
+    alert('Clicked ok' + dp);
+  }
+
+  searchLoads() {
+    this.spinner.show();
+    if (this.searchForm.get("customerObj").value == "") {
+      this.searchForm.get("customerId").setValue(null);
+    }
+
+    this.loadBoardService.getLoadSearch(this.searchForm.value).subscribe(
+      (data) => {
+        this.loads = data;
+        // this.quickSearch();
+        this.spinner.hide();
+        if (data.length == 0) {
+          this.toastr.info("No Loads found in such criteria");
+        }
+      },
+      (error) => {
+        this.spinner.hide();
+        this.toastr.error("Load Search Failed");
+      }
+    );
+  }
+
+  createSerchForm() {
+    this.searchForm = this.fb.group({
+      loadId: [""],
+      customerId: [""],
+      customerObj: [""],
+      equipmentId: [""],
+      originCsz: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("^(.+)[,\\s]+(.+?)s*(d{5})?$"),
+        ],
+      ],
+      destinationCsz: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("^(.+)[,\\s]+(.+?)s*(d{5})?$"),
+        ],
+      ],
+    });
+  }
+
+  searchCityStateZip = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap((searchText) => {
+        if (searchText.length < 3) {
+          return of([]);
+        }
+        return this.lookupService
+          .fetchCityStateZip(searchText)
+          .pipe(
+            map((list) =>
+              list.length < 1
+                ? []
+                : list.length > 10
+                ? list.splice(0, 10)
+                : list
+            )
+          );
+      })
+    );
+
+  searchCustomer = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap((term) => {
+        if (!term) {
+          return of([]);
+        }
+
+        return this.lookupService
+          .fetchCustDetails(term)
+          .pipe(map((list) => (list.length > 10 ? list.splice(0, 10) : list)));
+      })
+    );
+
+  formatter = (x: { company: string }) => x.company;
+
+  selectedCustomer(customer) {
+    this.searchForm.get("customerId").setValue(customer.item.id);
+  }
 
 }
