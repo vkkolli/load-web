@@ -100,7 +100,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   setPage(page) {
     
     const offsetStart = page.offset+1;
-    let offsetEnd = offsetStart + this.pageSize;
+    let offsetEnd = ""+this.pageSize;
     
     this.loadBoardService.getLoads(offsetStart, offsetEnd).subscribe(data =>{
       this.data = data;
