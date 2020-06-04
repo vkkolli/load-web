@@ -369,13 +369,14 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     if (this.searchForm.get("customerObj").value == "") {
       this.searchForm.get("customerId").setValue(null);
     }
-
+    this.searchForm.get("pageResultsCount").setValue(this.pageResultsCount);
+    this.searchForm.get("pageNumber").setValue(this.pageNumber);
     this.loadBoardService.getLoadSearch(this.searchForm.value).subscribe(
-      (data) => {
-        this.loads = data;
+      (loadData) => {
+        this.data = loadData;
         this.quickSearch();
         this.spinner.hide();
-        if (data.length == 0) {
+        if (loadData.length == 0) {
           this.toastr.info("No Loads found in such criteria");
         }
       },
@@ -406,6 +407,9 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
           Validators.pattern("^(.+)[,\\s]+(.+?)s*(d{5})?$"),
         ],
       ],
+      pageNumber: [1],
+      pageResultsCount: ["10"],
+      sortOrder: ["loadId desc"]
     });
   }
 
