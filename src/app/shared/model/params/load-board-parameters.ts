@@ -4,4 +4,7 @@ export class LoadBoardParameters {
   destinationCsz: string;
   originCsz: string;
   customerId: number;
+  sortOrder: string;
+  pageNumber: number;
+  pageResultsCount: string;
 }

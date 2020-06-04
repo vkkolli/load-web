@@ -66,6 +66,8 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   selected = [];
   dateString = "";
   timeString = "";
+  pageResultsCount = "10";
+  loadParams:LoadBoardParameters;
 
   dateForm = new FormGroup({
     timeCtrl: new FormControl(new Date().getTime()),
@@ -120,7 +122,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void { 
-    this.createSerchForm();
+    this.createSearchForm();
     this.loadBoardService.getLoads().subscribe(
       (loads: LoadBoard[]) => {
         this.loads = loads;
@@ -142,17 +144,44 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   setPage(page) {
-    const offsetStart = page.offset * this.pageSize;
-    let offsetEnd = offsetStart + this.pageSize;
-    if (offsetEnd >= this.totalElements) {
-      offsetEnd = this.totalElements - 1;
+
+    if (page.offset != undefined) {
+      this.pageNumber = page.offset + 1;
     }
-    this.data = this.rows?.slice(offsetStart, offsetEnd) ?? [];
+    this.loadBoardService.getLoads("" + this.pageNumber, this.pageResultsCount).subscribe(data => {
+      this.data = data;
+    })
+  }
+
+  onSort(event){
+    this.loadParams = new LoadBoardParameters();
+    var columnName = event.sorts[0].prop;
+    var sortOrder = event.sorts[0].dir;
+    this.loadParams.sortOrder = columnName +' '+ sortOrder;
+    this.loadParams.pageNumber = this.pageNumber;
+    this.loadParams.pageResultsCount = this.pageResultsCount;
+    
+    this.loadBoardService.getLoadSearch(this.loadParams).subscribe(
+      (loaddata) => {
+        this.data = loaddata;
+        this.spinner.hide();
+        this.toastr.success("Sorted with " + columnName);
+      },
+      (error) => {
+        this.spinner.hide();
+        this.toastr.error("Sort Failed");
+      }
+    );
+  }
+
+  getResults(page) {
+    this.setPage(page);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.rows && changes.rows.currentValue) {
-      this.totalElements = this.rows?.length ?? 0;
+
+      this.totalElements = this.rows[0].totalRecords;
       this.data = this.rows?.slice(0, this.pageSize) ?? [];
     }
   }
@@ -357,7 +386,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
-  createSerchForm() {
+  createSearchForm() {
     this.searchForm = this.fb.group({
       loadId: [""],
       customerId: [""],
