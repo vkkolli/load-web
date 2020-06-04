@@ -23,6 +23,7 @@ import { fromEvent } from "rxjs";
 import { debounceTime, takeWhile } from "rxjs/operators";
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { LoadBoardParameters } from '@app/shared/model/params/load-board-parameters';
 
 @Component({
   selector: "app-load-table",
@@ -59,7 +60,8 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   selected = [];
   dateString = "";
   timeString = "";
-  PageResultsCount = "10";
+  pageResultsCount = "10";
+  loadParams:LoadBoardParameters;
 
   searchForm: FormGroup;
   dateForm = new FormGroup({
@@ -136,9 +138,30 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     if (page.offset != undefined) {
       this.pageNumber = page.offset + 1;
     }
-    this.loadBoardService.getLoads("" + this.pageNumber, this.PageResultsCount).subscribe(data => {
+    this.loadBoardService.getLoads("" + this.pageNumber, this.pageResultsCount).subscribe(data => {
       this.data = data;
     })
+  }
+
+  onSort(event){
+    this.loadParams = new LoadBoardParameters();
+    var columnName = event.sorts[0].prop;
+    var sortOrder = event.sorts[0].dir;
+    this.loadParams.sortOrder = columnName +' '+ sortOrder;
+    this.loadParams.pageNumber = this.pageNumber;
+    this.loadParams.pageResultsCount = this.pageResultsCount;
+    
+    this.loadBoardService.getLoadSearch(this.loadParams).subscribe(
+      (loaddata) => {
+        this.data = loaddata;
+        this.spinner.hide();
+        this.toastr.success("Sorted with " + columnName);
+      },
+      (error) => {
+        this.spinner.hide();
+        this.toastr.error("Sort Failed");
+      }
+    );
   }
 
   getResults(page) {
