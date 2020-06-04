@@ -123,7 +123,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void { 
     this.createSearchForm();
-    this.loadBoardService.getLoads().subscribe(
+    this.loadBoardService.getLoads("" + this.pageNumber, this.pageResultsCount).subscribe(
       (loads: LoadBoard[]) => {
         this.loads = loads;
         this.spinner.hide();
