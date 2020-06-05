@@ -385,6 +385,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
         this.toastr.error("Load Search Failed");
       }
     );
+    this.filterFlyout();
   }
 
   createSearchForm() {
