@@ -182,6 +182,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getResults(page) {
+	this.pageSize = Number(this.pageResultsCount);
     this.setPage(page);
   }
 
