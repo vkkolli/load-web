@@ -6,5 +6,5 @@ export class LoadBoardParameters {
   customerId: number;
   sortOrder: string;
   pageNumber: number;
-  pageResultsCount: string;
+  pageResultsCount: number;
 }

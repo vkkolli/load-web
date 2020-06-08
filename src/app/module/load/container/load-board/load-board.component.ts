@@ -38,7 +38,7 @@ export class LoadBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadBoardService.getLoads("1","10").subscribe(
+    this.loadBoardService.getLoads().subscribe(
       (loads: LoadBoard[]) => {
         this.loads = loads;
         this.spinner.hide();

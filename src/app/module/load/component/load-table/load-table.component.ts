@@ -68,6 +68,8 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   timeString = "";
   pageResultsCount = "10";
   loadParams:LoadBoardParameters;
+  columnName = "loadId";
+  sortOrder = "desc";
 
   dateForm = new FormGroup({
     timeCtrl: new FormControl(new Date().getTime()),
@@ -123,16 +125,6 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void { 
     this.createSearchForm();
-    this.loadBoardService.getLoads("" + this.pageNumber, this.pageResultsCount).subscribe(
-      (loads: LoadBoard[]) => {
-        this.loads = loads;
-        this.spinner.hide();
-      },
-      (error: any) => {
-        this.errorMessage = <any>error;
-        this.spinner.hide();
-      }
-    );
   }
 
   quickSearch() {
@@ -145,27 +137,42 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
 
   setPage(page) {
 
-    if (page.offset != undefined) {
-      this.pageNumber = page.offset + 1;
-    }
-    this.loadBoardService.getLoads("" + this.pageNumber, this.pageResultsCount).subscribe(data => {
-      this.data = data;
-    })
+   this.loadParams = new LoadBoardParameters();
+    this.loadParams.customerId = this.searchForm.get("customerId").value;
+    this.loadParams.destinationCsz = this.searchForm.get("destinationCsz").value;
+    this.loadParams.equipmentId = this.searchForm.get("equipmentId").value;
+    this.loadParams.originCsz = this.searchForm.get("originCsz").value;
+    this.loadParams.sortOrder = this.columnName +' '+ this.sortOrder;
+    this.loadParams.pageNumber = (page.offset !=undefined ? (page.offset + 1) : this.pageNumber);
+    this.loadParams.pageResultsCount = Number(this.pageResultsCount);
+    this.loadBoardService.getLoadSearch(this.loadParams).subscribe(loadData => {
+      console.log("called for Paging");
+      this.data = loadData;
+      this.spinner.hide();
+    },
+    (error) => {
+      this.spinner.hide();
+    });
   }
 
   onSort(event){
     this.loadParams = new LoadBoardParameters();
-    var columnName = event.sorts[0].prop;
-    var sortOrder = event.sorts[0].dir;
-    this.loadParams.sortOrder = columnName +' '+ sortOrder;
+    this.columnName = event.sorts[0].prop;
+    this.sortOrder = event.sorts[0].dir;
+    this.loadParams.sortOrder = this.columnName +' '+ this.sortOrder;
+    this.loadParams.customerId = this.searchForm.get("customerId").value;
+    this.loadParams.destinationCsz = this.searchForm.get("destinationCsz").value;
+    this.loadParams.equipmentId = this.searchForm.get("equipmentId").value;
+    this.loadParams.originCsz = this.searchForm.get("originCsz").value;
     this.loadParams.pageNumber = this.pageNumber;
-    this.loadParams.pageResultsCount = this.pageResultsCount;
+    this.loadParams.pageResultsCount = Number(this.pageResultsCount);
     
     this.loadBoardService.getLoadSearch(this.loadParams).subscribe(
       (loaddata) => {
+        console.log("called for sorting");
         this.data = loaddata;
         this.spinner.hide();
-        this.toastr.success("Sorted with " + columnName);
+        this.toastr.success("Sorted with " + this.columnName);
       },
       (error) => {
         this.spinner.hide();
@@ -290,6 +297,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   );
 }*/
   updatePickupDate(cell, rowIndex) {
+	console.log('Updated Pickup for ::' + rowIndex);
     this.spinner.show();
     this.pickupDateEditing[rowIndex] = false;
     var date = this.dateForm.get('dateCtrl').value;
@@ -325,6 +333,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateDeliveryDate(cell, rowIndex) {
+	console.log('Updated delivery for ::' + rowIndex);
     this.deliveryDateEditing[rowIndex] = false;
     var date = this.dateForm.get('dateCtrl').value;
     if (date) {
@@ -370,10 +379,13 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
       this.searchForm.get("customerId").setValue(null);
     }
     this.searchForm.get("pageResultsCount").setValue(this.pageResultsCount);
-    this.searchForm.get("pageNumber").setValue(this.pageNumber);
+    this.searchForm.get("pageNumber").setValue(1);
     this.loadBoardService.getLoadSearch(this.searchForm.value).subscribe(
       (loadData) => {
         this.data = loadData;
+		this.totalElements = loadData[0].totalRecords;
+        this.pageResultsCount = "10";
+        this.pageNumber = 0;
         this.quickSearch();
         this.spinner.hide();
         if (loadData.length == 0) {
