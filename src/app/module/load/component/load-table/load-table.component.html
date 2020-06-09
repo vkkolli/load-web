@@ -3,7 +3,7 @@
     headerHeight="30" footerHeight="50" [rowHeight]="50" [rowClass]="getStatusClass" [scrollbarV]="true"
     [scrollbarH]="false" [virtualization]="false" [externalSorting]="true" [externalPaging]="true" [count]="totalElements" [offset]="pageNumber"
     [limit]="pageSize" [selected]="selected" [selectionType]="SelectionType.single" (activate)="onActivate($event)" 
-    (select)="onSelect($event)" (page)="setPage($event)" [rows]="data" (sort)="onSort($event)">
+    (select)="onSelect($event)" (page)="setPaging($event)" [rows]="data" (sort)="onSort($event)">
     <!-- Row Template -->
     <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
       <ng-template let-row="row" ngx-datatable-row-detail-template>

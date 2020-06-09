@@ -135,7 +135,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     this.isAlive = false;
   }
 
-  setPage(page) {
+  setPaging(page) {
 
    this.loadParams = new LoadBoardParameters();
     this.loadParams.customerId = this.searchForm.get("customerId").value;
@@ -148,6 +148,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     this.loadBoardService.getLoadSearch(this.loadParams).subscribe(loadData => {
       console.log("called for Paging");
       this.data = loadData;
+	  this.pageNumber = 0;
       this.spinner.hide();
     },
     (error) => {
@@ -183,7 +184,7 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
 
   getResults(page) {
 	this.pageSize = Number(this.pageResultsCount);
-    this.setPage(page);
+    this.setPaging(page);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -313,9 +314,9 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     const format = "yyyy-MM-dd, HH:mm:ss";
     const locale = "en-US";
     const formattedDate = formatDate(val, format, locale);
-    this.rows[rowIndex].actualPickupDate = formattedDate;
+    this.data[rowIndex].actualPickupDate = formattedDate;
     const pickupDeliveryDates = new PickupDeliveryDates();
-    pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+    pickupDeliveryDates.loadId = this.data[rowIndex].loadId;
     pickupDeliveryDates.tripType = "ORGIN";
     pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
     pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
@@ -350,9 +351,9 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
     const formattedDate = formatDate(val, format, locale);
     console.log('formattedDate formattedDate ' + formattedDate);
     this.spinner.show();
-    this.rows[rowIndex].actualDeliveryDate = formattedDate;
+    this.data[rowIndex].actualDeliveryDate = formattedDate;
     const pickupDeliveryDates = new PickupDeliveryDates();
-    pickupDeliveryDates.loadId = this.rows[rowIndex].loadId;
+    pickupDeliveryDates.loadId = this.data[rowIndex].loadId;
     pickupDeliveryDates.tripType = "DESTINATION";
     pickupDeliveryDates.pickupOrDeliveryDate = formattedDate.split(", ")[0];
     pickupDeliveryDates.pickupOrDeliveryTime = formattedDate.split(", ")[1];
@@ -368,10 +369,6 @@ export class LoadTableComponent implements OnInit, OnChanges, OnDestroy {
         this.toastr.error("Delivery Confirmation Error ...");
       }
     );
-  }
-
-  onClickOK(dp: String) {
-    alert('Clicked ok' + dp);
   }
 
   searchLoads() {
