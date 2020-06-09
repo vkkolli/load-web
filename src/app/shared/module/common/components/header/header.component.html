@@ -12,7 +12,7 @@
             <button class="btn btn-sm btn-danger px-3" routerLink="/load/">Cancel </button>
           </div>
           <div class="col-auto px-2">
-            <button class="btn btn-sm btn-success px-3" (click)="formSubmit.emit();" [disabled]="!loadFormValid">{{!isEdit ? 'Create' : 'Update'}}</button>
+            <button class="btn btn-sm btn-success px-3" (click)="formSubmit.emit();" [disabled]="loadStatusId>30 || !loadFormValid">{{!isEdit ? 'Create' : 'Update'}}</button>
           </div>
       </div>
     </nav>

@@ -19,6 +19,7 @@ export class CreateLoadComponent implements OnInit {
   protected toastr: ToastrService;
   private routeSub: Subscription;
   isEdit: boolean;
+  loadStatusId: number;
 
   constructor(injector: Injector, private fb: FormBuilder,
     config: NgbAccordionConfig, private loadService: LoadService, private router: Router, private route: ActivatedRoute) {
@@ -173,6 +174,7 @@ export class CreateLoadComponent implements OnInit {
     this.loadService.fetchByIsd(loadId).subscribe(
       data => {
         this.objectFormMapper(data);
+        this.loadStatusId = data.loadStatus.id;
         this.modifyFormObjects();
         this.spinner.hide();
       },

@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   protected toastr: ToastrService;
   private routeSub: Subscription;
 
+  @Input() loadStatusId: number;
   @Input() loadFormValid : boolean;
   @Output() formSubmit = new EventEmitter<any>();
 
