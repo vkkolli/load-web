@@ -78,9 +78,8 @@
                   <i class="fa fa-cart-arrow-down"></i>Confirmed Pickup
                 </a>
               </div>
-            
               <div *ngIf="!row.actualPickupDate && row.isConfirmPickupEnable">
-              <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle   >
+              <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle>
                 <i class="fa fa-cart-arrow-down"></i>
                 Confirmed Pickup
                 <ul class="substatus-load pt-0" ngbDropdownMenu>
@@ -99,7 +98,7 @@
                                     </button>
                                   </div>
                                   <input type="text" class="form-control-lbd" formControlName="dateCtrl" 
-                                  placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">                                
+                                  placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker">                                
                                 </div>
                               </div>
                             </div>
@@ -129,15 +128,15 @@
                     <li>
                       <div id="btn-xsm" class="d-flex mb-2">
                         <div class="d-fx-50 mr-1">
-                          <button type="button" (click)="updatePickupDate('row.actualPickupDate', rowIndex)" 
-                          class="btn btn-block btn-sm btn-dark" ngbDropdownToggle>OK</button>
+                          <input type="submit" (click)="updatePickupDate('row.actualPickupDate', rowIndex)" 
+                          class="btn btn-block btn-sm btn-dark" ngbDropdownToggle>
                         </div>
                         <div class="d-fx-50 ml-1">
                           <button class="btn btn-block btn-sm btn-light" ngbDropdownToggle>Cancel</button>
                         </div>
                       </div>
                     </li>
-                  </form>
+                  </form>     
                 </ul>
               </a>
             </div> 
@@ -169,7 +168,7 @@
                                     </button>
                                   </div>
                                   <input type="text" class="form-control-lbd" formControlName="dateCtrl" 
-                                  placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker">                                
+                                  placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker">                                
                                 </div>
                               </div>
                             </div>
@@ -199,8 +198,8 @@
                     <li>
                       <div id="btn-xsm" class="d-flex mb-2">
                         <div class="d-fx-50 mr-1">
-                          <button type="button" (click)="updateDeliveryDate('row.actualPickupDate', rowIndex)" 
-                          class="btn btn-block btn-sm btn-dark" ngbDropdownToggle>OK</button>
+                          <button (click)="updateDeliveryDate('row.actualDeliveryDate', rowIndex)" 
+                          class="btn btn-block btn-sm btn-dark" ngbDropdownToggle>Submit</button>
                         </div>
                         <div class="d-fx-50 ml-1">
                           <button class="btn btn-block btn-sm btn-light" ngbDropdownToggle>Cancel</button>
