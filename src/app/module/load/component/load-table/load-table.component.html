@@ -73,12 +73,13 @@
           </a>
           <ul ngbDropdownMenu>
             <li ngbDropdown>
-              <div *ngIf="row.actualPickupDate">
+              <div *ngIf="!row.isConfirmPickupEnable">
                 <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle class="disabled">
                   <i class="fa fa-cart-arrow-down"></i>Confirmed Pickup
                 </a>
               </div>
-              <div *ngIf="!row.actualPickupDate">
+            
+              <div *ngIf="!row.actualPickupDate && row.isConfirmPickupEnable">
               <a class="cnf-pkup" href="javascript:void(0)" ngbDropdownToggle   >
                 <i class="fa fa-cart-arrow-down"></i>
                 Confirmed Pickup
@@ -128,7 +129,7 @@
                     <li>
                       <div id="btn-xsm" class="d-flex mb-2">
                         <div class="d-fx-50 mr-1">
-                          <button type="submit" (click)="updatePickupDate('row.actualPickupDate', rowIndex)" 
+                          <button type="button" (click)="updatePickupDate('row.actualPickupDate', rowIndex)" 
                           class="btn btn-block btn-sm btn-dark" ngbDropdownToggle>OK</button>
                         </div>
                         <div class="d-fx-50 ml-1">
@@ -139,17 +140,16 @@
                   </form>
                 </ul>
               </a>
-            </div>
-            
+            </div> 
             </li>
             <li ngbDropdown>
-              <div *ngIf = "(row.actualPickupDate && row.actualDeliveryDate)">
+              <div *ngIf = "!row.isConfirmDeliveryEnable">
                 <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle class="disabled">
                   <i class="fa fa-truck"></i>
-                  Confirmed Delivery
+                  Confirmed Delivery 
                 </a>
               </div> 
-              <div *ngIf = "!(row.actualPickupDate && row.actualDeliveryDate)">
+              <div *ngIf = "row.isConfirmDeliveryEnable">
                 <a class="cnf-dlvd" href="javascript:void(0)" ngbDropdownToggle>
                 <i class="fa fa-truck"></i>
                 Confirmed Delivery
@@ -199,7 +199,7 @@
                     <li>
                       <div id="btn-xsm" class="d-flex mb-2">
                         <div class="d-fx-50 mr-1">
-                          <button type="submit" (click)="updateDeliveryDate('row.actualPickupDate', rowIndex)" 
+                          <button type="button" (click)="updateDeliveryDate('row.actualPickupDate', rowIndex)" 
                           class="btn btn-block btn-sm btn-dark" ngbDropdownToggle>OK</button>
                         </div>
                         <div class="d-fx-50 ml-1">
@@ -267,7 +267,7 @@
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Actual Delivery" [minWidth]="140" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.actualDeliveryDate">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="row.deliveryDate">
         <!-- <span title="Click to edit" (click)="deliveryDateEditing[rowIndex] = true"
           *ngIf="!row.actualDeliveryDate && !deliveryDateEditing[rowIndex]">
           <button class="btn btn-xs btn-primary btn-blue" [disabled]="!row.isConfirmDeliveryEnable">Confirm
